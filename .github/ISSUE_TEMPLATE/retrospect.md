@@ -1,6 +1,6 @@
 ---
-name: main
-about: main
+name: KPT Issue
+about: KPT card
 title: ''
 labels: ''
 assignees: ''
