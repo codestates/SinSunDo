@@ -1,6 +1,6 @@
 ---
-name: KPT
-about: KPT review
+name: main
+about: main
 title: ''
 labels: ''
 assignees: ''
