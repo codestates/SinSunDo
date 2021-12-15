@@ -1,0 +1,19 @@
+{
+  "name": "sinsundo",
+  "version": "1.0.0",
+  "description": "SinSunDo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlwodud9529/SinSunDo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dlwodud9529/SinSunDo/issues"
+  },
+  "homepage": "https://github.com/dlwodud9529/SinSunDo#readme"
+}
