@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+}
+
+.add {
+  margin: 2.5em 5em;
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 10em;
+  height: 2em;
+  border: none;
+  font-size: 1.4em;
+  font-weight: 900;
+  border-radius: 0.5em;
+  background-color: rgb(245, 197, 14);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(194, 168, 66);
+}
+
+.container {
+  padding-top: 10em;
+}
+
+.refrigerator_name {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.refrigerator {
+  margin: 0 0 2em 3em;
+  width: 95%;
+  height: 10em;
+  background-color: rgb(244, 249, 249);
+}
+
+.freezer {
+  margin: 0 0 2em 3em;
+  width: 95%;
+  height: 10em;
+  background-color: rgb(211, 241, 242);
+}
+
+.freezer_name {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.roomTemperature {
+  margin: 0 0 2em 3em;
+  width: 95%;
+  height: 10em;
+  background-color: rgb(179, 232, 240);
+}
+
+.roomTemperature_name {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.countContainer {
+  float: right;
+  display: ;
+}
+
+.total {
+  margin-top: 1em;
+  padding-top: 0.3em;
+  display: inline-block;
+  width: 5em;
+  height: 2em;
+  border: 0.1em solid black;
+  border-radius: 0.3em;
+  font-size: 1.3em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.total_num {
+  margin-left: 0.5em;
+}
+
+.danger {
+  margin: 1em 1em 0 1em;
+  padding-top: 0.3em;
+  display: inline-block;
+  width: 5em;
+  height: 2em;
+  border: 0.1em solid black;
+  border-radius: 0.3em;
+  font-size: 1.3em;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(133, 18, 18);
+}
+
+.danger_num {
+  margin-left: 0.5em;
+}

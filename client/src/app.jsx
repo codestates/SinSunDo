@@ -1,9 +1,11 @@
-import './App.css';
+import "./App.css";
+import LogInPage from "./page/logInPage";
+import MembershipPage from "./page/membershipPage";
+import ProductUpload from "./page/productUpload";
+import RefrigeratorPage from "./page/refrigeratorPage";
 
 function App() {
-  return (
-    <h1>Hello :)</h1>
-  );
+  return <div></div>;
 }
 
 export default App;
