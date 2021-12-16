@@ -47,7 +47,7 @@
 
 button:hover {
   cursor: pointer;
-  background-color: rgb(194, 168, 66);
+  /* background-color: rgb(194, 168, 66); */
 }
 
 .membership {
