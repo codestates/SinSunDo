@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 
-// const controllers = require("./controllers");
+const controllers = require("./controllers");
 
 app.use(express.json()); //front에서 json 형식의 데이터를 보냈을 때 데이터 req.body에 넣어준다
 app.use(express.urlencoded({ extended: false })); // form submit 했을 때 데이터를 req.body에 넣어준다
@@ -23,10 +23,14 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
-// app.get('/auth', controllers.auth);
-// app.post('/user', controllers.user);
-// app.post('/product', controllers.product);
-// app.post('/search', controllers.search);
+app.get('/auth', controllers.auth);
+
+app.post('/signup', controllers.signup);
+app.post('/signin', controllers.signin);
+app.post('/signout', controllers.signout);
+
+app.post('/product', controllers.product);
+app.post('/search', controllers.search);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 
