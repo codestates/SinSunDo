@@ -3,7 +3,7 @@
 }
 
 .add {
-  margin: 2.5em 5em;
+  margin: 1em 5em;
   display: block;
   position: absolute;
   right: 0;
@@ -22,7 +22,7 @@ button:hover {
 }
 
 .container {
-  padding-top: 10em;
+  padding-top: 6em;
 }
 
 .refrigerator_name {
@@ -63,7 +63,6 @@ button:hover {
 
 .countContainer {
   float: right;
-  display: ;
 }
 
 .total {
