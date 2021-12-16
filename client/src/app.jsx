@@ -5,7 +5,11 @@ import ProductUpload from "./page/productUpload";
 import RefrigeratorPage from "./page/refrigeratorPage";
 
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <RefrigeratorPage />
+    </div>
+  );
 }
 
 export default App;
