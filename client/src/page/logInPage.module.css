@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 10em auto;
+  border: 0.1em solid black;
+  width: 25em;
+  height: 36em;
+  border-radius: 0.5em;
+}
+
+.logo {
+  padding: 2.5em 0 1.2em 2.6em;
+}
+
+.email {
+  margin: 1em auto;
+  display: block;
+  width: 23em;
+  height: 4em;
+  border: 0.2em solid rgb(191, 191, 191);
+  border-radius: 10em;
+}
+
+.password {
+  margin: 1em auto;
+  display: block;
+  width: 23em;
+  height: 4em;
+  border: 0.2em solid rgb(191, 191, 191);
+  border-radius: 10em;
+}
+
+.login {
+  margin: 0.5em auto;
+  display: block;
+  width: 13.5em;
+  height: 2.5em;
+  border: none;
+  font-size: 1.4em;
+  font-weight: 900;
+  border-radius: 10em;
+  background-color: rgb(245, 197, 14);
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(194, 168, 66);
+}
+
+.membership {
+  padding: 3em 0 0 4.5em;
+}
+
+.membership_btn {
+  display: block;
+  margin: 0.2em auto;
+  display: block;
+  width: 13.5em;
+  height: 2.5em;
+  border: none;
+  font-size: 1.4em;
+  font-weight: 900;
+  border-radius: 10em;
+  background-color: rgb(245, 197, 14);
+  color: white;
+}
