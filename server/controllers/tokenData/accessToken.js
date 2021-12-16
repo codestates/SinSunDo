@@ -6,11 +6,10 @@ module.exports = {
         return sign(data, process.env.ACCESS_SECRET, { expiresIn: new Date(Date.parse(new Date()) + 1000 * 3600 * 24 * 3)});
     },
     sendAccessToken: (res, accessToken) => {
-        res.cookie("accessToken", accessToken, {
-            sameSite: 'Strict',
-            secure: true,
-            httpOnly: true,
-        })
+        res.json({ data: { accessToken }, message: "ok" });
+    },
+    resendAccessToken: (res, accessToken, data) => {
+        res.json({ data: { accessToken, userInfo: data }, message: "ok" });
     },
     isAuthorized: (req) => {
         const cookies = req.headers["cookie"];
