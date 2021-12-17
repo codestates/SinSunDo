@@ -16,10 +16,10 @@ function App() {
   return (
     <>
       <Nav />
-      {/* <MainPage /> */}
-      {/* <AlarmPage /> */}
-      {/* <MyPage /> */}
-      {/* <MyPageCorrection /> */}
+      {/* <MainPage /> /}
+      {/ <AlarmPage /> /}
+      {/ <MyPage /> /}
+      {/ <MyPageCorrection /> */}
       <RefrigeratorPage
         productOnOff={productOnOff}
         setProductOnOff={setProductOnOff}

@@ -52,7 +52,7 @@
 
 .membership {
   display: block;
-  margin: 0.2em auto;
+  margin: 0.5em auto;
   display: block;
   width: 13.5em;
   height: 2.5em;
@@ -66,5 +66,12 @@
 
 button:hover {
   cursor: pointer;
-  /* background-color: rgb(194, 168, 66); */
+}
+
+.message{
+  display: block;
+  text-align: center;
+  color: red;
+  margin-top:1em;
+  font-size: 0.8em;
 }
