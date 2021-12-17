@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      storage: {
+        type: Sequelize.STRING
+      },
       food_name: {
         type: Sequelize.STRING
       },
@@ -16,12 +19,6 @@ module.exports = {
       },
       food_expiration: {
         type: Sequelize.DATE
-      },
-      food_img_id: {
-        type: Sequelize.INTEGER
-      },
-      category_name_id: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

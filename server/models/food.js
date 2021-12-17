@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   food.init({
+    storage: DataTypes.STRING,
     food_name: DataTypes.STRING,
     food_quantity: DataTypes.INTEGER,
     food_expiration: DataTypes.DATE,

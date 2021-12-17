@@ -8,12 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      food_id: {
-        type: Sequelize.INTEGER
-      },
-      food_alram_id: {
-        type: Sequelize.INTEGER
-      },
       day_ago: {
         type: Sequelize.INTEGER
       },
