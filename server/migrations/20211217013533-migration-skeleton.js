@@ -8,6 +8,7 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
+    await queryInterface.addColumn('user_category', 'user_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('user_category', {
       fields: ['user_id'],
       type: 'foreign key',
@@ -19,6 +20,7 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     }),
+    await queryInterface.addColumn('user_category', 'category_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('user_category', {
       fields: ['category_id'],
       type: 'foreign key',
@@ -30,6 +32,7 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     }),
+    await queryInterface.addColumn('food', 'category_name_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('food', {
       fields: ['category_name_id'],
       type: 'foreign key',
@@ -41,6 +44,7 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     }),
+    await queryInterface.addColumn('food', 'food_img_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('food', {
       fields: ['food_img_id'],
       type: 'foreign key',
@@ -52,6 +56,7 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     }),
+    await queryInterface.addColumn('food_alram', 'category_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('food_alram', {
       fields: ['category_id'],
       type: 'foreign key',
@@ -63,6 +68,7 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     }),
+    await queryInterface.addColumn('food_alram', 'food_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('food_alram', {
       fields: ['food_id'],
       type: 'foreign key',
@@ -74,6 +80,7 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     }),
+    await queryInterface.addColumn('expiration', 'food_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('expiration', {
       fields: ['food_id'],
       type: 'foreign key',
@@ -85,6 +92,7 @@ module.exports = {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     }),
+    await queryInterface.addColumn('expiration', 'food_alram_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('expiration', {
       fields: ['food_alram_id'],
       type: 'foreign key',
@@ -109,6 +117,8 @@ module.exports = {
       await queryInterface.removeColumn('user_category', 'user_id'),
       await queryInterface.removeConstraint('user_category', 'category&user_category'),
       await queryInterface.removeColumn('user_category', 'category_id'),
+      await queryInterface.removeConstraint('food', 'food&category'),
+      await queryInterface.removeColumn('food', 'category_name_id'),
       await queryInterface.removeConstraint('food', 'food&food_img'),
       await queryInterface.removeColumn('food', 'food_img_id'),
       await queryInterface.removeConstraint('food_alram', 'food_alram&category'),
