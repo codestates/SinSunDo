@@ -12,18 +12,16 @@ import MyPageCorrection from "./page/myPageCorrection";
 import { useState } from "react";
 
 function App() {
-  const [productOnOff, setProductOnOff] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
   return (
     <>
-      <Nav />
-      {/* <MainPage /> /}
-      {/ <AlarmPage /> /}
-      {/ <MyPage /> /}
-      {/ <MyPageCorrection /> */}
-      <RefrigeratorPage
-        productOnOff={productOnOff}
-        setProductOnOff={setProductOnOff}
-      />
+      <Nav isLogin={isLogin} />
+      {/* <MyPageCorrection />
+      <MyPage /> */}
+      <LogInPage isLogin={isLogin} setIsLogin={setIsLogin} />
+      <MembershipPage />
+      <RefrigeratorPage />
       <Footer />
     </>
   );
