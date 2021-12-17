@@ -23,7 +23,13 @@
 
 .Product_name {
   position: absolute;
-  left: 20em;
+  left: 16em;
+  font-size: 2em;
+}
+
+.quantity {
+  position: absolute;
+  left: 30em;
   font-size: 2em;
 }
 

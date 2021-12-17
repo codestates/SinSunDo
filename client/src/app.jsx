@@ -9,8 +9,10 @@ import MainPage from "./page/mainPage";
 import AlarmPage from "./page/alarmPage";
 import MyPage from "./page/myPage";
 import MyPageCorrection from "./page/myPageCorrection";
+import { useState } from "react";
 
 function App() {
+  const [productOnOff, setProductOnOff] = useState(false);
   return (
     <>
       <Nav />
@@ -18,7 +20,10 @@ function App() {
       {/* <AlarmPage /> */}
       {/* <MyPage /> */}
       {/* <MyPageCorrection /> */}
-      <RefrigeratorPage />
+      <RefrigeratorPage
+        productOnOff={productOnOff}
+        setProductOnOff={setProductOnOff}
+      />
       <Footer />
     </>
   );

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import style from "./refrigeratorPage.module.css";
 import Product from "../components/product";
 import { dummy } from "../dummy/dummy";
+import ProductUpload from "./productUpload";
 
-const RefrigeratorPage = () => {
+const RefrigeratorPage = ({ productOnOff, setProductOnOff }) => {
   const [product, setProduct] = useState(dummy.product);
 
   const refrigerate = product.filter((item) => item.storage === "냉장실");
@@ -14,11 +15,18 @@ const RefrigeratorPage = () => {
     const filter = product.filter((el) => el.id !== id);
     setProduct(filter);
   };
+  console.log(productOnOff);
+
+  const handleAdd = () => {
+    productOnOff === false ? setProductOnOff(true) : setProductOnOff(false);
+  };
 
   return (
     <>
-      <button className={style.add}>추가</button>
-
+      {productOnOff === true ? <ProductUpload handleAdd={handleAdd} /> : null}
+      <button className={style.add} onClick={handleAdd}>
+        추가
+      </button>
       <div className={style.container}>
         <div className={style.refrigerator}>
           <i className="refrigerator_logo fas fa-apple-alt"></i>

@@ -8,6 +8,7 @@
   width: 25em;
   height: 40em;
   border-radius: 0.5em;
+  background-color: white;
 }
 
 .logo {
@@ -110,9 +111,19 @@
 }
 
 .registration {
-  margin: 2em auto;
-  display: block;
-  width: 10em;
+  margin: 1em 1.2em;
+  display: inline-block;
+  width: 7em;
+  height: 2em;
+  border: none;
+  font-size: 1.4em;
+  font-weight: 900;
+  border-radius: 0.5em;
+  background-color: rgb(245, 197, 14);
+}
+
+.close {
+  width: 7em;
   height: 2em;
   border: none;
   font-size: 1.4em;
