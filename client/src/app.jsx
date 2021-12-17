@@ -12,13 +12,6 @@ import MyPageCorrection from './page/myPageCorrection'
 
 function App() {
   return <>
-    <Nav />
-    {/* <MainPage /> */}
-    {/* <AlarmPage /> */}
-    {/* <MyPage /> */}
-    {/* <MyPageCorrection /> */}
-    <RefrigeratorPage />
-    <Footer />
   </>;
 }
 
