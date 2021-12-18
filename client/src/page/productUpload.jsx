@@ -4,7 +4,7 @@ import style from "./productUpload.module.css";
 const ProductUpload = ({ handleAdd }) => {
   return (
     <div className={style.container}>
-      <img className={style.logo} src="productupload.png" />
+      <img className={style.logo} src="productupload.png" alt="" />
       <div className={style.imageUpLoad_text}>
         제품의 사진을 업로드 할 수 있습니다
       </div>
