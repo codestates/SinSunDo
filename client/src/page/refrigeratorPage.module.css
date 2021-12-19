@@ -3,7 +3,7 @@
 }
 
 .add {
-  margin: 1em 5em;
+  margin: 1em 3em;
   display: block;
   position: absolute;
   right: 0;
@@ -18,7 +18,7 @@
 
 button:hover {
   cursor: pointer;
-  background-color: rgb(194, 168, 66);
+  /* background-color: rgb(194, 168, 66); */
 }
 
 .container {
@@ -32,15 +32,17 @@ button:hover {
 
 .refrigerator {
   margin: 0 0 2em 3em;
+  padding-bottom: 2em;
   width: 95%;
-  height: 10em;
+  height: 10%;
   background-color: rgb(244, 249, 249);
 }
 
 .freezer {
   margin: 0 0 2em 3em;
+  padding-bottom: 2em;
   width: 95%;
-  height: 10em;
+  height: 10%;
   background-color: rgb(211, 241, 242);
 }
 
@@ -51,8 +53,9 @@ button:hover {
 
 .roomTemperature {
   margin: 0 0 2em 3em;
+  padding-bottom: 2em;
   width: 95%;
-  height: 10em;
+  height: 10%;
   background-color: rgb(179, 232, 240);
 }
 
@@ -98,4 +101,19 @@ button:hover {
 
 .danger_num {
   margin-left: 0.5em;
+}
+
+.empty {
+  margin: 1.5em auto;
+  border: 0.1em solid black;
+  width: 97%;
+  height: 4em;
+  border-radius: 0.6em;
+  background-color: white;
+}
+
+.empty_sentence {
+  margin-top: 0.3em;
+  font-size: 2em;
+  text-align: center;
 }

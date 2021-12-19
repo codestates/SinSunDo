@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./productUpload.module.css";
 
-const ProductUpload = () => {
+const ProductUpload = ({ handleAdd }) => {
   return (
     <div className={style.container}>
       <img className={style.logo} src="productupload.png" />
@@ -44,7 +44,12 @@ const ProductUpload = () => {
         유통기한
         <input className={style.date} type="date" />
       </span>
-      <button className={style.registration}>등록</button>
+      <button className={style.registration} onClick={handleAdd}>
+        등록
+      </button>
+      <button className={style.close} onClick={handleAdd}>
+        취소
+      </button>
     </div>
   );
 };
