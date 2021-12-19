@@ -12,6 +12,7 @@ import MyPageCorrection from './page/myPageCorrection'
 
 function App() {
   return <>
+    <MyPageCorrection />
   </>;
 }
 
