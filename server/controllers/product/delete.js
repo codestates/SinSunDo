@@ -1,6 +1,6 @@
 // 물품 지우기
 const { users, user_category, category, food } = require('../../models');
-const { isAuthorized } = require('../tokenData');
+const { isAuthorized } = require('../tokenData/accessToken');
 
 module.exports = (req, res) => {
     const accessTokenData = isAuthorized(req);
