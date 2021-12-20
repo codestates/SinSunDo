@@ -1,4 +1,4 @@
-const { user } = require('../../models');
+const { users } = require('../../models');
 const bcrypt = require('bcrypt');
 // const { generateAccessToken, sendAccessToken} = require('../tokenFunctions');
 
@@ -6,16 +6,16 @@ module.exports = async(req, res) => {
 // console.log(req.body)
     const { email, password, nickname, user_picture, socialtype, togle} = req.body;
     if(!nickname || !email || !password) {
-        res.status(422).send('모든 항목은 필수입니다.')
+        res.status(422).json({data: null, message: '모든 항목은 필수입니다.'})
     } try {
 
-    const userEmail = await user.findOne({
+    const userEmail = await users.findOne({
         where: {
             email
         },
     })
 
-    const userNickname = await user.findOne({
+    const userNickname = await users.findOne({
         where: {
             nickname
         },
@@ -23,9 +23,9 @@ module.exports = async(req, res) => {
     // console.log(userEmail)
 
         if(userEmail) {
-            res.status(409).send({message: '이미 존재하는 이메일입니다.'})
+            res.status(409).json({message: '이미 존재하는 이메일입니다.'})
         } else if(!userEmail && userNickname) {
-            res.status(409).send({message: '이미 존재하는 닉네임입니다.'})
+            res.status(409).json({message: '이미 존재하는 닉네임입니다.'})
         } else {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(password, salt, async (err, hash) => {
@@ -38,7 +38,7 @@ module.exports = async(req, res) => {
                             password: hash,
                             user_picture,
                             socialtype,
-                            togle
+                            togle: true
                         })
                     
                 // const AccessToken = generateAccessToken(data.dataValues);

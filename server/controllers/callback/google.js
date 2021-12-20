@@ -3,7 +3,7 @@ const axios = require('axios');
 const { users } = require('../../models');
 const { generateAccessToken } = require('../tokenData/accessToken');
 
-module.exports = (req, res ) => {
+module.exports = (req, res) => {
 
     axios.post('https://oauth2.googleapis.com/token', {
         code: req.cookies.accessToken,
