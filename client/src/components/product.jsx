@@ -3,7 +3,7 @@ import style from "./product.module.css";
 
 const Product = ({ product, handleDelete }) => {
   return (
-    <div className={style.container} key={product.id}>
+    <div className={style.container}>
       <span className={style.category}>{product.category_name}</span>
       <img className={style.image} src={product.food_picture} />
       <span className={style.Product_name}>{product.food_name}</span>

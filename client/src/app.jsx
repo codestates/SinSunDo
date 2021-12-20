@@ -17,11 +17,9 @@ function App() {
   return (
     <>
       <Nav isLogin={isLogin} />
-      {/* <MyPageCorrection />
-      <MyPage /> */}
-      <LogInPage isLogin={isLogin} setIsLogin={setIsLogin} />
-      <MembershipPage />
+      <ProductUpload />
       <RefrigeratorPage />
+      <LogInPage isLogin={isLogin} setIsLogin={setIsLogin} />
       <Footer />
     </>
   );

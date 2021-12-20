@@ -38,7 +38,7 @@ const LogInPage = ({ isLogin, setIsLogin }) => {
     // }
 
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/users/signup`, userinfo, {
+      .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`, userinfo, {
         withCredentials: true,
       })
       .then((res) => {

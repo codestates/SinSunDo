@@ -72,13 +72,17 @@
 .quatity {
   display: inline-block;
   margin: 0 0.3em 0 0.3em;
-  width: 1.5em;
+  width: 2.3em;
   height: 1.5em;
   border: 0.1em solid rgb(191, 191, 191);
   font-size: 1.5em;
   font-weight: 600;
   border-radius: 0.3em;
   text-align: center;
+}
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .quatity_plus_btn {
