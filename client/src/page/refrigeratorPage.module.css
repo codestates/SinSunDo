@@ -3,9 +3,9 @@
 }
 
 .add {
-  margin: 1em 3em;
+  margin: 1em 85%;
   display: block;
-  position: absolute;
+  position: static;
   right: 0;
   width: 10em;
   height: 2em;
