@@ -23,6 +23,7 @@ const AlarmPage = ({ alram, setAlram, product, setProduct }) => {
           <div className={style.box}>
             <div className={style.innerBox}>
               <AlramList
+                key={el.id}
                 handleDelete={handleDelete}
                 id={el.id}
                 category={el.category_name}
