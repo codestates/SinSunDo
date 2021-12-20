@@ -2,7 +2,6 @@ const router = require('express').Router()
 const controllers = require('../controllers/product')
 
 //product router
-//product router
 router.post('/', controllers.add); // 음식 추가
 router.get('/:filter', controllers.filter); // 필터된 물품 조회
 router.get('/:search', controllers.search); // 찾고자 하는 물품 조회
