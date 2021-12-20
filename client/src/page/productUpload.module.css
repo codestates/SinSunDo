@@ -9,25 +9,13 @@
   height: 40em;
   border-radius: 0.5em;
   background-color: white;
+  position: absolute;
+  left: 40%;
 }
 
 .logo {
+  margin-bottom: 3em;
   padding: 2.5em 0 1.2em 0.5em;
-}
-
-.imageUpLoad {
-  display: block;
-  margin: 0 1em;
-  padding: 0.5em 5em;
-  font-size: 1em;
-  border: 0.15em solid rgb(191, 191, 191);
-  border-radius: 0.6em;
-  width: 22.8em;
-  height: 3em;
-}
-
-.imageUpLoad_text {
-  margin: 1em 0 0 5.2em;
 }
 
 #storageSelect {

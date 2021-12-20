@@ -68,10 +68,6 @@ const ProductUpload = ({ handleAdd }) => {
   return (
     <div className={style.container}>
       <img className={style.logo} src="productupload.png" />
-      <div className={style.imageUpLoad_text}>
-        제품의 사진을 업로드 할 수 있습니다
-      </div>
-      <input className={style.imageUpLoad} type="file" accept="image/*" />
 
       <select
         name="storageSelect"
