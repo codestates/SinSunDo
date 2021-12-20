@@ -19,15 +19,19 @@ module.exports = (req, res) => {
                 }
                 else {
                     // 비밀번호 암호화 해서 넣어줘야 한다.
-                    // const bcrypt_password = 
-                    users.update({ nickname : nickname, password : password}, {where : { email: accessTokenData.email }})
-                    .then(() => {
-                        users.findOne({ where: { email: accessTokenData.email }})
-                        .then((data) => {
-                            delete data.dataValues.password; 
-                            res.status(201).send({message: "회원정보가 수정되었습니다."})
+                    bcrypt.genSalt(10, (err, salt) => { 
+                        bcrypt.hash(password, salt, async (err, hash) => {
+                            users.update({ nickname : nickname, password : hash}, {where : { email: accessTokenData.email }})
+                            .then(() => {
+                                users.findOne({ where: { email: accessTokenData.email }})
+                                .then((data) => {
+                                    delete data.dataValues.password; 
+                                    res.status(201).send({message: "회원정보가 수정되었습니다."})
+                                })
+                            })
                         })
                     })
+
                 }
             })
         }
