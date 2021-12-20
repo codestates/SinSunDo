@@ -6,7 +6,7 @@
   margin: 10em auto;
   border: 0.1em solid black;
   width: 25em;
-  height: 36em;
+  height: 46em;
   border-radius: 0.5em;
 }
 
@@ -48,6 +48,40 @@
 button:hover {
   cursor: pointer;
   /* background-color: rgb(194, 168, 66); */
+}
+
+.kakao {
+  margin: 3em auto 0 auto;
+  display: block;
+  width: 19em;
+  height: 2.5em;
+  border: none;
+  font-size: 1em;
+  font-weight: 900;
+  border-radius: 10em;
+  background-color: rgb(246, 225, 2);
+  color: white;
+}
+
+.google {
+  margin: 0.5em auto;
+  display: block;
+  width: 19em;
+  height: 2.5em;
+  border: none;
+  font-size: 1em;
+  font-weight: 900;
+  border-radius: 10em;
+  background-color: rgb(74, 134, 245);
+  color: white;
+}
+
+.message {
+  display: block;
+  text-align: center;
+  color: red;
+  margin-top: 1em;
+  font-size: 0.8em;
 }
 
 .membership {

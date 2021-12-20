@@ -3,7 +3,7 @@ const { sign, verify } = require('jsonwebtoken');
 
 module.exports = {
     generateAccessToken: (data) => {
-        return sign(data, process.env.ACCESS_SECRET, { expiresIn: new Date(Date.parse(new Date()) + 1000 * 3600 * 24 * 3)});
+        return sign(data, process.env.ACCESS_SECRET, { expiresIn: '2d'});
     },
     sendAccessToken: (res, accessToken) => {
         res.json({ data: { accessToken }, message: "ok" });
@@ -18,6 +18,7 @@ module.exports = {
             return null;
         } 
         const token = authorization.split(" ")[1];
+        // console.log(token)
         try {
             return verify(token, process.env.ACCESS_SECRET);
         } catch (err) {

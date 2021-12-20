@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import style from "./membershipPage.module.css";
-import axios from 'axios';
+import axios from "axios";
 
-const MembershipPage = () => {
+const MembershipPage = ({ handlemembership }) => {
   const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
@@ -49,20 +49,16 @@ const MembershipPage = () => {
     if (chk_num < 0 || chk_eng < 0) {
       setMessage("비밀번호는 숫자와 영문자를 혼용하여야 합니다.");
       return false;
-    }
-    else return true;
+    } else return true;
   };
 
   const handleSignUp = () => {
     if (password === passwordcheck) {
       const userinfo = { email, nickName, password };
       axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/users/signup`,
-          userinfo,
-          {
-            withCredentials: true,
-          }
-        )
+        .post(`${process.env.REACT_APP_SERVER_URL}/users/signup`, userinfo, {
+          withCredentials: true,
+        })
         .then((res) => {
           if (res.message === "same email") {
             setMessage("중복된 이메일이 있습니다.");
@@ -115,11 +111,11 @@ const MembershipPage = () => {
 
   return (
     <div className={style.container}>
-      <img className={style.logo} src="membership.png" />
+      <img className={style.logo} src="membership.png" alt="" />
       <input
         className={style.email}
         type="text"
-        placeholder="이메일"
+        placeholder="   이메일"
         value={email}
         required
         onChange={onChangeEmail}
@@ -127,7 +123,7 @@ const MembershipPage = () => {
       <input
         className={style.nickName}
         type="text"
-        placeholder="닉네임"
+        placeholder="   닉네임"
         value={nickName}
         required
         onChange={onChangenickName}
@@ -135,7 +131,7 @@ const MembershipPage = () => {
       <input
         className={style.password}
         type="password"
-        placeholder="비밀번호"
+        placeholder="   비밀번호"
         value={password}
         required
         onChange={onChangePassword}
@@ -143,7 +139,7 @@ const MembershipPage = () => {
       <input
         className={style.passwordConfirm}
         type="password"
-        placeholder="비밀번호 확인"
+        placeholder="   비밀번호 확인"
         value={passwordcheck}
         required
         onChange={onChangePasswordCheck}
@@ -152,6 +148,10 @@ const MembershipPage = () => {
         회원 가입
       </button>
       <span className={style.message}>{message}</span>
+      <span className={style.login_text}>이미 sinsundo의 회원이신가요 ?</span>
+      <button className={style.login_bnt} onClick={handlemembership}>
+        로그인
+      </button>
     </div>
   );
 };
