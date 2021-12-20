@@ -9,6 +9,7 @@
 }
 .box{
     margin: 0 auto;
+    padding-bottom: 1.5em;
     width: 20em;
     border: 1px solid black;
     border-radius: 15px;
@@ -28,11 +29,11 @@
     font-weight:bold;
 }
 .settingBtn{
-    width:4.5em;
+    width:7em;
     height:2.2em;
     font-size:1em;
     margin-bottom:2em;
-    background-color: rgb(245, 197, 14);;
+    background-color: rgb(245, 197, 14);
     border: none;
     border-radius: 5px;
 }
@@ -40,11 +41,9 @@
     width: 80%;
 }
 .toggleText{
-    margin-top:1.8em;
+    margin-top:1.3em;
+    margin-bottom: 0.7em;
     font-size: 1.2em;
-}
-.toggleBtn{
-    margin-bottom: 3em;
 }
 .leaveBtn{
     border: none;
@@ -52,4 +51,11 @@
     font-size: 1.2em;
     margin-top: 1.5em;
     font-weight: bold;
+}
+.modalBox{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left:0px;
 }
