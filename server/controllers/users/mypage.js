@@ -1,6 +1,6 @@
 // 내 정보 요청(마이페이지)
 const { users } = require('../../models');
-const { isAuthorized } = require('../tokenData');
+const { isAuthorized } = require('../tokenData/accessToken');
 const { generateRefreshToken, sendRefreshToken } = require('../tokenData/refreshToken');
 
 module.exports ={

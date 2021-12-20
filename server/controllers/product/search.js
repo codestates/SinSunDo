@@ -1,8 +1,6 @@
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
 const { food } = require('../../models')
-const { category } = require('../../models/category')
-
 
 module.exports = (req, res) => {
     const searchWord = req.query.searchWord
