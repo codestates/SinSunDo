@@ -3,40 +3,47 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import style from './myPageCorrection.module.css'
 import axios from 'axios';
 
-const MyPageCorrection = () => {
+const MyPageCorrection = ({ userinfoEditHandler }) => {
+    const [email, setEmail] = useState("");
+    const [nickName, setNickName] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordcheck, setPasswordCheck] = useState("");
+    const [message, setMessage] = useState(false);
+    const [img, setImg] = useState("");
+
     //토큰 확인 후 정보 가져오기
-    const userInfoHandler = async () => {
-        const accessToken = localStorage.getItem('token'); //웹스토리지에 토큰을 저장
-        await axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    "Content-Type": "application/json"
-                },
-                withCredentials: true
-            })
-            .then((res) => {
-                const { email, nickName } = res.data.data.userInfo; //데이터 불러오는 것은 server 확인 필요
-                setEmail(email), setNickName(nickName);
-            })
-            .catch((err) => console.log(err));
-    }
+    // const userInfoHandler = async () => {
+    //     const accessToken = localStorage.getItem('token'); //웹스토리지에 토큰을 저장
+    //     await axios
+    //         .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${accessToken}`,
+    //                 "Content-Type": "application/json"
+    //             },
+    //             withCredentials: true
+    //         })
+    //         .then((res) => {
+    //             const { email, nickName } = res.data.data.userInfo; //데이터 불러오는 것은 server 확인 필요
+    //             setEmail(email), setNickName(nickName);
+    //         })
+    //         .catch((err) => console.log(err));
+    // }
 
     //회원 정보 업데이트
     const handleSignUp = () => {
         if (password === passwordcheck) {
-            const userinfo = { nickName, password };
+            const userinfo = { nickName, password, img };
             axios
                 .post(`${process.env.REACT_APP_SERVER_URL}/users/mypage`,
                     userinfo,
                     { withCredentials: true })
                 .then((res) => {
-                    if (res.message === "same nickName") {
+                    if (res.message === "이미 존재하는 닉네임입니다.") {
                         alert("중복된 닉네임이 있습니다.");
-                    } else if (res.message === "success") {
+                    } else if (res.message === "회원정보가 수정되었습니다") {
                         alert("회원정보가 수정되었습니다");
                         axios
-                            .put(`${process.env.REACT_APP_SERVER_URL}/users/update`,
+                            .patch(`${process.env.REACT_APP_SERVER_URL}/users/update`,
                                 { nickName: nickName.value, password: password.value },
                                 { withCredentials: true })
                             .then((res) => {
@@ -75,11 +82,6 @@ const MyPageCorrection = () => {
         // }
     }
 
-    const [email, setEmail] = useState("");
-    const [nickName, setNickName] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordcheck, setPasswordCheck] = useState("");
-    const [message, setMessage] = useState(false);
 
     const onChangenickName = (e) => {
         setNickName(e.target.value);
@@ -132,19 +134,19 @@ const MyPageCorrection = () => {
             }
         }
         if (checkPassword(password)) {
-            handleSignUp(password);
+            handleSignUp(password, nickName);
             return;
         }
-    }, [nickName, password, passwordcheck, message]);
+    }, [nickName, password, passwordcheck, message, img]);
 
     // 회원 정보를 가져오기 위해
-    useEffect(() => {
-        userInfoHandler();
-    }, [])
+    // useEffect(() => {
+    //     userInfoHandler();
+    // }, [])
 
     return (
-        <div className={style.container}>
-            <div className={style.inner_container}>
+        <div className={style.modalContainer}>
+            <div className={style.modalBox}>
                 <div className={style.imgBox}>
                     <input
                         className={style.imgFile}
@@ -197,6 +199,10 @@ const MyPageCorrection = () => {
                     className={style.correctBtn}
                     onClick={() => handleClick()}
                 >수정 완료</button>
+                <button
+                    className={style.backBtn}
+                    onClick={userinfoEditHandler}
+                >돌아가기</button>
                 <span className={style.message}>{message}</span>
             </div>
         </div>
