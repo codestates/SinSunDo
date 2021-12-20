@@ -1,6 +1,6 @@
 // 회원탈퇴
 const { users } = require('../../models');
-const { isAuthorized } = require('../tokenData');
+const { isAuthorized } = require('../tokenData/accessToken');
 
 module.exports = (req, res) => {
     const accessTokenData = isAuthorized(req); // 토큰 확인
