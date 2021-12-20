@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./productUpload.module.css";
 import axios from "axios";
 
-const ProductUpload = ({ handleAdd }) => {
+const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
   const [storage, setStorage] = useState("");
   const [category, setCategory] = useState("");
   const [foodName, setFoodName] = useState("");
@@ -65,79 +65,86 @@ const ProductUpload = ({ handleAdd }) => {
       .catch((err) => console.log(err));
   };
 
+  const handleModal = () => {
+    setProductOnOff(false);
+  };
+
   return (
-    <div className={style.container}>
-      <select
-        name="storageSelect"
-        id={style.storageSelect}
-        onChange={handleChangeStorage}
-      >
-        <option value="">보관장소</option>
-        <option value="refrigerate">냉장</option>
-        <option value="freeze">냉동</option>
-        <option value="roomTemperature">실온</option>
-      </select>
-
-      <select
-        name="category"
-        id={style.category}
-        onChange={handleChangeCategory}
-      >
-        <option value="카테고리">카테고리</option>
-        <option value="과일">과일</option>
-        <option value="완제품/요리">완제품/요리</option>
-        <option value="유제품">유제품</option>
-        <option value="음료">음료</option>
-        <option value="인스턴스">인스턴스</option>
-        <option value="채소">채소</option>
-      </select>
-
-      <input
-        className={style.productName}
-        type="text"
-        placeholder="상품이름"
-        onChange={handleChangeFoodName}
-      />
-
-      <span className={style.quatity_container}>
-        <button
-          className={style.quatity_plus_btn}
-          onClick={handlePlus}
-          onChange={handleChangeQuantity}
+    <div className={style.main} onClick={handleModal}>
+      <div className={style.container} onClick={(e) => e.stopPropagation()}>
+        <img className={style.logo} src="productupload.png" alt="" />
+        <select
+          name="storageSelect"
+          id={style.storageSelect}
+          onChange={handleChangeStorage}
         >
-          <i className="quatity_plus fas fa-plus-square"></i>
-        </button>
-        <input
-          className={style.quatity}
-          type="number"
-          // placeholder="수량"
-          value={quantity}
-          onChange={(e) => handleChangeQuantity(e.target.value)}
-        />
-        {/* <div className={style.quatity}>1</div> */}
-        <button className={style.quatity_minus_btn} onClick={handleMinus}>
-          <i className="quatity_minus fas fa-minus-square"></i>
-        </button>
-      </span>
+          <option value="">보관장소</option>
+          <option value="refrigerate">냉장</option>
+          <option value="freeze">냉동</option>
+          <option value="roomTemperature">실온</option>
+        </select>
 
-      <span className={style.expirationDate}>
-        유통기한
+        <select
+          name="category"
+          id={style.category}
+          onChange={handleChangeCategory}
+        >
+          <option value="카테고리">카테고리</option>
+          <option value="과일">과일</option>
+          <option value="완제품/요리">완제품/요리</option>
+          <option value="유제품">유제품</option>
+          <option value="음료">음료</option>
+          <option value="인스턴스">인스턴스</option>
+          <option value="채소">채소</option>
+        </select>
+
         <input
-          className={style.date}
-          type="date"
-          onChange={handleExpirationDate}
+          className={style.productName}
+          type="text"
+          placeholder="상품이름"
+          onChange={handleChangeFoodName}
         />
-      </span>
-      <button
-        className={style.registration}
-        onClick={handleProductData}
-        onClick={handleAdd}
-      >
-        등록
-      </button>
-      <button className={style.close} onClick={handleAdd}>
-        취소
-      </button>
+
+        <span className={style.quatity_container}>
+          <button
+            className={style.quatity_plus_btn}
+            onClick={handlePlus}
+            onChange={handleChangeQuantity}
+          >
+            <i className="quatity_plus fas fa-plus-square"></i>
+          </button>
+          <input
+            className={style.quatity}
+            type="number"
+            // placeholder="수량"
+            value={quantity}
+            onChange={(e) => handleChangeQuantity(e.target.value)}
+          />
+          {/* <div className={style.quatity}>1</div> */}
+          <button className={style.quatity_minus_btn} onClick={handleMinus}>
+            <i className="quatity_minus fas fa-minus-square"></i>
+          </button>
+        </span>
+
+        <span className={style.expirationDate}>
+          유통기한
+          <input
+            className={style.date}
+            type="date"
+            onChange={handleExpirationDate}
+          />
+        </span>
+        <button
+          className={style.registration}
+          onClick={handleProductData}
+          onClick={handleAdd}
+        >
+          등록
+        </button>
+        <button className={style.close} onClick={handleAdd}>
+          취소
+        </button>
+      </div>
     </div>
   );
 };
