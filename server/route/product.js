@@ -9,4 +9,4 @@ router.delete('/delete', controllers.delete_product); // 선택 음식 제거
 // router.delete('/:foodid', controllers.delete_product); // 선택 음식 제거
 router.get('/', controllers.product) // 전체 음식 조회
 
-module.exports = router
+module.exports = router;

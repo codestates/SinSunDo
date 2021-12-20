@@ -11,4 +11,4 @@ router.post('/signout', controllers.signout); // 로그아웃
 router.patch('/update', controllers.update); // 회원정보 수정
 router.delete('/delete', controllers.delete_user); // 회원탈퇴
 
-module.exports = router
+module.exports = router;
