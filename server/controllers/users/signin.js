@@ -4,17 +4,17 @@ const { users } = require('../../models');
 const { generateAccessToken, sendAccessToken } = require('../tokenData/accessToken');
 
 module.exports = (req, res) => {
-  if (!req.body.email || !req.body.password) {
-    return res.status(422).send({ message: '모든 정보가 필요합니다' })
-  }
+    if (!req.body.email || !req.body.password) {
+        return res.status(422).send({ message: '모든 정보가 필요합니다' })
+    }
 
-  users.findOne({ 
-    where: { email: req.body.email, password: req.body.password }
-  })
-  .then((data) => {
+    users.findOne({ 
+        where: { email: req.body.email, password: req.body.password }
+    })
+    .then((data) => {
     // bcrypt.compareSync : 비밀번호와 암호화시킨 값이 같은지 비교하는 명령어
     if(!data || !bcrypt.compareSync(password, data.dataValues.password)) {
-      return res.status(404).send({message:'로그인 정보가 일치하지 않습니다.'})
+        return res.status(404).send({message:'로그인 정보가 일치하지 않습니다.'})
     }
     delete data.dataValues.password;
     const AccessToken = generateAccessToken(data.dataValues);
@@ -22,5 +22,5 @@ module.exports = (req, res) => {
     
     sendAccessToken(res, `Bearer ${AccessToken}`);
     // sendRefreshToken(res, `jwt ${RefreshToken}`);
-  })
+    })
 }

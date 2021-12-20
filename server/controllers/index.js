@@ -4,7 +4,8 @@ module.exports = {
     signin: require('./users/signin'),
     signout: require('./users/signout'),
     delete_user: require('./users/delete'),
-    // mypage: require('./users/mypage'),
+    mypageInfo: require('./users/mypageInfo'),
+    mypageGet: require('./users/mypageGet'),
     update: require('./users/update'),
 
     //product

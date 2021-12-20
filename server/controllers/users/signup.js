@@ -8,7 +8,8 @@ module.exports = async(req, res) => {
     if(!nickname || !email || !password) {
         res.status(422).json({data: null, message: '모든 항목은 필수입니다.'})
     } try {
-
+    //두 개 이상 중복 확인을 할 때는 findOrCreate보단 findOne으로 하나씩 찾고 각각 중복검사를 한다
+    //findOrCreate에 두 개 이상의 컬럼 값을 넣으면 두 개 모두 중복되었을 때만 중복 에러가 나온다.
     const userEmail = await users.findOne({
         where: {
             email

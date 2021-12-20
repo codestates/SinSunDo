@@ -12,7 +12,19 @@ module.exports = {
     await queryInterface.addConstraint('foodalram', {
       fields: ['food_id'],
       type: 'foreign key',
-      name: 'foodalram&food',
+      name: 'foodalram&foodF',
+      references: {
+        table: 'food',
+        field: 'id',
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    }),
+    await queryInterface.addColumn('foodalram', 'user_id', Sequelize.INTEGER);
+    await queryInterface.addConstraint('foodalram', {
+      fields: ['user_id'],
+      type: 'foreign key',
+      name: 'foodalram&foodU',
       references: {
         table: 'food',
         field: 'id',
@@ -41,8 +53,10 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-      await queryInterface.removeConstraint('foodalram', 'foodalram&food'),
+      await queryInterface.removeConstraint('foodalram', 'foodalram&foodF'),
       await queryInterface.removeColumn('foodalram', 'food_id'),
+      await queryInterface.removeConstraint('foodalram', 'foodalram&foodU'),
+      await queryInterface.removeColumn('foodalram', 'user_id'),
       await queryInterface.removeConstraint('food', 'food&users'),
       await queryInterface.removeColumn('food', 'user_id')
   }
