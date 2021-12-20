@@ -6,7 +6,10 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 
-const controllers = require("./controllers");
+// const controllers = require("./controllers");
+const usersRoute = require('./route/users');
+const productRoute = require('./route/product');
+
 
 app.use(express.json()); //front에서 json 형식의 데이터를 보냈을 때 데이터 req.body에 넣어준다
 app.use(express.urlencoded({ extended: false })); // form submit 했을 때 데이터를 req.body에 넣어준다
@@ -14,23 +17,17 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    methods: ["GET", "POST", "DELETE"],
+    methods: ["GET", "PATCH", "POST", "DELETE"],
   })
 );
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("Hello SinSunDo!");
 });
 
-app.get('/auth', controllers.auth);
-
-app.post('/signup', controllers.signup);
-app.post('/signin', controllers.signin);
-app.post('/signout', controllers.signout);
-
-app.post('/product', controllers.product);
-app.post('/search', controllers.search);
+app.use('/users', usersRoute);
+app.use('/product', productRoute);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 
