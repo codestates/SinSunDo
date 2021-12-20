@@ -14,6 +14,9 @@ module.exports = {
       nickname: {
         type: Sequelize.STRING
       },
+      socialtype: {
+        type: Sequelize.STRING
+      },
       password: {
         type: Sequelize.STRING
       },

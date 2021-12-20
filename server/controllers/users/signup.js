@@ -1,34 +1,57 @@
-const { users } = require('../../models');
-const { generateAccessToken, sendAccessToken } = require('../tokenData/accessToken');
-const { generateRefreshToken, sendRefreshToken } = require('../tokenData/refreshToken');
+const { user } = require('../../models');
+const bcrypt = require('bcrypt');
+// const { generateAccessToken, sendAccessToken} = require('../tokenFunctions');
 
-module.exports = (req, res) => {
-    const { email, password, username } = req.body;
-    if(!username || !email || !password) {
-        res.status(400).send("모든 항목은 필수입니다.")
-    }
-    users.findOrCreate({
+module.exports = async(req, res) => {
+// console.log(req.body)
+    const { email, password, nickname, user_picture, socialtype, togle} = req.body;
+    if(!nickname || !email || !password) {
+        res.status(422).send('모든 항목은 필수입니다.')
+    } try {
+
+    const userEmail = await user.findOne({
         where: {
-            email,
-            password,
-            username
+            email
         },
     })
-    .then(([data, created]) => {
-        // console.log(created)
-        if(created === false) {
-            return res.status(409).send("이미 존재하는 이메일입니다.")
-        } 
-        const AccessToken = generateAccessToken(data.dataValues);
-        const RefreshToken = generateRefreshToken(data.dataValues);
-          // console.log(AccessToken)
-          // console.log(RefreshToken)
-        sendRefreshToken(res, `jwt ${RefreshToken}`);
-        sendAccessToken(res, `jwt ${AccessToken}`);
-        return res.status(201).send({message: "회원가입에 성공하였습니다."})
+
+    const userNickname = await user.findOne({
+        where: {
+            nickname
+        },
     })
-    .catch((err) => {
+    // console.log(userEmail)
+
+        if(userEmail) {
+            res.status(409).send({message: '이미 존재하는 이메일입니다.'})
+        } else if(!userEmail && userNickname) {
+            res.status(409).send({message: '이미 존재하는 닉네임입니다.'})
+        } else {
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(password, salt, async (err, hash) => {
+                    if(err) {
+                        throw err;
+                    } else {
+                        await user.create({
+                            email,
+                            nickname,
+                            password: hash,
+                            user_picture,
+                            socialtype,
+                            togle
+                        })
+                    
+                // const AccessToken = generateAccessToken(data.dataValues);
+                // const RefreshToken = generateRefreshToken(data.dataValues);
+                // sendRefreshToken(res, `jwt ${RefreshToken}`);
+                // sendAccessToken(res, `jwt ${AccessToken}`);
+                        res.status(201).json({message: "회원가입에 성공하였습니다."});
+                    }
+                })
+            })
+        }
+    } catch (err) {
         console.log(err);
-        res.status(500).send({message: "error"}); // Server error
-    });
-}
+        res.status(500).json({ message: "error" });
+    }
+};
