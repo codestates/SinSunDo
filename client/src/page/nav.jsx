@@ -1,25 +1,38 @@
 import React from "react";
 import style from "./nav.module.css";
+import { Link } from "react-router-dom";
 
 const Nav = ({ isLogin }) => {
   return (
     <div className={style.container}>
-      <img className={style.logo} src={"/logo.png"} />
+      <Link to="/">
+        <img src={"/logo.png"} className={style.logo} alt="logo" />
+      </Link>
       <ul className={style.list}>
         <li className={style.li}>
-          <button className={style.button}>냉장고</button>
+          <Link to="/RefrigeratorPage">
+            <button className={style.button}>냉장고</button>
+          </Link>
         </li>
         <li className={style.li}>
-          <button className={style.button}>알림</button>
+          <Link to="/AlarmPage">
+            <button className={style.button}>알림</button>
+          </Link>
         </li>
         <li className={style.li}>
-          <button className={style.button}>마이페이지</button>
+          <Link to="/MyPage">
+            <button className={style.button}>마이페이지</button>
+          </Link>
         </li>
         <li className={style.li}>
           {isLogin !== true ? (
-            <button className={style.button}>로그인</button>
+            <Link to="/LogInPage">
+              <button className={style.button}>로그인</button>
+            </Link>
           ) : (
-            <button className={style.button}>로그아웃</button>
+            <Link to="/mainPage">
+              <button className={style.button}>로그아웃</button>
+            </Link>
           )}
         </li>
       </ul>

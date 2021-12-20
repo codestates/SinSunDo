@@ -111,7 +111,7 @@ const MembershipPage = ({ handlemembership }) => {
 
   return (
     <div className={style.container}>
-      <img className={style.logo} src="membership.png" />
+      <img className={style.logo} src="membership.png" alt="" />
       <input
         className={style.email}
         type="text"
