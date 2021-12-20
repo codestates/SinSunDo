@@ -24,7 +24,14 @@ const RefrigeratorPage = () => {
 
   return (
     <>
-      {productOnOff === true ? <ProductUpload handleAdd={handleAdd} /> : null}
+      {productOnOff === true ? (
+        <ProductUpload
+          handleAdd={handleAdd}
+          productOnOff={productOnOff}
+          setProductOnOff={setProductOnOff}
+        />
+      ) : null}
+
       <button className={style.add} onClick={handleAdd}>
         추가
       </button>
