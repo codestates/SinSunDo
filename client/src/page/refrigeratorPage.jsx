@@ -15,6 +15,7 @@ const RefrigeratorPage = () => {
   const handleDelete = (id) => {
     const filter = product.filter((el) => el.id !== id);
     setProduct(filter);
+    //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
   };
 
   const handleAdd = () => {
@@ -47,7 +48,9 @@ const RefrigeratorPage = () => {
           {refrigerate.length !== 0 ? (
             product
               .filter((item) => item.storage === "냉장실")
-              .map((el) => <Product product={el} handleDelete={handleDelete} />)
+              .map((el) => (
+                <Product product={el} key={el.id} handleDelete={handleDelete} />
+              ))
           ) : (
             <div className={style.empty}>
               <div className={style.empty_sentence}>냉장실이 비어 있습니다</div>
@@ -71,7 +74,9 @@ const RefrigeratorPage = () => {
           {freeze.length !== 0 ? (
             product
               .filter((item) => item.storage === "냉동실")
-              .map((el) => <Product product={el} handleDelete={handleDelete} />)
+              .map((el) => (
+                <Product product={el} key={el.id} handleDelete={handleDelete} />
+              ))
           ) : (
             <div className={style.empty}>
               <div className={style.empty_sentence}>냉동실이 비어 있습니다</div>
@@ -97,7 +102,7 @@ const RefrigeratorPage = () => {
           {roomTemperature.length !== 0 ? (
             product
               .filter((item) => item.storage === "실온")
-              .map((el) => <Product product={el} />)
+              .map((el) => <Product product={el} key={el.id} />)
           ) : (
             <div className={style.empty}>
               <div className={style.empty_sentence}>
