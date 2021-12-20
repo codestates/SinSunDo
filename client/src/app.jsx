@@ -26,7 +26,6 @@ function App() {
           <Route path="/RefrigeratorPage">
             <RefrigeratorPage />
           </Route>
-
           <Route path="/AlarmPage">
             <AlarmPage />
           </Route>
