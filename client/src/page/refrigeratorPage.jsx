@@ -4,8 +4,7 @@ import Product from "../components/product";
 import { dummy } from "../dummy/dummy";
 import ProductUpload from "./productUpload";
 
-const RefrigeratorPage = () => {
-  const [product, setProduct] = useState(dummy.product);
+const RefrigeratorPage = ({ product, setProduct }) => {
   const [productOnOff, setProductOnOff] = useState(false);
 
   const refrigerate = product.filter((item) => item.storage === "냉장실");

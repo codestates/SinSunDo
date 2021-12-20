@@ -11,9 +11,12 @@ import MyPage from "./page/myPage";
 import MyPageCorrection from "./page/myPageCorrection";
 import { useState } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { dummy } from "./dummy/dummy";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [product, setProduct] = useState(dummy.product);
+  const [alram, setAlram] = useState(dummy.alram);
 
   return (
     <>
@@ -24,10 +27,15 @@ function App() {
             <MainPage />
           </Route>
           <Route path="/RefrigeratorPage">
-            <RefrigeratorPage />
+            <RefrigeratorPage product={product} setProduct={setProduct} />
           </Route>
           <Route path="/AlarmPage">
-            <AlarmPage />
+            <AlarmPage
+              alram={alram}
+              setAlram={setAlram}
+              product={product}
+              setProduct={setProduct}
+            />
           </Route>
           <Route path="/MyPage">
             <MyPage />

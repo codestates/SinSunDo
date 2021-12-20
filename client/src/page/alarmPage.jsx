@@ -1,35 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./alarmPage.module.css";
+import AlramList from "../components/alramList";
 
-const AlarmPage = (props) => {
+const AlarmPage = ({ alram, setAlram, product, setProduct }) => {
+  const renderAlram = product.filter(
+    (el) => alram.map((alram) => alram.food_id).indexOf(el.id) > -1
+  );
+  const [renderAlrams, setRenderAlrams] = useState(renderAlram);
+
+  const handleDelete = (id) => {
+    console.log(id);
+    const filter = renderAlrams.filter((el) => el.id !== id);
+    setRenderAlrams(filter);
+    //ToDo axios 와 엔드포인트 renerAlram/delete를 사용하여 삭제를 구현 해야하나 .. ?
+  };
+
+  console.log(renderAlram);
   return (
-    <div className={style.container}>
-      <div className={style.box}>
-        <div className={style.innerBox}>
-          <img className={style.icon} src={"/7day.png"} alt="" />
-          <p className={style.alarmText}>
-            우유의 서울우유 500ml가 유통기한 7일 남았습니다.
-          </p>
-        </div>
-        <p className={style.dateText}>2021-12-1</p>
-      </div>
-      <div className={style.box}>
-        <div className={style.innerBox}>
-          <img className={style.icon} src={"/5day.png"} alt="" />
-          <p className={style.alarmText}>
-            우유의 서울우유 500ml가 유통기한 5일 남았습니다.
-          </p>
-        </div>
-        <p className={style.dateText}>2021-12-3</p>
-      </div>
-      <div className={style.box}>
-        <div className={style.innerBox}>
-          <img className={style.icon} src={"/d-day.png"} alt="" />
-          <p className={style.alarmText}>
-            우유의 서울우유 500ml가 유통기한 1일 남았습니다.
-          </p>
-        </div>
-        <p className={style.dateText}>2021-12-7</p>
+    <div>
+      <div className={style.container}>
+        {renderAlrams.map((el) => (
+          <div className={style.box}>
+            <div className={style.innerBox}>
+              <AlramList
+                handleDelete={handleDelete}
+                id={el.id}
+                category={el.category_name}
+                name={el.food_name}
+                quantity={el.food_quantity}
+                dayAgo={el.day_ago}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
