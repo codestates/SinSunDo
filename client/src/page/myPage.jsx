@@ -51,19 +51,19 @@ const MyPage = () => {
                         className={style.settingBtn}
                         onClick={userinfoEditHandler}
                     >회원정보 수정</button>
-                    {isEditModal ?
-                        <MyPageCorrection /> : null
-                    }
                     <hr className={style.underline} />
                     <p className={style.toggleText}>유통기한 알림 설정</p>
                     <Toggle />
+                    {isEditModal ?
+                        <MyPageCorrection userinfoEditHandler={userinfoEditHandler} /> : null
+                    }
                 </div>
                 <button
                     className={style.leaveBtn}
                     onClick={withModalHandler}
                 >회원탈퇴</button>
-                {isSignoutModal ?
-                    <WithSingoutModal withModalHandler={withModalHandler} /> : null}
+                {isWithdrawModal ?
+                    <WithdrawModal withModalHandler={withModalHandler} /> : null}
             </div >
         </>
     );
