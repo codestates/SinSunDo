@@ -17,11 +17,14 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      togle: {
-        type: Sequelize.BOOLEAN
+      socialtype: {
+        type: Sequelize.STRING
       },
       user_picture: {
         type: Sequelize.BLOB
+      },
+      togle: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

@@ -10,16 +10,33 @@ import AlarmPage from "./page/alarmPage";
 import MyPage from "./page/myPage";
 import MyPageCorrection from "./page/myPageCorrection";
 import { useState } from "react";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
     <>
-      <Nav isLogin={isLogin} />
-      {/* <ProductUpload /> */}
-      <RefrigeratorPage />
-      {/* <LogInPage isLogin={isLogin} setIsLogin={setIsLogin} /> */}
+      <BrowserRouter>
+        <Nav isLogin={isLogin} />
+        <Switch>
+          <Route exact path="/">
+            <MainPage />
+          </Route>
+          <Route path="/RefrigeratorPage">
+            <RefrigeratorPage />
+          </Route>
+          <Route path="/AlarmPage">
+            <AlarmPage />
+          </Route>
+          <Route path="/MyPage">
+            <MyPage />
+          </Route>
+          <Route path="/LogInPage">
+            <LogInPage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
       <Footer />
     </>
   );

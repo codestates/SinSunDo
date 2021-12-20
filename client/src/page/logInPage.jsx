@@ -31,11 +31,6 @@ const LogInPage = ({ isLogin, setIsLogin }) => {
 
   const handleLogin = () => {
     const userinfo = { email, password };
-    // if (email === "") {
-    //   setMessage("이메일을 입력해 주세요");
-    // } else if (password === "") {
-    //   setMessage("비밀번호를 입력해 주세요");
-    // }
 
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`, userinfo, {
@@ -61,11 +56,11 @@ const LogInPage = ({ isLogin, setIsLogin }) => {
     } else if (password === "") {
       setMessage("비밀번호를 입력해주세요.");
     } else {
-      setMessage("");
       handleLogin();
+      setMessage("");
       return;
     }
-  }, [email, password]);
+  }, [email, password, message]);
 
   const handlemembership = () => {
     membershipOnOff === false

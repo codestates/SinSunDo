@@ -67,8 +67,6 @@ const ProductUpload = ({ handleAdd }) => {
 
   return (
     <div className={style.container}>
-      <img className={style.logo} src="productupload.png" />
-
       <select
         name="storageSelect"
         id={style.storageSelect}
