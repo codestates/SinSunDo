@@ -14,12 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   food.init({
+    user_id: DataTypes.INTEGER,
+    food_quantity: DataTypes.INTEGER,
+    category_name: DataTypes.STRING,
     storage: DataTypes.STRING,
     food_name: DataTypes.STRING,
-    food_quantity: DataTypes.INTEGER,
-    food_expiration: DataTypes.DATE,
-    food_img_id: DataTypes.INTEGER,
-    category_name_id: DataTypes.INTEGER
+    day_ago: DataTypes.DATE,
+    food_expiration: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'food',
