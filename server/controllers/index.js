@@ -5,6 +5,7 @@ module.exports = {
     signout: require('./users/signout'),
     delete_user: require('./users/delete'),
     mypage: require('./users/mypage'),
+    update: require('./users/update'),
 
     //product
     product: require('./product/product'),
@@ -13,3 +14,5 @@ module.exports = {
     add: require('./product/add'),
     delete_product: require('./product/delete')
 };
+
+// https://github.com/codestates/RunnersHigh 참고

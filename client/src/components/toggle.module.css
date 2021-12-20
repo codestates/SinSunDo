@@ -1,0 +1,35 @@
+.toggleContainer{
+    position: relative;
+    left: 42%;
+    cursor: pointer;
+}
+.toggleCircle__checked{
+    position: absolute;
+    top: 1px;
+    left: 31px;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: white;
+}
+.toggleBox__unchecked{
+    width: 3.5em;
+    height: 1.7em;
+    border-radius: 10em;
+    background-color: #8b8b8b;
+}
+.toggleBox__checked{
+    background-color: rgb(245, 197, 14);
+    width: 3.5em;
+    height: 1.7em;
+    border-radius: 10em;
+}
+.toggleCircle__unchecked {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
