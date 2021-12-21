@@ -14,7 +14,7 @@ module.exports = (req, res) => {
             res.status(200).json({ data : null, message: '알람 설정이 변경되었습니다.'})
         }).catch((err) => {
             console.log(err);
-            res.status(500).send('');
+            res.status(500).send({ message: 'Server Error' });
         });
     }
 }

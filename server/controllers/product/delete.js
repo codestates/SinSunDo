@@ -15,7 +15,7 @@ module.exports = (req, res) => {
         .then(() => res.status(201).send({ message: '음식을 제거했습니다.' }))
         .catch((err) => {
             console.log(err);
-            res.status(500).send('');
+            res.status(500).send({ message: 'Server Error' });
         });
     }
 }
