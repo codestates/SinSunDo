@@ -46,7 +46,7 @@ const RefrigeratorPage = () => {
     const filter = product.filter((el) => el.id !== id);
     setProduct(filter);
     //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
-    // axios.delete(${process.env.REACT_APP_SERVER_URL}/product/Delete`, { withCredentials: true })
+    // axios.delete(`${process.env.REACT_APP_SERVER_URL}/product/Delete`, { withCredentials: true })
   };
 
   const handleAdd = () => {
