@@ -23,6 +23,9 @@ module.exports = {
       food_expiration: {
         type: Sequelize.DATE
       },
+      day_ago: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

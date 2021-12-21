@@ -16,8 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   foodalram.init({
     food_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    alram_data: DataTypes.STRING,
-    day_ago: DataTypes.DATE
+    alram_data: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'foodalram',

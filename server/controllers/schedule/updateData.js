@@ -13,7 +13,7 @@ module.exports = {
         food.findAll({
             where:{ 
                 [Op.or]: [{ day_ago: 7 }, { day_ago: 5 }, { day_ago: 1 }]
-             }
+            }
         })
         .then((data) => {
             // 이게 하나 만들어지는걸텐데

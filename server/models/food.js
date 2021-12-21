@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     category_name: DataTypes.STRING,
     storage: DataTypes.STRING,
     food_name: DataTypes.STRING,
-    food_expiration: DataTypes.DATE
+    food_expiration: DataTypes.DATE,
+    day_ago: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'food',
