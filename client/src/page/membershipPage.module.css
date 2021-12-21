@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 3.5em auto;
+  border: 0.1em solid black;
+  width: 25em;
+  height: 40em;
+  border-radius: 0.5em;
+}
+
+.logo {
+  padding: 2.5em 0 1.2em 0.9em;
+}
+
+.email {
+  margin: 1em auto;
+  display: block;
+  width: 23em;
+  height: 4em;
+  border: 0.2em solid rgb(191, 191, 191);
+  border-radius: 10em;
+}
+
+.nickName {
+  margin: 1em auto;
+  display: block;
+  width: 23em;
+  height: 4em;
+  border: 0.2em solid rgb(191, 191, 191);
+  border-radius: 10em;
+}
+
+.password {
+  margin: 1em auto;
+  display: block;
+  width: 23em;
+  height: 4em;
+  border: 0.2em solid rgb(191, 191, 191);
+  border-radius: 10em;
+}
+
+.passwordConfirm {
+  margin: 1em auto;
+  display: block;
+  width: 23em;
+  height: 4em;
+  border: 0.2em solid rgb(191, 191, 191);
+  border-radius: 10em;
+}
+
+.membership {
+  display: block;
+  margin: 0.5em auto;
+  display: block;
+  width: 13.5em;
+  height: 2.5em;
+  border: none;
+  font-size: 1.4em;
+  font-weight: 900;
+  border-radius: 10em;
+  background-color: #ff7272;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.message {
+  display: block;
+  text-align: center;
+  color: red;
+  margin-top: 1em;
+  font-size: 0.8em;
+}
+
+.login_text {
+  margin-left: 3em;
+}
+.login_bnt {
+  margin-top: 1.4em;
+  margin-left: 1.2em;
+  font-size: 1em;
+  font-weight: 900;
+  width: 5em;
+  height: 2em;
+  border: none;
+  border-radius: 10em;
+  color: white;
+  background-color: rgb(245, 197, 14);
+}
