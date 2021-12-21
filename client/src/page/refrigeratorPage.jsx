@@ -9,12 +9,20 @@ const RefrigeratorPage = () => {
   const [productOnOff, setProductOnOff] = useState(false);
   const [product, setProduct] = useState(dummy.product);
   console.log(dummy.product);
-  // const [product, setProduct] = useState({id, storage, category_name, day_ago, food_expiration, food_name, food_quantity});
+  // const [product, setProduct] = useState({
+  //   id,
+  //   storage,
+  //   category_name,
+  //   day_ago,
+  //   food_expiration,
+  //   food_name,
+  //   food_quantity,
+  // });
 
   // get 요청으로 상품 list 가져오기
   // const productList = () => {
   //   axios
-  //     .get(`${process.env.REACT_APP_SERVER_URL}/product/add`, {
+  //     .get(`${process.env.REACT_APP_SERVER_URL}/product`, {
   //       headers: {
   //         Authorization: `Bearer ${accessToken}`,
   //       },
@@ -22,13 +30,13 @@ const RefrigeratorPage = () => {
   //     })
   //     .then((data) => {
   //       setProduct({
-  //         id: data.id,
-  //         storage: data.storage,
-  //         category_name: data.category_name,
-  //         day_ago: data.day_ago,
-  //         food_expiration: data.food_expiration,
-  //         food_name: data.food_name,
-  //         food_quantity: data.food_quantity,
+  //         id: data.data.foodInfo.id,
+  //         storage: data.data.foodInfo.storage,
+  //         category_name: data.data.foodInfo.category_name,
+  //         day_ago: data.data.foodInfo.day_ago,
+  //         food_expiration: data.data.foodInfo.food_expiration,
+  //         food_name: data.data.foodInfo.food_name,
+  //         food_quantity: data.data.foodInfo.food_quantity,
   //       });
   //     });
   // };
@@ -46,7 +54,10 @@ const RefrigeratorPage = () => {
     const filter = product.filter((el) => el.id !== id);
     setProduct(filter);
     //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
-    // axios.delete(${process.env.REACT_APP_SERVER_URL}/product/Delete`, { withCredentials: true })
+    // axios.delete(${process.env.REACT_APP_SERVER_URL}/product/Delete`, headers: {
+    //         Authorization: `Bearer ${accessToken}`,
+    //       }, data: {filter}, withCredentials: true })
+
   };
 
   const handleAdd = () => {
