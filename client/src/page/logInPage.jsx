@@ -3,7 +3,7 @@ import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ isLogin, setIsLogin, history }) => {
+const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -39,7 +39,7 @@ const LogInPage = ({ isLogin, setIsLogin, history }) => {
         if (res.message !== "ok") {
           setMessage("고객님의 정보가 일치하지 않습니다");
         } else {
-          setIsLogin(true);
+          loginHandler();
           setEmail("");
           setPassword("");
           history.push('/')
@@ -91,10 +91,11 @@ const LogInPage = ({ isLogin, setIsLogin, history }) => {
             로그인
           </button>
           <span className={style.message}>{message}</span>
-
-          <button className={style.kakao}>카카오톡 로그인</button>
-          <button className={style.google}>구글 로그인</button>
-
+        <button className={style.kakao}>카카오톡 로그인</button>
+        <button
+          className={style.google}
+          onClick={googleAccessToken}
+        >구글 로그인</button>
           <div className={style.membership}>
             아직 sinsundo의 회원이 아니신가요 ?
           </div>
