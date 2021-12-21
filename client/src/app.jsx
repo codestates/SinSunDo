@@ -11,7 +11,7 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { dummy } from "./dummy/dummy";
 import axios from "axios";
 
-function App() {
+function App({ history }) {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState({ accessToken: null })
   const [userInfo, setUserInfo] = useState({
@@ -126,12 +126,12 @@ function App() {
             <MainPage />
           </Route>
           <Route path="/RefrigeratorPage">
-            <RefrigeratorPage 
-                product={product} 
-                setProduct={setProduct}
-                isLogin={isLogin}
+            <RefrigeratorPage
+              product={product}
+              setProduct={setProduct}
+              isLogin={isLogin}
               accessToken={accessToken}
-              />
+            />
           </Route>
           <Route path="/AlarmPage">
             <AlarmPage

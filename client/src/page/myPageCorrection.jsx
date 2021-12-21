@@ -150,7 +150,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
             handleEdit(password, nickname);
             return;
         }
-    }, [nickname, password, passwordcheck, message, img]);
+    }, [nickname, password, passwordcheck, message, user_picture]);
 
     // 회원 정보를 가져오기 위해
     useEffect(() => {
