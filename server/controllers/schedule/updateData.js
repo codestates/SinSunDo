@@ -5,12 +5,12 @@ const Op = sequelize.Op;
 module.exports = {
     foodData: async () => {
         // day_ago 데이터 업데이트
-        food.update({ day_ago : day_ago - 1 })
+        await food.update({ day_ago : day_ago - 1 })
     },
 
     alram: async () => {
         // 조건이 맞다면 알람데이터 추가
-        food.findAll({
+        await food.findAll({
             where:{ 
                 [Op.or]: [{ day_ago: 7 }, { day_ago: 5 }, { day_ago: 1 }]
              }
@@ -19,9 +19,12 @@ module.exports = {
             // 이게 하나 만들어지는걸텐데
             // 내가 원하는건 여러개를 만들어야하는건데
             // map 써야한다고 한다.
-            foodalram.create({
-
+            data.map((el) => {
+                await foodalram.create({
+                    food_id : el_dataValues.food_id
+                })
             })
+            
         })
     }
 }
