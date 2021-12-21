@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-// import { useHistory } from "react-router-dom";
 import style from './myPageCorrection.module.css'
 import axios from 'axios';
 
-const MyPageCorrection = ({ userinfoEditHandler }) => {
+const MyPageCorrection = ({ userinfoEditHandler, history }) => {
     const [email, setEmail] = useState("");
     const [nickName, setNickName] = useState("");
     const [password, setPassword] = useState("");
@@ -47,7 +46,7 @@ const MyPageCorrection = ({ userinfoEditHandler }) => {
                                 { nickName: nickName.value, password: password.value },
                                 { withCredentials: true })
                             .then((res) => {
-                                // history.push("/MyPage");
+                                history.push("/MyPage");
                             })
                             .catch((err) => { console.log(err) })
                     }
