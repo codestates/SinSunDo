@@ -146,12 +146,18 @@ const MembershipPage = ({ handlemembership, history }) => {
         required
         onChange={onChangePasswordCheck}
       />
-      <button className={style.membership} onClick={() => handleClick()}>
+      <button
+        className={style.membership}
+        onClick={() => handleClick()}
+      >
         회원 가입
       </button>
       <span className={style.message}>{message}</span>
       <span className={style.login_text}>이미 sinsundo의 회원이신가요 ?</span>
-      <button className={style.login_bnt} onClick={handlemembership}>
+      <button
+        className={style.login_bnt}
+        onClick={handlemembership}
+      >
         로그인
       </button>
     </div>

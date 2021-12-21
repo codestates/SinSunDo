@@ -5,7 +5,6 @@ import axios from "axios";
 const WithdrawModal = ({ accessToken, logoutHadler, withModalHandler }) => {
     const handleDeleteUser = () => {
         let result = window.confirm('정말 탈퇴하시겠습니까?');
-
         if (result) {
             axios
                 .delete(`${process.env.REACT_APP_SERVER_URL}/users/delete`, {
