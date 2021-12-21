@@ -57,6 +57,7 @@ const RefrigeratorPage = () => {
     // axios.delete(${process.env.REACT_APP_SERVER_URL}/product/Delete`, headers: {
     //         Authorization: `Bearer ${accessToken}`,
     //       }, data: {filter}, withCredentials: true })
+
   };
 
   const handleAdd = () => {

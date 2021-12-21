@@ -5,10 +5,8 @@ import axios from 'axios';
 const WithdrawModal = ({ withModalHandler }) => { //logout, accessToken props 받기
     // const handleDeleteUser = () => {
     //     let result = window.confirm('정말 탈퇴하시겠습니까?');
-    //     // const accessToken = localStorage.getItem('accessToken');
 
     //     if (result) {
-    //         console.log('yes');
     //         axios
     //             .delete(`${process.env.REACT_APP_SERVER_URL}/users/delete`, {
     //                 headers: { Authorization: `bearer ${accessToken}` },
@@ -16,9 +14,8 @@ const WithdrawModal = ({ withModalHandler }) => { //logout, accessToken props �
     //             })
     //             .then((res) => {
     //                 if (res.status === 200) {
-    //                     alert('회원정보가 삭제되었습니다.');
-    //                     // handleLogout(); 로그아웃
-    //                     // 메인 페이지 이동
+    //                     alert('탈퇴가 정상적으로 이루어졌습니다.');
+    //                     // handleLogout();
     //                 }
     //             });
     //     } else {
