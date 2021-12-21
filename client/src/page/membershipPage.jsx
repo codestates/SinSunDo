@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useHistory } from "react";
 import style from "./membershipPage.module.css";
 import axios from "axios";
 
@@ -8,6 +8,7 @@ const MembershipPage = ({ handlemembership }) => {
   const [password, setPassword] = useState("");
   const [passwordcheck, setPasswordCheck] = useState("");
   const [message, setMessage] = useState(false);
+  const history = useHistory();
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -65,7 +66,9 @@ const MembershipPage = ({ handlemembership }) => {
           } else if (res.message === "same nickName") {
             setMessage("중복된 닉네임이 있습니다.");
           } else if (res.message === "success") {
-            setMessage("회원가입이 완료되었습니다.");
+            setMessage('');
+            alert("회원가입이 완료되었습니다.");
+            history.push('/LogInPage');
           } else {
             setMessage("잘못된 요청입니다.");
           }
