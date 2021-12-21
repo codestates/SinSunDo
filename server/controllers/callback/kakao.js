@@ -17,6 +17,7 @@ module.exports = async(req, res ) => {
             },
         });
 
+        // 카카오는 데이터 구분에 따라 정해진 타입이 있다.
         const user = await users.findOrCreate({
             where: {
                 email: kakaoUser.data.kakao_account.email,
