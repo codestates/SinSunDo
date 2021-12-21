@@ -17,6 +17,9 @@ export const Toggle = () => {
 
   return (
     <>
+      <div className={style.toggle_text}>
+        {isOn ? <span>on</span> : <span>off</span>}
+      </div>
       <div className={style.toggleContainer}>
         {isOn ? (
           <div
