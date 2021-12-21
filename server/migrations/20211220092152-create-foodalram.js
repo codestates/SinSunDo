@@ -11,9 +11,6 @@ module.exports = {
       alram_data: {
         type: Sequelize.STRING
       },
-      day_ago: {
-        type: Sequelize.DATE
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

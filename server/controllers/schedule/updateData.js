@@ -13,7 +13,7 @@ module.exports = {
         await food.findAll({
             where:{ 
                 [Op.or]: [{ day_ago: 7 }, { day_ago: 5 }, { day_ago: 1 }]
-             }
+            }
         })
         .then((data) => {
             // async 위치 : data.map(async(el) => {
