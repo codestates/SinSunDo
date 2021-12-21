@@ -15,7 +15,7 @@ module.exports = (req, res) => {
             users.findOne({ where: { nickname: nickname}})
             .then((data) => {
                 if(data) {
-                    return res.status(404).send({message:'중복된 닉네임입니다.'})
+                    return res.status(409).send({message:'중복된 닉네임입니다.'})
                 }
                 else {
                     // 비밀번호 암호화 해서 넣어줘야 한다.
@@ -26,6 +26,7 @@ module.exports = (req, res) => {
                                 users.findOne({ where: { email: accessTokenData.email }})
                                 .then((data) => {
                                     delete data.dataValues.password; 
+                                    delete data.dataValues.togle;
                                     res.status(201).send({message: "회원정보가 수정되었습니다."})
                                 })
                             })
