@@ -4,7 +4,7 @@ const https = require("https");
 const cors = require("cors");
 
 const schedule = require('node-schedule'); // 스케줄러 : 설정 시간마다 실행되는 패키지
-const { alram, foodData } = require('./controller/crawler/automateCrawler');
+const { alram, foodData } = require('./controller/schedule');
 
 const cookieParser = require("cookie-parser");
 const express = require("express");
