@@ -3,7 +3,7 @@ import style from "./alarmPage.module.css";
 import AlramList from "../components/alramList";
 import axios from "axios";
 
-const AlarmPage = ({ alram, setAlram, product, setProduct }) => {
+const AlarmPage = ({ alram, setAlram, product, setProduct, isLogin, accessToken }) => {
   const renderAlram = product.filter(
     (el) => alram.map((alram) => alram.food_id).indexOf(el.id) > -1
   );
