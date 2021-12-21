@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ loginHandler }) => {
+const LogInPage = ({ loginHandler, googleAccessToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -93,7 +93,10 @@ const LogInPage = ({ loginHandler }) => {
         <span className={style.message}>{message}</span>
 
         <button className={style.kakao}>카카오톡 로그인</button>
-        <button className={style.google}>구글 로그인</button>
+        <button
+          className={style.google}
+          onClick={googleAccessToken}
+        >구글 로그인</button>
 
         <div className={style.membership}>
           아직 sinsundo의 회원이 아니신가요 ?

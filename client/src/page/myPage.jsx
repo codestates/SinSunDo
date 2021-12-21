@@ -5,7 +5,7 @@ import WithdrawModal from '../components/withdrawModal';
 import MyPageCorrection from './myPageCorrection';
 
 const MyPage = ({ isLogin, userInfo, accessToken, logoutHadler }) => {
-    const { nickname, img } = userInfo;
+    const { nickname, user_picture } = userInfo;
     const [isWithdrawModal, setIsWithdrawModal] = useState(false);
     const [isEditModal, setIsEditModal] = useState(false);
 
@@ -28,8 +28,8 @@ const MyPage = ({ isLogin, userInfo, accessToken, logoutHadler }) => {
                     <div className={style.box}>
                         <img
                             className={style.img}
-                            src={img}
-                            alt="ProfilePic"
+                            src={user_picture}
+                            alt="Profile_Pic"
                         />
                         <p className={style.nickname}>{nickname}</p>
                         <button

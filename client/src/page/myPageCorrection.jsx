@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import style from './myPageCorrection.module.css'
 import axios from 'axios';
 
-const MyPageCorrection = ({ accessToken, userinfoEditHandler }) => {
+const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     const [email, setEmail] = useState("");
     const [nickname, setNickname] = useState("");
     const [password, setPassword] = useState("");
@@ -14,8 +14,6 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler }) => {
     const [ImgUploadBtn, setImgUploadBtn] = useState(false);
     const [fileSelect, setFileSelect] = useState(null);
     const [Content, setContent] = useState("");
-
-    const history = useHistory();
 
     //토큰 확인 후 정보 가져오기
     const userInfoHandler = async () => {
@@ -37,7 +35,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler }) => {
     //회원 정보 업데이트
     const handleEdit = () => {
         if (password === passwordcheck) {
-            const userInfo = { nickname, password, img };
+            const userInfo = { nickname, password, user_picture };
             axios
                 .post(`${process.env.REACT_APP_SERVER_URL}/users/mypage`,
                     userInfo,

@@ -1,7 +1,5 @@
 import "./App.css";
 import LogInPage from "./page/logInPage";
-import MembershipPage from "./page/membershipPage";
-import ProductUpload from "./page/productUpload";
 import RefrigeratorPage from "./page/refrigeratorPage";
 import Nav from "./page/nav";
 import Footer from "./page/footer";
@@ -11,7 +9,6 @@ import MyPage from "./page/myPage";
 import { useState, useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import axios from "axios";
-import { ConsoleWriter } from "istanbul-lib-report";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -25,8 +22,7 @@ function App() {
   //로그인 관리----------------------------------------
   const loginHandler = () => {
     setIsLogin(true);
-    issueAccessToken(data.accessToken);
-    // issueAccessToken(data.data.accessToken);
+    issueAccessToken(data.data.accessToken);
   }
 
   useEffect(() => {
@@ -46,7 +42,7 @@ function App() {
         setUserInfo({
           email: '',
           nickname: '',
-          img: ''
+          user_picture: ''
         })
         history.push('/');
       });
@@ -64,8 +60,8 @@ function App() {
           withCredentials: true,
         })
       .then((res) => {
-        const { email, nickname, img } = res.data.userInfo
-        setUserInfo({ email, nickname, img })
+        const { email, nickname, user_picture } = res.data.userInfo
+        setUserInfo({ email, nickname, user_picture })
       })
       .catch((err) =>
         console.log(err)
@@ -83,6 +79,39 @@ function App() {
     accessTokenRequest();
   }, [])
 
+  //구글 로그인 코드---------------------------
+  //서버의 /callback 엔드포인트로 authorization code를 보내주고
+  //access token을 받아옵니다.
+  const googleAccessToken = async (authorizationCode) => {
+    let resp = await axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/callback/google`,
+        { authorizationCode },
+        { withCredentials: true }
+      )
+    issueAccessToken(resp.data.accessToken);
+    setIsLogin(true);
+  };
+
+  //카카오 로그인 코드---------------------------------- 구글 로그인 확인 후 진행
+  // const getAccessToken = async (authorizationCode) => {
+  //   let resp = await axios
+  //     .post(`${process.env.REACT_APP_SERVER_URL}/callback/kakao`,
+  //       { authorizationCode },
+  //       { withCredentials: true }
+  //     );
+  //   issueAccessToken(resp.data.accessToken);
+  //   setIsLogin(true);
+  // };
+
+  //소셜 로그인 코드 받기--------------------------------
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get('code');
+    if (authorizationCode) {
+      googleAccessToken(authorizationCode);
+    }
+  });
+
   return (
     <>
       <BrowserRouter>
@@ -97,14 +126,12 @@ function App() {
           <Route path="/RefrigeratorPage">
             <RefrigeratorPage
               isLogin={isLogin}
-              userInfo={userInfo}
               accessToken={accessToken}
             />
           </Route>
           <Route path="/AlarmPage">
             <AlarmPage
               isLogin={isLogin}
-              userInfo={userInfo}
               accessToken={accessToken}
             />
           </Route>
@@ -119,6 +146,7 @@ function App() {
           <Route path="/LogInPage">
             <LogInPage
               loginHandler={loginHandler}
+              googleAccessToken={googleAccessToken}
             />
           </Route>
         </Switch>
