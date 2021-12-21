@@ -1,5 +1,5 @@
 // 물품 조회하기
-const { users, user_category, category, food } = require('../../models');
+const { users, food } = require('../../models');
 const { isAuthorized } = require('../tokenData/accessToken');
 
 module.exports = (req, res) => {
@@ -10,15 +10,9 @@ module.exports = (req, res) => {
     else {
         users.findAll({ 
             where: {email: accessTokenData.email},
-            include: [
-                { 
-                    model: user_category,
-                    attributes: {  }
-                }
-            ]
         })
-        .then()
+        .then((foodData) => {
+            res.status(201).json({ data : { foodInfo : foodData }, message: '음식 조회에 성공했습니다'})
+        })
     }
 }
-
-//https://flyingsquirrel.medium.com/sequelize-table-join%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-34dc1ce4e86f

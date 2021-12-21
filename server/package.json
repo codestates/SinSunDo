@@ -20,10 +20,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "node-schedule": "^2.1.0",
-<<<<<<< HEAD
     "nodemailer": "^6.7.2",
-=======
->>>>>>> 2a0b2d6180ee7d0f29eae3de3bfe4322de74ff5d
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
