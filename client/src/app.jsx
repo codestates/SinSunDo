@@ -71,41 +71,6 @@ function App() {
         console.log(err)
       );
   }
-  // const accessTokenRequest = (accessToken) => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_SERVER_URL}/tokenData/accessToken`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           'Content-Type': 'application/json',
-  //         },
-  //         withCredentials: true,
-  //       })
-  //     .then((res) => {
-  //       if (res.status === 401) {
-  //         const message =
-  //           "access token이 만료되어 불러올 수 없습니다. 다시 로그인 해주세요";
-  //         setIsLogin(false)
-  //         alert({ message })
-  //         return history.push('/');
-  //         // return setUserInfo({ email: message, createdAt: message });
-  //       } //토큰이 유효하면 저장
-  //       else {
-  //         setUserInfo(res.data.userInfo);
-  //       }
-  //     })
-  //     .then((data) => {
-  //       const { email, nickname, img } = data;
-  //       setUserInfo({
-  //         email,
-  //         nickname,
-  //         img
-  //       })
-  //     })
-  //     .catch((err) =>
-  //       console.log(err)
-  //     );
-  // }
 
   //토큰 최신화------------------------------------
   const issueAccessToken = (token) => {
