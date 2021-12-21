@@ -2,29 +2,26 @@ import React from 'react';
 import style from './withdrawModal.module.css';
 import axios from 'axios';
 
-const WithdrawModal = ({ withModalHandler }) => { //logout, accessToken props 받기
-    // const handleDeleteUser = () => {
-    //     let result = window.confirm('정말 탈퇴하시겠습니까?');
-    //     // const accessToken = localStorage.getItem('accessToken');
+const WithdrawModal = ({ accessToken, logoutHadler, withModalHandler }) => {
+    const handleDeleteUser = () => {
+        let result = window.confirm('정말 탈퇴하시겠습니까?');
 
-    //     if (result) {
-    //         console.log('yes');
-    //         axios
-    //             .delete(`${process.env.REACT_APP_SERVER_URL}/users/delete`, {
-    //                 headers: { Authorization: `bearer ${accessToken}` },
-    //                 withCredentials: true,
-    //             })
-    //             .then((res) => {
-    //                 if (res.status === 200) {
-    //                     alert('회원정보가 삭제되었습니다.');
-    //                     // handleLogout(); 로그아웃
-    //                     // 메인 페이지 이동
-    //                 }
-    //             });
-    //     } else {
-    //         return false;
-    //     }
-    // };
+        if (result) {
+            axios
+                .delete(`${process.env.REACT_APP_SERVER_URL}/users/delete`, {
+                    headers: { Authorization: `bearer ${accessToken}` },
+                    withCredentials: true,
+                })
+                .then((res) => {
+                    if (res.status === 201) {
+                        alert('회원정보가 삭제되었습니다.');
+                        logoutHadler();
+                    }
+                });
+        } else {
+            return false;
+        }
+    };
 
     return (
         <div className={style.modalContainer}>
@@ -36,7 +33,7 @@ const WithdrawModal = ({ withModalHandler }) => { //logout, accessToken props �
                 <p className={style.text}>그동안 사용해 주셔서 감사합니다:D</p>
                 <button
                     className={style.singoutBtn}
-                // onClick={handleDeleteUser}
+                    onClick={handleDeleteUser}
                 >탈퇴하기</button>
                 <button
                     className={style.closeBtn}

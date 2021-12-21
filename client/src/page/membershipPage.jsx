@@ -4,7 +4,7 @@ import axios from "axios";
 
 const MembershipPage = ({ handlemembership }) => {
   const [email, setEmail] = useState("");
-  const [nickName, setNickName] = useState("");
+  const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [passwordcheck, setPasswordCheck] = useState("");
   const [message, setMessage] = useState(false);
@@ -13,8 +13,8 @@ const MembershipPage = ({ handlemembership }) => {
     setEmail(e.target.value);
   };
 
-  const onChangenickName = (e) => {
-    setNickName(e.target.value);
+  const onChangeNickname = (e) => {
+    setNickname(e.target.value);
   };
 
   const onChangePassword = (e) => {
@@ -54,7 +54,7 @@ const MembershipPage = ({ handlemembership }) => {
 
   const handleSignUp = () => {
     if (password === passwordcheck) {
-      const userinfo = { email, nickName, password };
+      const userinfo = { email, nickname, password };
       axios
         .post(`${process.env.REACT_APP_SERVER_URL}/users/signup`, userinfo, {
           withCredentials: true,
@@ -82,7 +82,7 @@ const MembershipPage = ({ handlemembership }) => {
       setMessage("올바른 메일 양식으로 입력해주세요.");
       return;
     }
-    if (nickName === "") {
+    if (nickname === "") {
       setMessage("닉네임을 입력해주세요.");
       return;
     }
@@ -94,7 +94,7 @@ const MembershipPage = ({ handlemembership }) => {
         return;
       } else if (password === passwordcheck) {
         setMessage("");
-        setNickName("");
+        setNickname("");
         setEmail("");
         setPassword("");
       } else {
@@ -107,7 +107,7 @@ const MembershipPage = ({ handlemembership }) => {
       handleSignUp(email, password);
       return;
     }
-  }, [email, nickName, password, passwordcheck, message]);
+  }, [email, nickname, password, passwordcheck, message]);
 
   return (
     <div className={style.container}>
@@ -124,9 +124,9 @@ const MembershipPage = ({ handlemembership }) => {
         className={style.nickName}
         type="text"
         placeholder="   닉네임"
-        value={nickName}
+        value={nickname}
         required
-        onChange={onChangenickName}
+        onChange={onChangeNickname}
       />
       <input
         className={style.password}

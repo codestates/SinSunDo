@@ -1,41 +1,46 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import style from './myPageCorrection.module.css'
 import axios from 'axios';
 
-const MyPageCorrection = ({ userinfoEditHandler }) => {
+const MyPageCorrection = ({ accessToken, userinfoEditHandler }) => {
     const [email, setEmail] = useState("");
-    const [nickName, setNickName] = useState("");
+    const [nickname, setNickname] = useState("");
     const [password, setPassword] = useState("");
     const [passwordcheck, setPasswordCheck] = useState("");
     const [message, setMessage] = useState(false);
-    const [img, setImg] = useState("");
+    //사진 업데이트를 위한 변수
+    const [FilePath, setFilePath] = useState("");
+    const [ImgUploadBtn, setImgUploadBtn] = useState(false);
+    const [fileSelect, setFileSelect] = useState(null);
+    const [Content, setContent] = useState("");
+
+    const history = useHistory();
 
     //토큰 확인 후 정보 가져오기
-    // const userInfoHandler = async () => {
-    //     const accessToken = localStorage.getItem('token'); //웹스토리지에 토큰을 저장
-    //     await axios
-    //         .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${accessToken}`,
-    //                 "Content-Type": "application/json"
-    //             },
-    //             withCredentials: true
-    //         })
-    //         .then((res) => {
-    //             const { email, nickName } = res.data.data.userInfo; //데이터 불러오는 것은 server 확인 필요
-    //             setEmail(email), setNickName(nickName);
-    //         })
-    //         .catch((err) => console.log(err));
-    // }
+    const userInfoHandler = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true
+            })
+            .then((res) => {
+                const { email, nickname } = res.data.userInfo;
+                setEmail(email), setNickname(nickname);
+            })
+            .catch((err) => console.log(err));
+    }
 
     //회원 정보 업데이트
-    const handleSignUp = () => {
+    const handleEdit = () => {
         if (password === passwordcheck) {
-            const userinfo = { nickName, password, img };
+            const userInfo = { nickname, password, img };
             axios
                 .post(`${process.env.REACT_APP_SERVER_URL}/users/mypage`,
-                    userinfo,
+                    userInfo,
                     { withCredentials: true })
                 .then((res) => {
                     if (res.message === "이미 존재하는 닉네임입니다.") {
@@ -44,10 +49,10 @@ const MyPageCorrection = ({ userinfoEditHandler }) => {
                         alert("회원정보가 수정되었습니다");
                         axios
                             .patch(`${process.env.REACT_APP_SERVER_URL}/users/update`,
-                                { nickName: nickName.value, password: password.value },
+                                { nickname: nickname.value, password: password.value },
                                 { withCredentials: true })
                             .then((res) => {
-                                // history.push("/MyPage");
+                                history.push("/MyPage");
                             })
                             .catch((err) => { console.log(err) })
                     }
@@ -57,34 +62,45 @@ const MyPageCorrection = ({ userinfoEditHandler }) => {
 
     // 프로필 사진 업로드를 위한 구현
     const fileInput = useRef();
-    //버튼 클릭 설정
-    const onButtonClick = (e) => {
+
+    const imageHandler = event => {
+        // console.log(event.target.files);
+        if (event.target) {
+            setContent(event.target.files[0]);
+            setFileSelect(event.target.files[0].name);
+            setImgUploadBtn(true);
+        } else {
+            setContent(FilePath);
+        }
+    };
+
+    const upoadImage = (e) => {
         e.preventDefault();
         fileInput.current.click();
-    }
-    //업로드 사진 보내기
-    const onFileChange = (e) => {
-        console.log(e.target.files[0]); // 사진을 가져오는 것 확인
-        // if (e.target.files) {
-        //     const uploadFile = e.target.files[0]
-        //     console.log(uploadFile)
-        // const formData = new FormData()
-        // formData.append('files', uploadFile)
 
-        // await axios({
-        //     method: 'post',
-        //     url: '/api/files/images',
-        //     data: formData,
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data',
-        //     },
-        // });
-        // }
-    }
+        const formData = new FormData();
+        formData.append("image", Content);
+        // console.log(formData);
 
+        axios
+            .post(`${process.env.REACT_APP_SERVER_URL}/uploads3`, formData, {
+                header: {
+                    "content-type": "multipart/form-data",
+                    Authorization: `Bearer ${accessToken}`
+                },
+                withCredentials: true
+            })
+            .then(res => {
+                console.log(res.data);
+                setFilePath(res.data.fileName);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
 
     const onChangenickName = (e) => {
-        setNickName(e.target.value);
+        setNickname(e.target.value);
     };
 
     const onChangePassword = (e) => {
@@ -113,7 +129,7 @@ const MyPageCorrection = ({ userinfoEditHandler }) => {
     };
 
     const handleClick = useCallback(() => {
-        if (nickName === "") {
+        if (nickname === "") {
             setMessage("닉네임을 입력해주세요.");
             return;
         }
@@ -125,7 +141,7 @@ const MyPageCorrection = ({ userinfoEditHandler }) => {
                 return;
             } else if (password === passwordcheck) {
                 setMessage("");
-                setNickName("");
+                setNickname("");
                 setPassword("");
             } else {
                 setMessage("비밀번호를 정확하게 입력해주세요.");
@@ -134,15 +150,15 @@ const MyPageCorrection = ({ userinfoEditHandler }) => {
             }
         }
         if (checkPassword(password)) {
-            handleSignUp(password, nickName);
+            handleEdit(password, nickname);
             return;
         }
-    }, [nickName, password, passwordcheck, message, img]);
+    }, [nickname, password, passwordcheck, message, img]);
 
     // 회원 정보를 가져오기 위해
-    // useEffect(() => {
-    //     userInfoHandler();
-    // }, [])
+    useEffect(() => {
+        userInfoHandler();
+    }, [])
 
     return (
         <div className={style.modalContainer}>
@@ -152,14 +168,15 @@ const MyPageCorrection = ({ userinfoEditHandler }) => {
                         className={style.imgFile}
                         type="file"
                         accept='image/*'
-                        onChange={onFileChange}
+                        onChange={imageHandler}
                         ref={fileInput}
+                    // value={fileSelect}
                     />
                 </div>
                 <div>
                     <button
                         className={style.imgBtn}
-                        onClick={onButtonClick}
+                        onClick={upoadImage}
                     >변경</button>
                 </div>
                 <div className={style.textBox}>
@@ -172,7 +189,7 @@ const MyPageCorrection = ({ userinfoEditHandler }) => {
                         <input
                             className={style.input}
                             type='text'
-                            value={nickName}
+                            value={nickname}
                             onChange={onChangenickName}
                         />
                     </div>

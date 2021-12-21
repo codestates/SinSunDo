@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ isLogin, setIsLogin }) => {
+const LogInPage = ({ loginHandler }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -40,7 +40,7 @@ const LogInPage = ({ isLogin, setIsLogin }) => {
         if (res.message !== "ok") {
           setMessage("고객님의 정보가 일치하지 않습니다");
         } else {
-          setIsLogin(true);
+          loginHandler();
           setEmail("");
           setPassword("");
         }
