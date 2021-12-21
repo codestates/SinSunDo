@@ -147,8 +147,8 @@ const MyPageCorrection = ({ userinfoEditHandler, history }) => {
   // }, [])
 
   return (
-    <div className={style.modalContainer} onClick={userinfoEditHandler}>
-      <div className={style.modalBox} onClick={(e) => e.stopPropagation()}>
+    <div className={style.modalContainer}>
+      <div className={style.modalBox}>
         <div className={style.imgBox}>
           <input
             className={style.imgFile}
