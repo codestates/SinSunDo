@@ -1,12 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./refrigeratorPage.module.css";
 import Product from "../components/product";
 import { dummy } from "../dummy/dummy";
 import ProductUpload from "./productUpload";
+import axios from "axios";
 
 const RefrigeratorPage = () => {
-  const [product, setProduct] = useState(dummy.product);
   const [productOnOff, setProductOnOff] = useState(false);
+  const [product, setProduct] = useState(dummy.product);
+  console.log(dummy.product);
+  // const [product, setProduct] = useState({id, storage, category_name, day_ago, food_expiration, food_name, food_quantity});
+
+  // get 요청으로 상품 list 가져오기
+  // const productList = () => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_SERVER_URL}/product/add`, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setProduct({
+  //         id: data.id,
+  //         storage: data.storage,
+  //         category_name: data.category_name,
+  //         day_ago: data.day_ago,
+  //         food_expiration: data.food_expiration,
+  //         food_name: data.food_name,
+  //         food_quantity: data.food_quantity,
+  //       });
+  //     });
+  // };
+
+  // get 요청 자동으로 가져 오기
+  // useEffect(() => {
+  //   productList();
+  // }, []);
 
   const refrigerate = product.filter((item) => item.storage === "냉장실");
   const freeze = product.filter((item) => item.storage === "냉동실");
@@ -16,6 +46,7 @@ const RefrigeratorPage = () => {
     const filter = product.filter((el) => el.id !== id);
     setProduct(filter);
     //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
+    // axios.delete(${process.env.REACT_APP_SERVER_URL}/product/Delete`, { withCredentials: true })
   };
 
   const handleAdd = () => {
