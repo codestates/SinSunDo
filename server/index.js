@@ -38,14 +38,17 @@ app.use('/product', productRoute);
 const update_dayAgo = schedule.scheduleJob(
   '00 05 0 * *',
   async () => {
+<<<<<<< HEAD
     alram();
     foodData();
     mail();
+=======
+    alram().catch(console.error);;
+    foodData().catch(console.error);;
+    mail().catch(console.error);;
+>>>>>>> 5ed7991ebff49266abfe67d8e18e2ed557177834
   },
 );
-
-
-
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 

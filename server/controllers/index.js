@@ -5,7 +5,7 @@ module.exports = {
     signout: require('./users/signout'),
     delete_user: require('./users/delete'),
     mypageInfo: require('./users/mypageInfo'),
-    mypageGet: require('./users/mypageTogle'),
+    mypageTogle: require('./users/mypageTogle'),
     update: require('./users/update'),
 
     //product
@@ -13,7 +13,7 @@ module.exports = {
     search: require('./product/search'),
     add: require('./product/add'),
     delete_product: require('./product/delete'),
-    alram: require('./product/alram'),
+    alram: require('./product/alram')
 };
 
 // https://github.com/codestates/RunnersHigh 참고

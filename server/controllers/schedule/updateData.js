@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { users, food, foodalram } = require('../../models');
 const nodemailer = require('nodemailer')
 const sequelize = require("sequelize");
@@ -28,37 +30,62 @@ module.exports = {
             })  
         })
     },
-    mail: async (req, res) => {
-        const emailData = {
-            "host": "smtp.mailtrap.io",
-            "port": 2525,
-            "secure": false,
-            "auth": {
-                "user": "843b211373ad23",
-                "pass": "ff63eb685ab36f"
-            }
-        }
 
-        const send = async (data) => {
-            nodemailer.createTransport(emailData).sendMail(data, function(err, info) {
-                if(err) {
-                    console.log(err);
-                    res.status(500).json({ message: "Server Error"})
-                } else {
-                    console.log(info);
-                    return info.response
-                }
+    mail: async () => {
+        // 메일을 보내기 위한 기본 설정
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: process.env.NODEMAILER_USER,
+                pass: process.env.NODEMAILER_PASS,
+            },
+        });
+        // 토글정보 확인
+        await users.findAll({ where : { togle : true }})
+        .then((usersData) => {
+            usersData.map(async(el) => {
+                // 그 유저의 알람메시지를 하나로 모은다.
+                let message = ""; // 빈 메시지 하나 만들어준다.
+
+                let today = new Date(); // 날짜 비교를 위해 만듦
+                let year = today.getFullYear();
+                let month = ('0' + (today.getMonth() + 1)).slice(-2);
+                let day = ('0' + today.getDate()).slice(-2);
+                let dateString = year + '-' + month  + '-' + day;
+                
+                // 메시지를 중첩하는 작업을 진행한다.
+                await foodalram.findAll({ where : {
+                    [Op.and]: [
+                        {
+                            user_id: el.dataValues.id
+                        },
+                        {
+                            createdAt: {
+                                [Op.like]: dateString + "%"
+                            }
+                        }
+                    ]
+                    } 
+                })
+                .then((alramData) => {
+                    alramData.map((el2) => {
+                        // 여러개의 메시지를 하나의 string으로 묶어 보낸다.
+                        message = message + " " + el2.dataValues.alram_data;
+                    })
+                })
+
+                // 토글정보가 true인 계정의 모든 알람을 확인
+                await transporter.sendMail({
+                    from: `"SinSunDo" <${process.env.NODEMAILER_USER}>`,
+                    to: el.dataValues.email,
+                    subject: '유통기한 알림 메일입니다.',
+                    text: message
+                });
             })
-        }
-        
-        const content = {
-            from: "gg9297@gmail.com",
-            to: "26ebabea6a-c9c369@inbox.mailtrap.io",
-            subject: "project test 1",
-            text: "project test 1 - data"
-        }
-
-        send(content)
+        })
     }
     
 }

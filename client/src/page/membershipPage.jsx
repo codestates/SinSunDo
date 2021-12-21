@@ -1,14 +1,13 @@
-import React, { useState, useCallback, useHistory } from "react";
+import React, { useState, useCallback } from "react";
 import style from "./membershipPage.module.css";
 import axios from "axios";
 
-const MembershipPage = ({ handlemembership }) => {
+const MembershipPage = ({ handlemembership, history }) => {
   const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordcheck, setPasswordCheck] = useState("");
   const [message, setMessage] = useState(false);
-  const history = useHistory();
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);

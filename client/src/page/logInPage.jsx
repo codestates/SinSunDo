@@ -1,10 +1,9 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import style from "./logInPage.module.css";
-import { useState } from "react";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ isLogin, setIsLogin }) => {
+const LogInPage = ({ isLogin, setIsLogin, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -33,7 +32,7 @@ const LogInPage = ({ isLogin, setIsLogin }) => {
     const userinfo = { email, password };
 
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`, userinfo, {
+      .post(`http//localhost:4000/users/signin`, userinfo, {
         withCredentials: true,
       })
       .then((res) => {
@@ -43,6 +42,7 @@ const LogInPage = ({ isLogin, setIsLogin }) => {
           setIsLogin(true);
           setEmail("");
           setPassword("");
+          history.push('/')
         }
       });
   };
