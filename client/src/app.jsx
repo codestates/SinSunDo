@@ -8,7 +8,7 @@ import Footer from "./page/footer";
 import MainPage from "./page/mainPage";
 import AlarmPage from "./page/alarmPage";
 import MyPage from "./page/myPage";
-import { useState, useHistory, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import { ConsoleWriter } from "istanbul-lib-report";
@@ -21,7 +21,6 @@ function App() {
     nickname: '',
     img: ''
   });
-  const history = useHistory();
 
   //로그인 관리----------------------------------------
   const loginHandler = () => {
