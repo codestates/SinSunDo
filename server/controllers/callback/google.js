@@ -15,6 +15,7 @@ module.exports = (req, res) => {
     .then((data) => {
         if(data) {
             // console.log(data)
+            // 토큰 검사
             axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${data.data.accessToken}`, {
                 headers: {
                     Authorization: `Bearer ${data.data.accessToken}`,

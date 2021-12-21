@@ -7,7 +7,8 @@ export const dummy =
       "category_name": "유제품",
       "food_name": "바나나우유",
       "food_expiration": "2021-12-16-목",
-      "food_quantity": 5
+      "food_quantity": 5,
+      "day_ago": 7,
     },
     {
       "id": 2,
@@ -15,7 +16,8 @@ export const dummy =
       "category_name": "어패류",
       "food_name": "가리비",
       "food_expiration": "2021-12-18-토",
-      "food_quantity": 30
+      "food_quantity": 30,
+      "day_ago": 5,
     },
     {
       "id": 3,
@@ -23,7 +25,8 @@ export const dummy =
       "category_name": "음료",
       "food_name": "기네스(맥주)",
       "food_expiration": "2022-12-16-목",
-      "food_quantity": 10
+      "food_quantity": 10,
+      "day_ago": 1,
     },
     {
       "id": 4,
@@ -41,5 +44,19 @@ export const dummy =
       "food_expiration": "2022-12-16-목",
       "food_quantity": 2
     },
+  ],
+  "alram": [
+    {
+      "food_id": 1,
+
+    },
+    {
+      "food_id": 2,
+
+    },
+    {
+      "food_id": 3,
+
+    }
   ]
 }

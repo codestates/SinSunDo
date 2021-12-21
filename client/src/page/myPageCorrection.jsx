@@ -100,31 +100,30 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     const onChangenickName = (e) => {
         setNickname(e.target.value);
     };
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
 
-    const onChangePassword = (e) => {
-        setPassword(e.target.value);
-    };
+  const onChangePasswordCheck = (e) => {
+    setPasswordCheck(e.target.value);
+    setMessage(e.target.value !== password);
+  };
 
-    const onChangePasswordCheck = (e) => {
-        setPasswordCheck(e.target.value);
-        setMessage(e.target.value !== password);
-    };
-
-    //이메일 유효성 검사
-    const checkPassword = (upw) => {
-        if (!/^[a-zA-Z0-9]{8,20}$/.test(upw)) {
-            setMessage(
-                "비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다."
-            );
-            return false;
-        }
-        var chk_num = upw.search(/[0-9]/g);
-        var chk_eng = upw.search(/[a-z]/gi);
-        if (chk_num < 0 || chk_eng < 0) {
-            setMessage("비밀번호는 숫자와 영문자를 혼용하여야 합니다.");
-            return false;
-        } else return true;
-    };
+  //이메일 유효성 검사
+  const checkPassword = (upw) => {
+    if (!/^[a-zA-Z0-9]{8,20}$/.test(upw)) {
+      setMessage(
+        "비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다."
+      );
+      return false;
+    }
+    var chk_num = upw.search(/[0-9]/g);
+    var chk_eng = upw.search(/[a-z]/gi);
+    if (chk_num < 0 || chk_eng < 0) {
+      setMessage("비밀번호는 숫자와 영문자를 혼용하여야 합니다.");
+      return false;
+    } else return true;
+  };
 
     const handleClick = useCallback(() => {
         if (nickname === "") {
@@ -221,7 +220,16 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
                 <span className={style.message}>{message}</span>
             </div>
         </div>
-    );
+        <button className={style.correctBtn} onClick={() => handleClick()}>
+          수정 완료
+        </button>
+        <button className={style.backBtn} onClick={userinfoEditHandler}>
+          돌아가기
+        </button>
+        <span className={style.message}>{message}</span>
+      </div>
+    </div>
+  );
 };
 
 export default MyPageCorrection;

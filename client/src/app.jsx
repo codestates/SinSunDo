@@ -8,6 +8,7 @@ import AlarmPage from "./page/alarmPage";
 import MyPage from "./page/myPage";
 import { useState, useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { dummy } from "./dummy/dummy";
 import axios from "axios";
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
     nickname: '',
     img: ''
   });
+  const [product, setProduct] = useState(dummy.product);
+  const [alram, setAlram] = useState(dummy.alram);
 
   //로그인 관리----------------------------------------
   const loginHandler = () => {
@@ -111,7 +114,6 @@ function App() {
       googleAccessToken(authorizationCode);
     }
   });
-
   return (
     <>
       <BrowserRouter>
@@ -124,13 +126,19 @@ function App() {
             <MainPage />
           </Route>
           <Route path="/RefrigeratorPage">
-            <RefrigeratorPage
-              isLogin={isLogin}
+            <RefrigeratorPage 
+                product={product} 
+                setProduct={setProduct}
+                isLogin={isLogin}
               accessToken={accessToken}
-            />
+              />
           </Route>
           <Route path="/AlarmPage">
             <AlarmPage
+              alram={alram}
+              setAlram={setAlram}
+              product={product}
+              setProduct={setProduct}
               isLogin={isLogin}
               accessToken={accessToken}
             />

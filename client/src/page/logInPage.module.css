@@ -3,10 +3,10 @@
 }
 
 .container {
-  margin: 10em auto;
+  margin: 3.5em auto;
   border: 0.1em solid black;
   width: 25em;
-  height: 46em;
+  height: 40em;
   border-radius: 0.5em;
 }
 
@@ -51,9 +51,11 @@ button:hover {
 }
 
 .kakao {
-  margin: 3em auto 0 auto;
-  display: block;
-  width: 19em;
+  /* margin: 2em 3em; */
+  margin-left: 3.4em;
+  margin-right: 2em;
+  display: inline-block;
+  width: 8em;
   height: 2.5em;
   border: none;
   font-size: 1em;
@@ -64,9 +66,9 @@ button:hover {
 }
 
 .google {
-  margin: 0.5em auto;
-  display: block;
-  width: 19em;
+  /* margin: 0.5em auto; */
+  display: inline-block;
+  width: 8em;
   height: 2.5em;
   border: none;
   font-size: 1em;

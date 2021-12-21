@@ -2,8 +2,13 @@ require("dotenv").config();
 const fs = require("fs");
 const https = require("https");
 const cors = require("cors");
+
+const schedule = require('node-schedule'); // 스케줄러 : 설정 시간마다 실행되는 패키지
+const { alram, foodData, mail } = require('./controllers/schedule/updateData');
+
 const cookieParser = require("cookie-parser");
 const express = require("express");
+
 const app = express();
 
 // const controllers = require("./controllers");
@@ -28,6 +33,16 @@ app.get("/", (req, res) => {
 
 app.use('/users', usersRoute);
 app.use('/product', productRoute);
+
+// 매 0시 5분 0초에 업데이트를 진행
+const update_dayAgo = schedule.scheduleJob(
+  '00 05 0 * *',
+  async () => {
+    alram().catch(console.error);;
+    foodData().catch(console.error);;
+    mail().catch(console.error);;
+  },
+);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 

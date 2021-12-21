@@ -1,12 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./refrigeratorPage.module.css";
 import Product from "../components/product";
 import { dummy } from "../dummy/dummy";
 import ProductUpload from "./productUpload";
+import axios from "axios";
 
 const RefrigeratorPage = () => {
-  const [product, setProduct] = useState(dummy.product);
   const [productOnOff, setProductOnOff] = useState(false);
+  const [product, setProduct] = useState(dummy.product);
+  console.log(dummy.product);
+  // const [product, setProduct] = useState({
+  //   id,
+  //   storage,
+  //   category_name,
+  //   day_ago,
+  //   food_expiration,
+  //   food_name,
+  //   food_quantity,
+  // });
+
+  // get 요청으로 상품 list 가져오기
+  // const productList = () => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_SERVER_URL}/product`, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setProduct({
+  //         id: data.data.foodInfo.id,
+  //         storage: data.data.foodInfo.storage,
+  //         category_name: data.data.foodInfo.category_name,
+  //         day_ago: data.data.foodInfo.day_ago,
+  //         food_expiration: data.data.foodInfo.food_expiration,
+  //         food_name: data.data.foodInfo.food_name,
+  //         food_quantity: data.data.foodInfo.food_quantity,
+  //       });
+  //     });
+  // };
+
+  // get 요청 자동으로 가져 오기
+  // useEffect(() => {
+  //   productList();
+  // }, []);
 
   const refrigerate = product.filter((item) => item.storage === "냉장실");
   const freeze = product.filter((item) => item.storage === "냉동실");
@@ -16,6 +54,10 @@ const RefrigeratorPage = () => {
     const filter = product.filter((el) => el.id !== id);
     setProduct(filter);
     //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
+    // axios.delete(${process.env.REACT_APP_SERVER_URL}/product/Delete`, headers: {
+    //         Authorization: `Bearer ${accessToken}`,
+    //       }, data: {filter}, withCredentials: true })
+
   };
 
   const handleAdd = () => {
@@ -24,7 +66,14 @@ const RefrigeratorPage = () => {
 
   return (
     <>
-      {productOnOff === true ? <ProductUpload handleAdd={handleAdd} /> : null}
+      {productOnOff === true ? (
+        <ProductUpload
+          handleAdd={handleAdd}
+          productOnOff={productOnOff}
+          setProductOnOff={setProductOnOff}
+        />
+      ) : null}
+
       <button className={style.add} onClick={handleAdd}>
         추가
       </button>

@@ -1,10 +1,9 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import style from "./logInPage.module.css";
-import { useState } from "react";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ loginHandler, googleAccessToken }) => {
+const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -33,7 +32,7 @@ const LogInPage = ({ loginHandler, googleAccessToken }) => {
     const userinfo = { email, password };
 
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`, userinfo, {
+      .post(`http//localhost:4000/users/signin`, userinfo, {
         withCredentials: true,
       })
       .then((res) => {
@@ -43,6 +42,7 @@ const LogInPage = ({ loginHandler, googleAccessToken }) => {
           loginHandler();
           setEmail("");
           setPassword("");
+          history.push('/')
         }
       });
   };
@@ -72,40 +72,39 @@ const LogInPage = ({ loginHandler, googleAccessToken }) => {
     <>
       {membershipOnOff === true ? (
         <MembershipPage handlemembership={handlemembership} />
-      ) : null}
-      <div className={style.container}>
-        <img className={style.logo} src="logo.png" />
-        <input
-          className={style.email}
-          type="text"
-          placeholder="   이메일"
-          onChange={onChangeEmail}
-        />
-        <input
-          className={style.password}
-          type="password"
-          placeholder="   비밀번호"
-          onChange={onChangePassword}
-        />
-        <button className={style.login} onClick={() => handleClick()}>
-          로그인
-        </button>
-        <span className={style.message}>{message}</span>
-
+      ) : (
+        <div className={style.container}>
+          <img className={style.logo} src="logo.png" />
+          <input
+            className={style.email}
+            type="text"
+            placeholder="   이메일"
+            onChange={onChangeEmail}
+          />
+          <input
+            className={style.password}
+            type="password"
+            placeholder="   비밀번호"
+            onChange={onChangePassword}
+          />
+          <button className={style.login} onClick={() => handleClick()}>
+            로그인
+          </button>
+          <span className={style.message}>{message}</span>
         <button className={style.kakao}>카카오톡 로그인</button>
         <button
           className={style.google}
           onClick={googleAccessToken}
         >구글 로그인</button>
+          <div className={style.membership}>
+            아직 sinsundo의 회원이 아니신가요 ?
+          </div>
 
-        <div className={style.membership}>
-          아직 sinsundo의 회원이 아니신가요 ?
+          <button className={style.membership_btn} onClick={handlemembership}>
+            회원가입
+          </button>
         </div>
-
-        <button className={style.membership_btn} onClick={handlemembership}>
-          회원가입
-        </button>
-      </div>
+      )}
     </>
   );
 };

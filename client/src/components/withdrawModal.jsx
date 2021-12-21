@@ -1,6 +1,6 @@
-import React from 'react';
-import style from './withdrawModal.module.css';
-import axios from 'axios';
+import React from "react";
+import style from "./withdrawModal.module.css";
+import axios from "axios";
 
 const WithdrawModal = ({ accessToken, logoutHadler, withModalHandler }) => {
     const handleDeleteUser = () => {
@@ -14,7 +14,7 @@ const WithdrawModal = ({ accessToken, logoutHadler, withModalHandler }) => {
                 })
                 .then((res) => {
                     if (res.status === 201) {
-                        alert('회원정보가 삭제되었습니다.');
+                        alert('탈퇴가 정상적으로 이루어졌습니다.');
                         logoutHadler();
                     }
                 });

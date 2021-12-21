@@ -20,10 +20,10 @@ module.exports = {
       food_name: {
         type: Sequelize.STRING
       },
-      day_ago: {
+      food_expiration: {
         type: Sequelize.DATE
       },
-      food_expiration: {
+      day_ago: {
         type: Sequelize.DATE
       },
       createdAt: {
