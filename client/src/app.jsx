@@ -28,11 +28,11 @@ function App({ history }) {
     issueAccessToken(data.data.accessToken);
   }
 
-  useEffect(() => {
-    if (accessToken.accessToken === null) {
-      logoutHadler();
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (accessToken.accessToken === null) {
+  //     logoutHadler();
+  //   }
+  // }, [])
 
   //로그아웃 관리-------------------------------------------------------
   const logoutHadler = () => {

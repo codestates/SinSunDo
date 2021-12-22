@@ -27,7 +27,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
             })
             .then((res) => {
                 const { email, nickname } = res.data.userInfo;
-                setEmail(email); 
+                setEmail(email);
                 setNickname(nickname);
             })
             .catch((err) => console.log(err));
