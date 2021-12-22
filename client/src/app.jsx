@@ -14,7 +14,7 @@ import axios from "axios";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
-  const [accessToken, setAccessToken] = useState(null)
+  const [accessToken, setAccessToken] = useState('')
 
   const isAuthenticated = (accessToken) => {
     // console.log(token)
@@ -36,8 +36,9 @@ function App() {
         setIsLogin(false);
     });
   };
+
   const handleResponseSuccess = (data) => {
-    isAuthenticated(data.data.data.accessToken.split(" ")[1]);
+    isAuthenticated(data);
   };
 
   const handleLogout = () => {
@@ -95,7 +96,7 @@ function App() {
             <LogInPage
               handleResponseSuccess={handleResponseSuccess}
               // loginHandler={loginHandler}
-              // googleAccessToken={googleAccessToken}
+              setAccessToken={setAccessToken}
               isLogin={isLogin}
             />
           </Route>

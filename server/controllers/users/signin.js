@@ -24,7 +24,7 @@ module.exports = (req, res) => {
                 }
                 delete data.dataValues.password;
                 delete data.dataValues.togle; // 토글데이터가 변경되어도 토큰에는 영향을 주지 않게 하기 위해 제거
-                const AccessToken = generateAccessToken(data.dataValues);
+                const accessToken = generateAccessToken(data.dataValues);
                 // const RefreshToken = generateRefreshToken(data.dataValues);
                 
                 sendAccessToken(res, `Bearer ${AccessToken}`, { message: '로그인에 성공했습니다.' });
