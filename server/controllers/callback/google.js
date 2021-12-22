@@ -56,15 +56,15 @@ module.exports = (req, res) => {
                             res.status(200).json({data: access_tokne, message: 'Oauth google login success'});
                         }
                     })
-                    .catch((err) => res.status(500).json({ status: false, message: 'Oauth google server error' }));
+                    .catch((err) => res.status(500).json({ status: false, message: 'Server Error' }));
                 } else {
                     res.status(403).json({message: 'Forbidden'})
                 }
             })
-            .catch((err) => res.status(500).json({ status: false, message: 'Oauth google server error' }));
+            .catch((err) => res.status(500).json({ status: false, message: 'Server Error' }));
         } else {
             res.status(400).json({message: 'Bad Request'})
         }
     })
-    .catch((err) => res.status(500).json({ status: false, message: 'Oauth google server error' }));
+    .catch((err) => res.status(500).json({ status: false, message: 'Server Error' }));
 };
