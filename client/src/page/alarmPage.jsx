@@ -3,7 +3,7 @@ import style from "./alarmPage.module.css";
 import AlramList from "../components/alramList";
 import axios from "axios";
 
-const AlarmPage = ({ alram, setAlram, product, setProduct }) => {
+const AlarmPage = ({ alram, setAlram, product, setProduct, isLogin, accessToken }) => {
   const renderAlram = product.filter(
     (el) => alram.map((alram) => alram.food_id).indexOf(el.id) > -1
   );
@@ -19,6 +19,26 @@ const AlarmPage = ({ alram, setAlram, product, setProduct }) => {
   //   day_ago
   // });
 
+  //알람 추가----------------(사름)
+  // const AddAlarm = () => {
+  //   axios
+  //     .post(`${process.env.REACT_APP_SERVER_URL}/product/alram`, {
+  //       headers: { Authorization: `Bearer ${accessToken}` },
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setRenderAlrams({
+  //         id: data.data.foodalram.id,
+  //         category_name: data.data.foodalram.category_name,
+  //         food_name: data.data.foodalram.food_name,
+  //         food_quantity: data.data.foodalram.food_quantity,
+  //         food_expiration: data.data.foodalram.food_expiration,
+  //         day_ago: data.data.foodalram.day_ago
+  //       });
+  //     })
+  // }
+
+  //별도 서버 지우기 요청 없이 클라에서만 지우는 것으로 진행....?
   // ToDo get 요청으로 alram list 가져오기
   // const alramList = () => {
   //   axios

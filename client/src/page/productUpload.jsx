@@ -70,8 +70,8 @@ const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
   };
 
   return (
-    <div className={style.main} onClick={handleModal}>
-      <div className={style.container} onClick={(e) => e.stopPropagation()}>
+    <div className={style.main}>
+      <div className={style.container}>
         <img className={style.logo} src="productupload.png" alt="" />
         <select
           name="storageSelect"

@@ -3,7 +3,7 @@ import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ isLogin, setIsLogin, history }) => {
+const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -28,18 +28,21 @@ const LogInPage = ({ isLogin, setIsLogin, history }) => {
     return false;
   };
 
+  // 태식님 코드인데 app.js에서 loginHandler로 구현하기 때문에
+  // 없어도 될 것 같아서 주석처리합니다! 확인 부탁 드려요~
   const handleLogin = () => {
     const userinfo = { email, password };
 
     axios
-      .post(`http//localhost:4000/users/signin`, userinfo, {
+      .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`,
+        userinfo, {
         withCredentials: true,
       })
       .then((res) => {
         if (res.message !== "ok") {
           setMessage("고객님의 정보가 일치하지 않습니다");
         } else {
-          setIsLogin(true);
+          loginHandler();
           setEmail("");
           setPassword("");
           history.push('/')
@@ -87,19 +90,25 @@ const LogInPage = ({ isLogin, setIsLogin, history }) => {
             placeholder="   비밀번호"
             onChange={onChangePassword}
           />
-          <button className={style.login} onClick={() => handleClick()}>
+          <button
+            className={style.login}
+            onClick={() => handleClick()}
+          >
             로그인
           </button>
           <span className={style.message}>{message}</span>
-
           <button className={style.kakao}>카카오톡 로그인</button>
-          <button className={style.google}>구글 로그인</button>
-
+          <button
+            className={style.google}
+            onClick={googleAccessToken}
+          >구글 로그인</button>
           <div className={style.membership}>
             아직 sinsundo의 회원이 아니신가요 ?
           </div>
 
-          <button className={style.membership_btn} onClick={handlemembership}>
+          <button
+            className={style.membership_btn}
+            onClick={handlemembership}>
             회원가입
           </button>
         </div>
