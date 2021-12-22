@@ -21,7 +21,7 @@ module.exports = (req, res) => {
             res.status(201).json({ data : { userInfo : data.dataValues }, message: '회원정보 조회에 성공했습니다'})
         }).catch((err) => {
             console.log(err);
-            res.status(500).send('');
+            res.status(500).send({ message: 'Server Error' });
         });
     }
 }

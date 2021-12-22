@@ -12,7 +12,7 @@ module.exports = (req, res) => {
             res.status(201).json({ data : { foodalram : data.dataValues }, message: '음식 알람 조회에 성공했습니다'})
         }).catch((err) => {
             console.log(err);
-            res.status(500).send('');
+            res.status(500).send({ message: 'Server Error' });
         });
     }
 }
