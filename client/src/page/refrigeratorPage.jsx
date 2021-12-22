@@ -5,7 +5,7 @@ import { dummy } from "../dummy/dummy";
 import ProductUpload from "./productUpload";
 import axios from "axios";
 
-const RefrigeratorPage = () => {
+const RefrigeratorPage = ({ isLogin, accessToken }) => {
   const [productOnOff, setProductOnOff] = useState(false);
   const [product, setProduct] = useState(dummy.product);
   console.log(dummy.product);

@@ -3,7 +3,7 @@ const controllers = require('../controllers')
 
 //user router
 router.get('/mypage', controllers.mypageInfo); // 유저정보 조회
-router.post('/mypage', controllers.mypageGet); // 알람설정 변경
+router.patch('/mypage', controllers.mypageTogle); // 알람설정 변경
 
 router.post('/signup', controllers.signup); // 회원가입
 router.post('/signin', controllers.signin); // 로그인
