@@ -20,7 +20,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     //토큰 확인 후 정보 가져오기
     const userInfoHandler = async () => {
         await axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/users/mypageinfo`, {
+            .patch(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                     "Content-Type": "application/json"

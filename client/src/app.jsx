@@ -11,118 +11,53 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { dummy } from "./dummy/dummy";
 import axios from "axios";
 
-require("dotenv").config();
-
-function App({ history }) {
+function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [accessToken, setAccessToken] = useState({ accessToken: null })
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    nickname: '',
-    img: ''
-  });
-  const [product, setProduct] = useState(dummy.product);
-  const [alram, setAlram] = useState(dummy.alram);
+  const [userinfo, setUserinfo] = useState(null);
+  const [accessToken, setAccessToken] = useState(null)
 
-  //로그인 관리----------------------------------------
-  const loginHandler = (data) => {
-    console.log(data.data.accessToken)
-    setIsLogin(true);
-    issueAccessToken(data.data.accessToken);
-  }
-
-  // useEffect(() => {
-  //   if (accessToken.accessToken === null) {
-  //     logoutHadler();
-  //   }
-  // }, [])
-
-  //로그아웃 관리-------------------------------------------------------
-  const logoutHadler = () => {
+  const isAuthenticated = (token) => {
+    setAccessToken(token)
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/users/signout`,
-        { withCredentials: true })
+      .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      })
       .then((res) => {
+        // console.log(res.data.data.userInfo)
+        setUserinfo(res.data.data.userInfo);
+        setIsLogin(true);
+      })
+      .catch((err) => {
         setIsLogin(false);
-        setAccessToken({ accessToken: null });
-        setUserInfo({
-          email: '',
-          nickname: '',
-          user_picture: ''
-        })
-        history.push('/');
+    });
+  };
+  const handleResponseSuccess = (data) => {
+    isAuthenticated(data.data.data.accessToken.split(" ")[1]);
+  };
+
+  const handleLogout = () => {
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
+      .then((res) => {
+        setUserinfo(null);
+        setIsLogin(false);
       });
   };
 
-  //토큰 요청--------------------------------------------------------------
-  const accessTokenRequest = (accessToken) => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        })
-      .then((res) => {
-        const { email, nickname } = res.data.data.userInfo
-        setUserInfo({ email, nickname })
-      })
-      .catch((err) =>
-        console.log(err)
-      );
-  }
-
-  //토큰 최신화------------------------------------
-  const issueAccessToken = (token) => {
-    setAccessToken({ accessToken: token.data.accessToken });
-    accessTokenRequest(accessToken);
-  }
-
-  //새로고침해도 로그인 유지--------------------
   useEffect(() => {
-    accessTokenRequest();
-  }, [])
+    isAuthenticated();
+  }, []);
 
-  //구글 로그인 코드---------------------------
-  //서버의 /callback 엔드포인트로 authorization code를 보내주고
-  //access token을 받아옵니다.
-  const googleAccessToken = async (authorizationCode) => {
-    let resp = await axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/callback/google`,
-        { authorizationCode },
-        { withCredentials: true }
-      )
-    issueAccessToken(resp.data.accessToken);
-    setIsLogin(true);
-  };
-
-  //카카오 로그인 코드---------------------------------- 구글 로그인 확인 후 진행
-  // const getAccessToken = async (authorizationCode) => {
-  //   let resp = await axios
-  //     .post(`${process.env.REACT_APP_SERVER_URL}/callback/kakao`,
-  //       { authorizationCode },
-  //       { withCredentials: true }
-  //     );
-  //   issueAccessToken(resp.data.accessToken);
-  //   setIsLogin(true);
-  // };
-
-  //소셜 로그인 코드 받기--------------------------------
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get('code');
-    if (authorizationCode) {
-      googleAccessToken(authorizationCode);
-    }
-  });
   return (
     <>
       <BrowserRouter>
         <Nav
           isLogin={isLogin}
-          logoutHadler={logoutHadler}
+          // logoutHadler={logoutHadler}
+          handleLogout={handleLogout}
         />
         <Switch>
           <Route exact path="/">
@@ -130,34 +65,37 @@ function App({ history }) {
           </Route>
           <Route path="/RefrigeratorPage">
             <RefrigeratorPage
-              product={product}
-              setProduct={setProduct}
+              // product={product}
+              // setProduct={setProduct}
               isLogin={isLogin}
-              accessToken={accessToken}
+            // accessToken={accessToken}
             />
           </Route>
           <Route path="/AlarmPage">
             <AlarmPage
-              alram={alram}
-              setAlram={setAlram}
-              product={product}
-              setProduct={setProduct}
+              // alram={alram}
+              // setAlram={setAlram}
+              // product={product}
+              // setProduct={setProduct}
               isLogin={isLogin}
-              accessToken={accessToken}
+            // accessToken={accessToken}
             />
           </Route>
           <Route path="/MyPage">
             <MyPage
               isLogin={isLogin}
-              userInfo={userInfo}
+              userInfo={userinfo}
               accessToken={accessToken}
-              logoutHadler={logoutHadler}
+              handleLogout={handleLogout}
+              userinfo={userinfo}
             />
           </Route>
           <Route path="/LogInPage">
             <LogInPage
-              loginHandler={loginHandler}
-              googleAccessToken={googleAccessToken}
+              handleResponseSuccess={handleResponseSuccess}
+              // loginHandler={loginHandler}
+              // googleAccessToken={googleAccessToken}
+              isLogin={isLogin}
             />
           </Route>
         </Switch>

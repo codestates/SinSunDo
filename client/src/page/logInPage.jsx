@@ -3,7 +3,7 @@ import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
+const LogInPage = ({ loginHandler, googleAccessToken, handleResponseSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -32,23 +32,30 @@ const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
   // 없어도 될 것 같아서 주석처리합니다! 확인 부탁 드려요~
   const handleLogin = () => {
     const userinfo = { email, password };
-
-    axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`,
-        userinfo, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.message !== "로그인에 성공했습니다.") {
-          setMessage("고객님의 정보가 일치하지 않습니다");
-        } else {
-          loginHandler();
+    if (!email || !password) {
+      setMessage('이메일, 비밀번호 모두 다 입력해야합니다.');
+    } else {
+      console.log("시작하자마자 요청을 한다.")
+      axios
+        .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`,
+          userinfo, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          // loginHandler(res.data);
+          // console.log(res)
+          handleResponseSuccess(res);
           setEmail("");
           setPassword("");
-          history.push('/')
-        }
-      });
-  };
+          // history.push("/");
+        })
+        .catch((err) => {
+          if (err.response.data.message === '로그인 정보가 일치하지 않습니다.') {
+            setMessage("로그인 정보가 일치하지 않습니다");
+          }
+      })
+    }
+  }
 
   const handleClick = useCallback(() => {
     if (email === "") {
