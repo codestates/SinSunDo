@@ -11,6 +11,8 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { dummy } from "./dummy/dummy";
 import axios from "axios";
 
+require("dotenv").config();
+
 function App({ history }) {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState({ accessToken: null })
@@ -24,6 +26,7 @@ function App({ history }) {
 
   //로그인 관리----------------------------------------
   const loginHandler = (data) => {
+    console.log(data.data.accessToken)
     setIsLogin(true);
     issueAccessToken(data.data.accessToken);
   }
@@ -54,7 +57,7 @@ function App({ history }) {
   //토큰 요청--------------------------------------------------------------
   const accessTokenRequest = (accessToken) => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/tokenData/accessToken`,
+      .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -63,8 +66,8 @@ function App({ history }) {
           withCredentials: true,
         })
       .then((res) => {
-        const { email, nickname, user_picture } = res.data.userInfo
-        setUserInfo({ email, nickname, user_picture })
+        const { email, nickname } = res.data.data.userInfo
+        setUserInfo({ email, nickname })
       })
       .catch((err) =>
         console.log(err)
@@ -73,8 +76,8 @@ function App({ history }) {
 
   //토큰 최신화------------------------------------
   const issueAccessToken = (token) => {
-    setAccessToken({ accessToken: token });
-    accessTokenRequest(token);
+    setAccessToken({ accessToken: token.data.accessToken });
+    accessTokenRequest(accessToken);
   }
 
   //새로고침해도 로그인 유지--------------------

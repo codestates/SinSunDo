@@ -6,10 +6,10 @@ module.exports = {
         return sign(data, process.env.ACCESS_SECRET, { expiresIn: '2d'});
     },
     sendAccessToken: (res, accessToken) => {
-        res.json({ data: { accessToken }, message: "ok" });
+        res.status(200).json({ data: { accessToken }, message: "ok" });
     },
     resendAccessToken: (res, accessToken, data) => {
-        res.json({ data: { accessToken, userInfo: data }, message: "ok" });
+        res.status(200).json({ data: { accessToken, userInfo: data }, message: "ok" });
     },
     isAuthorized: (req) => {
         const authorization = req.headers["authorization"];

@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import style from './myPageCorrection.module.css'
 import axios from 'axios';
 
+require("dotenv").config();
+
 const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     const [email, setEmail] = useState("");
     const [nickname, setNickname] = useState("");
