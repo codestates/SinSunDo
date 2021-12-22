@@ -23,16 +23,16 @@ function App({ history }) {
   const [alram, setAlram] = useState(dummy.alram);
 
   //로그인 관리----------------------------------------
-  const loginHandler = () => {
+  const loginHandler = (data) => {
     setIsLogin(true);
     issueAccessToken(data.data.accessToken);
   }
 
-  useEffect(() => {
-    if (accessToken.accessToken === null) {
-      logoutHadler();
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (accessToken.accessToken === null) {
+  //     logoutHadler();
+  //   }
+  // }, [])
 
   //로그아웃 관리-------------------------------------------------------
   const logoutHadler = () => {

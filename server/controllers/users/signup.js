@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 // const { generateAccessToken, sendAccessToken} = require('../tokenFunctions');
 
 module.exports = async(req, res) => {
-// console.log(req.body)
+    console.log(req)
     const { email, password, nickname, user_picture, socialtype, togle} = req.body;
     if(!nickname || !email || !password) {
         res.status(422).json({data: null, message: '모든 항목은 필수입니다.'})
