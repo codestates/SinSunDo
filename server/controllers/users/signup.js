@@ -33,7 +33,7 @@ module.exports = async(req, res) => {
                     if(err) {
                         throw err;
                     } else {
-                        await user.create({
+                        await users.create({
                             email,
                             nickname,
                             password: hash,
