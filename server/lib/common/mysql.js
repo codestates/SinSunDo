@@ -18,10 +18,11 @@ module.exports = class DatabaseConnector extends SingletonBase {
   constructor () {
     super();
     this.config = {
-      host: 'localhost',
+      host: process.env.DATABASE_HOST || 'localhost',
       user: process.env.DATABASE_USERNAME || 'root',
       password: process.env.DATABASE_PASSWORD || '',
-      database: process.env.DATABASE_NAME || 'sinsundo'
+      // database: process.env.DATABASE_NAME || 'sinsundo', // 로컬일 시 주석 해제
+      port: process.env.DATABASE_PORT // 업로드 시 주석 해제
     };
 
     return this;

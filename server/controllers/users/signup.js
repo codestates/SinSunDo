@@ -33,7 +33,7 @@ module.exports = async(req, res) => {
                     if(err) {
                         throw err;
                     } else {
-                        await user.create({
+                        await users.create({
                             email,
                             nickname,
                             password: hash,
@@ -53,6 +53,6 @@ module.exports = async(req, res) => {
         }
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: "error" });
+        res.status(500).json({ message: "Server Error" });
     }
 };
