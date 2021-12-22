@@ -38,7 +38,7 @@ const MyPage = ({ isLogin, userInfo, accessToken, handleLogout }) => {
                         >회원정보 수정</button>
                         <hr className={style.underline} />
                         <p className={style.toggleText}>유통기한 알림 설정</p>
-                        <Toggle accessToken={accessToken} />
+                        <Toggle accessToken={accessToken} userInfo={userInfo} />
                         {isEditModal ?
                             <MyPageCorrection
                                 accessToken={accessToken}
