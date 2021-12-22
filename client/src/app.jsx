@@ -16,12 +16,13 @@ function App() {
   const [userinfo, setUserinfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null)
 
-  const isAuthenticated = (token) => {
-    setAccessToken(token)
+  const isAuthenticated = (accessToken) => {
+    // console.log(token)
+    setAccessToken(accessToken)
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
+      .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage/mypageInfo`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
         withCredentials: true,

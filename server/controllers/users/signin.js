@@ -1,4 +1,3 @@
-// 로그인
 const bcrypt = require('bcrypt'); // 비밀번호 암호화
 const { users } = require('../../models');
 const { generateAccessToken, sendAccessToken } = require('../tokenData/accessToken');
@@ -28,11 +27,10 @@ module.exports = (req, res) => {
                 const AccessToken = generateAccessToken(data.dataValues);
                 // const RefreshToken = generateRefreshToken(data.dataValues);
                 
-                sendAccessToken(res, `Bearer ${AccessToken}`);
+                sendAccessToken(res, `Bearer ${AccessToken}`, { message: '로그인에 성공했습니다.' });
                 // sendRefreshToken(res, `jwt ${RefreshToken}`);
                 })
             }
         })
     })
 }
-
