@@ -27,7 +27,8 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
             })
             .then((res) => {
                 const { email, nickname } = res.data.userInfo;
-                setEmail(email), setNickname(nickname);
+                setEmail(email);
+                setNickname(nickname);
             })
             .catch((err) => console.log(err));
     }
@@ -35,7 +36,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     //회원 정보 업데이트
     const handleEdit = () => {
         if (password === passwordcheck) {
-            const userInfo = { nickname, password, user_picture };
+            const userInfo = { nickname, password };
             axios
                 .post(`${process.env.REACT_APP_SERVER_URL}/users/mypageinfo`,
                     userInfo,
@@ -150,7 +151,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
             handleEdit(password, nickname);
             return;
         }
-    }, [nickname, password, passwordcheck, message, user_picture]);
+    }, [nickname, password, passwordcheck, message]);
 
     // 회원 정보를 가져오기 위해
     useEffect(() => {

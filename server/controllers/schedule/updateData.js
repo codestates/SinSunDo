@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const { users, food, foodalram } = require('../../models');
+const nodemailer = require('nodemailer')
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
 
@@ -38,10 +39,10 @@ module.exports = {
             port: 587,
             secure: false,
             auth: {
-              user: process.env.NODEMAILER_USER,
-              pass: process.env.NODEMAILER_PASS,
+                user: process.env.NODEMAILER_USER,
+                pass: process.env.NODEMAILER_PASS,
             },
-          });
+        });
         // 토글정보 확인
         await users.findAll({ where : { togle : true }})
         .then((usersData) => {

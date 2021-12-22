@@ -41,6 +41,6 @@ module.exports = async(req, res ) => {
         });
         res.status(200).json({data: access_tokne, message: 'Oauth kakao login success'});
     } catch(err) {
-        res.status(500).json({message: 'error'})
+        res.status(500).json({ message: 'Server Error' })
     }
 };
