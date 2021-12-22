@@ -23,7 +23,7 @@ function App({ history }) {
   const [alram, setAlram] = useState(dummy.alram);
 
   //로그인 관리----------------------------------------
-  const loginHandler = () => {
+  const loginHandler = (data) => {
     setIsLogin(true);
     issueAccessToken(data.data.accessToken);
   }

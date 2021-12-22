@@ -39,7 +39,7 @@ const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
         withCredentials: true,
       })
       .then((res) => {
-        if (res.message !== "ok") {
+        if (res.message !== "로그인에 성공습니다.") {
           setMessage("고객님의 정보가 일치하지 않습니다");
         } else {
           loginHandler();

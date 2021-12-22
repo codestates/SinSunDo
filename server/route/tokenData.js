@@ -1,9 +1,8 @@
-// 참조 안하는 파일
-
 const router = require('express').Router()
-const controllers = require('../controllers/tokenData')
+const controllers = require('../controllers/tokenData/accessToken')
 
 //token router
-router.post('/refreshToken', controllers.refreshToken);
+router.post('/accessToken', controllers.isAuthorized);
+
 
 module.exports = router

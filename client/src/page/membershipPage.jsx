@@ -60,11 +60,11 @@ const MembershipPage = ({ handlemembership, history }) => {
           withCredentials: true,
         })
         .then((res) => {
-          if (res.message === "same email") {
+          if (res.message === "이미 존재하는 이메일입니다.") {
             setMessage("중복된 이메일이 있습니다.");
-          } else if (res.message === "same nickName") {
+          } else if (res.message === "이미 존재하는 닉네임입니다.") {
             setMessage("중복된 닉네임이 있습니다.");
-          } else if (res.message === "success") {
+          } else if (res.message === "회원가입에 성공하였습니다.") {
             setMessage('');
             alert("회원가입이 완료되었습니다.");
             history.push('/LogInPage');

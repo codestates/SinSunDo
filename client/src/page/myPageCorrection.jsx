@@ -36,15 +36,15 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     //회원 정보 업데이트
     const handleEdit = () => {
         if (password === passwordcheck) {
-            const userInfo = { nickname, password, user_picture };
+            const userInfo = { nickname, password };
             axios
                 .post(`${process.env.REACT_APP_SERVER_URL}/users/mypageinfo`,
                     userInfo,
                     { withCredentials: true })
                 .then((res) => {
-                    if (res.message === "이미 존재하는 닉네임입니다.") {
+                    if (res.message === "중복된 닉네임입니다.") {
                         alert("중복된 닉네임이 있습니다.");
-                    } else if (res.message === "회원정보가 수정되었습니다") {
+                    } else if (res.message === "회원정보가 수정되었습니다.") {
                         alert("회원정보가 수정되었습니다");
                         axios
                             .patch(`${process.env.REACT_APP_SERVER_URL}/users/update`,
@@ -151,7 +151,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
             handleEdit(password, nickname);
             return;
         }
-    }, [nickname, password, passwordcheck, message, user_picture]);
+    }, [nickname, password, passwordcheck, message]);
 
     // 회원 정보를 가져오기 위해
     useEffect(() => {

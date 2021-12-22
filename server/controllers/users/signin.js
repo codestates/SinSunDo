@@ -5,7 +5,7 @@ const { generateAccessToken, sendAccessToken } = require('../tokenData/accessTok
 
 module.exports = (req, res) => {
     if (!req.body.email || !req.body.password) {
-        return res.status(422).send({ message: '모든 정보가 필요합니다' })
+        return res.status(422).send({ message: '모든 정보가 필요합니다.' })
     }
 
     users.findOne({ 
@@ -22,6 +22,7 @@ module.exports = (req, res) => {
     // const RefreshToken = generateRefreshToken(data.dataValues);
     
     sendAccessToken(res, `Bearer ${AccessToken}`);
+    return res.status(422).send({ message: '로그인에 성공습니다.' })
     // sendRefreshToken(res, `jwt ${RefreshToken}`);
     })
 }
