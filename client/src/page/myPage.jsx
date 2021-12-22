@@ -4,7 +4,7 @@ import Toggle from '../components/toggle';
 import WithdrawModal from '../components/withdrawModal';
 import MyPageCorrection from './myPageCorrection';
 
-const MyPage = ({ isLogin, userInfo, accessToken, logoutHadler }) => {
+const MyPage = ({ isLogin, userInfo, accessToken, handleLogout }) => {
     const { nickname, user_picture } = userInfo;
     const [isWithdrawModal, setIsWithdrawModal] = useState(false);
     const [isEditModal, setIsEditModal] = useState(false);
@@ -38,7 +38,7 @@ const MyPage = ({ isLogin, userInfo, accessToken, logoutHadler }) => {
                         >회원정보 수정</button>
                         <hr className={style.underline} />
                         <p className={style.toggleText}>유통기한 알림 설정</p>
-                        <Toggle />
+                        <Toggle accessToken={accessToken} />
                         {isEditModal ?
                             <MyPageCorrection
                                 accessToken={accessToken}
@@ -54,7 +54,7 @@ const MyPage = ({ isLogin, userInfo, accessToken, logoutHadler }) => {
                         <WithdrawModal
                             accessToken={accessToken}
                             withModalHandler={withModalHandler}
-                            logoutHadler={logoutHadler}
+                            handleLogout={handleLogout}
                         /> : null}
                 </div > :
                 <div>{beforeLogin}</div>
