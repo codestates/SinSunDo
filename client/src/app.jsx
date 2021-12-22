@@ -14,29 +14,24 @@ import axios from "axios";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
-  const [accessToken, setAccessToken] = useState(null)
+  const [accessToken, setAccessToken] = useState('')
 
   const isAuthenticated = (token) => {
-    setAccessToken(token)
+    console.log(token);
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
+        headers: { authorization: `Bearer ${token}` },
         withCredentials: true,
       })
       .then((res) => {
-        // console.log(res.data.data.userInfo)
+        setAccessToken(token);
         setUserinfo(res.data.data.userInfo);
         setIsLogin(true);
       })
-      .catch((err) => {
-        setIsLogin(false);
-    });
   };
+
   const handleResponseSuccess = (data) => {
-    isAuthenticated(data.data.data.accessToken.split(" ")[1]);
+    isAuthenticated(data);
   };
 
   const handleLogout = () => {
@@ -94,7 +89,7 @@ function App() {
             <LogInPage
               handleResponseSuccess={handleResponseSuccess}
               // loginHandler={loginHandler}
-              // googleAccessToken={googleAccessToken}
+              setAccessToken={setAccessToken}
               isLogin={isLogin}
             />
           </Route>

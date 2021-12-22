@@ -6,8 +6,10 @@ export const Toggle = ( { accessToken } ) => {
   const [isOn, setisOn] = useState(false);
 
   const toggleHandler = () => {
+    console.log(accessToken)
     setisOn(!isOn);
-    axios.patch(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
+    axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',

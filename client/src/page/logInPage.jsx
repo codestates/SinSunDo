@@ -3,7 +3,7 @@ import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ loginHandler, googleAccessToken, handleResponseSuccess }) => {
+const LogInPage = ({ googleAccessToken, handleResponseSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -35,18 +35,15 @@ const LogInPage = ({ loginHandler, googleAccessToken, handleResponseSuccess }) =
     if (!email || !password) {
       setMessage('이메일, 비밀번호 모두 다 입력해야합니다.');
     } else {
-      console.log("시작하자마자 요청을 한다.")
       axios
         .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`,
           userinfo, {
           withCredentials: true,
         })
         .then((res) => {
-          // loginHandler(res.data);
-          // console.log(res)
-          handleResponseSuccess(res);
           setEmail("");
           setPassword("");
+          handleResponseSuccess(res.data.data.accessToken);
           // history.push("/");
         })
         .catch((err) => {
