@@ -1,13 +1,16 @@
 import React, { useCallback, useState } from "react";
+// import { useHistory } from 'react-router-dom';
 import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
+require('dotenv').config();
 
 const LogInPage = ({ googleAccessToken, handleResponseSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
   const [membershipOnOff, setMembershipOnOff] = useState(false);
+  // const history = useHistory();
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -43,8 +46,7 @@ const LogInPage = ({ googleAccessToken, handleResponseSuccess }) => {
         .then((res) => {
           setEmail("");
           setPassword("");
-          handleResponseSuccess(res.data.data.accessToken);
-          // history.push("/");
+          // history.push("/MyPage");
         })
         .catch((err) => {
           if (err.response.data.message === '로그인 정보가 일치하지 않습니다.') {
