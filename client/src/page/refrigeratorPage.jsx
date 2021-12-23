@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./refrigeratorPage.module.css";
 import Product from "../components/product";
-import { dummy } from "../dummy/dummy";
 import ProductUpload from "./productUpload";
 import axios from "axios";
 require("dotenv").config();
