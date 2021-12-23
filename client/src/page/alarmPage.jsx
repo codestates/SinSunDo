@@ -87,7 +87,7 @@ const AlarmPage = ({
   // console.log(renderAlram);
   return (
     <div>
-      {/* {isLogin ? */}
+      {isLogin ?
       <div className={style.container}>
         {renderAlrams.map((el) => (
           <div className={style.box}>
@@ -105,9 +105,9 @@ const AlarmPage = ({
           </div>
         ))}
       </div>
-      {/* :
+      :
         <BeforeLogin />
-      } */}
+      }
     </div>
   );
 };

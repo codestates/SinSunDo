@@ -2,7 +2,7 @@ import React from "react";
 import style from "./nav.module.css";
 import { Link } from "react-router-dom";
 
-const Nav = ({ isLogin, logoutHadler }) => {
+const Nav = ({ isLogin, handleLogout }) => {
   return (
     <div className={style.container}>
       <Link to="/">
@@ -33,7 +33,7 @@ const Nav = ({ isLogin, logoutHadler }) => {
             <Link to="/mainPage">
               <button
                 className={style.button}
-                onClick={logoutHadler}
+                onClick={handleLogout}
               >로그아웃</button>
             </Link>
           )}

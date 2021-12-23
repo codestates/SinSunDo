@@ -1,4 +1,5 @@
 // 계정정보 수정
+// 계정정보 수정
 const bcrypt = require('bcrypt'); // 비밀번호 암호화
 const { users } = require('../../models');
 const { isAuthorized } = require('../tokenData/accessToken');
@@ -14,7 +15,7 @@ module.exports = (req, res) => {
             const { nickname, password } = req.body;
             users.findOne({ where: { nickname: nickname}})
             .then((data) => {
-                if(data) {ƒ
+                if(data) {
                     return res.status(409).send({message:'중복된 닉네임입니다.'})
                 }
                 else {
@@ -26,7 +27,7 @@ module.exports = (req, res) => {
                                 users.findOne({ where: { email: accessTokenData.email }})
                                 .then((data) => {
                                     delete data.dataValues.password; 
-                                    // delete data.dataValues.togle;
+                                    delete data.dataValues.togle;
                                     res.status(201).send({message: "회원정보가 수정되었습니다."})
                                 })
                             })

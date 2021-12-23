@@ -61,9 +61,9 @@ function App() {
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
       .then((res) => {
-        setUserinfo(null);
-        setIsLogin(false);
-      });
+          setUserinfo(null);
+          setIsLogin(false);
+      })
   };
 
   useEffect(() => {
@@ -75,7 +75,6 @@ function App() {
       <BrowserRouter>
         <Nav
           isLogin={isLogin}
-          // logoutHadler={logoutHadler}
           handleLogout={handleLogout}
         />
         <Switch>
@@ -106,7 +105,6 @@ function App() {
               userInfo={userinfo}
               accessToken={accessToken}
               handleLogout={handleLogout}
-              userinfo={userinfo}
             />
           </Route>
           <Route path="/LogInPage">

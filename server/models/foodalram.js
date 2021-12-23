@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     alram_data: DataTypes.STRING
   }, {
     sequelize,
+    freezeTableName: true,
     modelName: 'foodalram',
   });
   return foodalram;

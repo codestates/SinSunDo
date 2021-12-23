@@ -1,5 +1,5 @@
 // 회원탈퇴
-const { users, food,  } = require('../../models');
+const { users, food, foodalram } = require('../../models');
 const { isAuthorized } = require('../tokenData/accessToken');
 
 module.exports = (req, res) => {
@@ -16,7 +16,9 @@ module.exports = (req, res) => {
                 .then(() => {
                     foodalram.destroy({ where: { user_id: accessTokenData.id } })
                 })
-                res.sendStatus(201);
+                .then(() => {
+                    res.status(201).send({ message: '회원탈퇴 완료.' })
+                })
             })
         } 
         catch (err) {

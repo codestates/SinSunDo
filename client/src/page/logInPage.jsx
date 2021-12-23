@@ -39,9 +39,9 @@ const LogInPage = ({ handleResponseSuccess }) => {
           withCredentials: true,
         })
         .then((res) => {
+          handleResponseSuccess(res.data.data.accessToken.split(" ")[1])
           setEmail("");
           setPassword("");
-          handleResponseSuccess(res.data.data.accessToken);
         })
         .catch((err) => {
           if (
