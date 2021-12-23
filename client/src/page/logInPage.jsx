@@ -5,7 +5,7 @@ import axios from "axios";
 import MembershipPage from "./membershipPage";
 require('dotenv').config();
 
-const LogInPage = ({ loginHandler, googleAccessToken, handleResponseSuccess }) => {
+const LogInPage = ({ googleAccessToken, handleResponseSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -44,9 +44,7 @@ const LogInPage = ({ loginHandler, googleAccessToken, handleResponseSuccess }) =
           withCredentials: true,
         })
         .then((res) => {
-          // loginHandler(res.data);
-          // console.log(res)
-          handleResponseSuccess(res);
+          handleResponseSuccess(res.data.data.accessToken.split(" ")[1])
           setEmail("");
           setPassword("");
           // history.push("/");

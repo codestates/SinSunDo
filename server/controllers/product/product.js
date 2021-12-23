@@ -3,13 +3,14 @@ const { users, food } = require('../../models');
 const { isAuthorized } = require('../tokenData/accessToken');
 
 module.exports = (req, res) => {
+    // console.log(req)
     const accessTokenData = isAuthorized(req);
     if(!accessTokenData) {
         res.status(401).send({ data: null, message: 'not authorized' });
     }
     else {
-        users.findAll({ 
-            where: {email: accessTokenData.email},
+        food.findAll({ 
+            where: {user_id: accessTokenData.id},
         })
         .then((foodData) => {
             console.log(foodData)
