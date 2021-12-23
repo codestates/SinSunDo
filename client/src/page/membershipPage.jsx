@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import style from "./membershipPage.module.css";
 import axios from "axios";
 require("dotenv").config();

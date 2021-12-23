@@ -3,11 +3,7 @@ import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
-  // let location = useLocation();
-  // console.log(history);
-  // console.log(location)
-
+const LogInPage = ({ handleResponseSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -45,7 +41,6 @@ const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
           setEmail("");
           setPassword("");
           handleResponseSuccess(res.data.data.accessToken);
-          // history.push("/");
         })
         .catch((err) => {
           if (
@@ -77,9 +72,6 @@ const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
       ? setMembershipOnOff(true)
       : setMembershipOnOff(false);
   };
-  // const hanleHistory = () => {
-  //   history.push("/");
-  // };
 
   return (
     <>
@@ -107,7 +99,7 @@ const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
           <button className={style.kakao}>카카오톡 로그인</button>
           <button
             className={style.google}
-            // onClick={googleAccessToken}
+          // onClick={googleAccessToken}
           >
             구글 로그인
           </button>
