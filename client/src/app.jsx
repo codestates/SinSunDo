@@ -14,6 +14,7 @@ require("dotenv").config();
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [nickname, setNickname] = useState("");
   const [userinfo, setUserinfo] = useState(null);
   const [product, setProduct] = useState([
     {
@@ -44,6 +45,7 @@ function App() {
       .then((res) => {
         // console.log(res.data.data.userInfo)
         setUserinfo(res.data.data.userInfo);
+        setNickname(res.data.data.userInfo.nickname);
         setIsLogin(true);
       })
       .catch((err) => {
@@ -72,11 +74,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Nav
-          isLogin={isLogin}
-          // logoutHadler={logoutHadler}
-          handleLogout={handleLogout}
-        />
+        <Nav isLogin={isLogin} handleLogout={handleLogout} />
         <Switch>
           <Route exact path="/">
             <MainPage />
@@ -107,6 +105,8 @@ function App() {
               accessToken={accessToken}
               handleLogout={handleLogout}
               userinfo={userinfo}
+              nickname={nickname}
+              setNickname={setNickname}
             />
           </Route>
           <Route path="/LogInPage">

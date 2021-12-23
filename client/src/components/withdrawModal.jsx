@@ -2,14 +2,7 @@ import React from "react";
 import style from "./withdrawModal.module.css";
 import axios from "axios";
 
-const WithdrawModal = ({
-  accessToken,
-  logoutHadler,
-  withModalHandler,
-  isLogin,
-  setIsLogin,
-  setIsWithdrawModal,
-}) => {
+const WithdrawModal = ({ accessToken, handleLogout, withModalHandler }) => {
   const handleDeleteUser = () => {
     let result = window.confirm("정말 탈퇴하시겠습니까?");
     if (result) {
@@ -21,9 +14,7 @@ const WithdrawModal = ({
         .then((res) => {
           if (res.status === 201) {
             alert("탈퇴가 정상적으로 이루어졌습니다.");
-            setIsLogin(false);
-            setIsWithdrawModal(false);
-            logoutHadler();
+            handleLogout();
           }
         });
     } else {

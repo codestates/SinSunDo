@@ -4,16 +4,16 @@ import Toggle from "../components/toggle";
 import WithdrawModal from "../components/withdrawModal";
 import MyPageCorrection from "./myPageCorrection";
 import BeforeLogin from "../components/beforeLogin";
-import MainPage from "./mainPage";
 
 const MyPage = ({
   isLogin,
-  setIsLogin,
   userInfo,
   accessToken,
   handleLogout,
+  nickname,
+  setNickname,
 }) => {
-  // const { nickname, user_picture } = userInfo;
+  // const { nickname } = userInfo;
   const [isWithdrawModal, setIsWithdrawModal] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
 
@@ -25,17 +25,16 @@ const MyPage = ({
     setIsEditModal(!isEditModal);
   };
 
+  // console.log("userInfo", userInfo.nickname);
+  // console.log("nickname", nickname);
+
   return (
     <>
       {isLogin ? (
         <div className={style.container}>
           <div className={style.box}>
-            <img
-              className={style.img}
-              // src={user_picture}
-              alt="Profile_Pic"
-            />
-            <p className={style.nickname}>nickname</p>
+            <img className={style.img} src={"/avocado.png"} alt="Profile_Pic" />
+            <p className={style.nickname}>{nickname}</p>
             <button className={style.settingBtn} onClick={userinfoEditHandler}>
               회원정보 수정
             </button>
@@ -52,17 +51,11 @@ const MyPage = ({
           <button className={style.leaveBtn} onClick={withModalHandler}>
             회원탈퇴
           </button>
-
-          {isEditModal ? (
-            <MainPage />
-          ) : isWithdrawModal ? (
+          {isWithdrawModal ? (
             <WithdrawModal
-              isLogin={isLogin}
-              setIsLogin={setIsLogin}
               accessToken={accessToken}
               withModalHandler={withModalHandler}
               handleLogout={handleLogout}
-              setIsWithdrawModal={setIsWithdrawModal}
             />
           ) : null}
         </div>
