@@ -74,7 +74,7 @@ function App() {
               // product={product}
               // setProduct={setProduct}
               isLogin={isLogin}
-            // accessToken={accessToken}
+              accessToken={accessToken}
             />
           </Route>
           <Route path="/AlarmPage">

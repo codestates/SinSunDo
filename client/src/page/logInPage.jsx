@@ -44,6 +44,7 @@ const LogInPage = ({ googleAccessToken, handleResponseSuccess }) => {
           withCredentials: true,
         })
         .then((res) => {
+          handleResponseSuccess(res.data.data.accessToken.split(" ")[1])
           setEmail("");
           setPassword("");
           // history.push("/MyPage");
