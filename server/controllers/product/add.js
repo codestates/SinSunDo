@@ -3,6 +3,15 @@ const { users, food } = require('../../models');
 const { isAuthorized } = require('../tokenData/accessToken');
 
 module.exports = (req, res) => {
+    // D-Day 날짜 지정
+    const setDate = new Date(req.body.food_expiration);
+    let now = new Date();
+    // D-Day 날짜에서 현재 날짜의 차이를 getTime 메서드를 사용해서 밀리초의 값으로 가져온다. 
+    let distance = setDate.getTime() - now.getTime();
+    // console.log(distance)
+
+    let day = Math.floor(distance/(1000*60*60*24)) + 1;
+    // console.log(day)
     const accessTokenData = isAuthorized(req);
     if(!accessTokenData) {
         res.status(401).send({ data: null, message: '유효하지 않은 토큰입니다.' });
@@ -46,4 +55,3 @@ module.exports = (req, res) => {
         });
     }
 }
-

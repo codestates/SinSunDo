@@ -1,4 +1,3 @@
-// 물품 지우기
 const { users, user_category, category, food } = require('../../models');
 const { isAuthorized } = require('../tokenData/accessToken');
 

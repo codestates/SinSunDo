@@ -3,7 +3,7 @@ import style from "./toggle.module.css";
 import axios from "axios";
 
 export const Toggle = ( { accessToken, userInfo } ) => {
-  const [isOn, setisOn] = useState(false);
+  const [isOn, setisOn] = useState(true);
   const [message, setMessage] = useState(false);
   const [accessTokenData, setAccessTokenData] = useState(null)
 

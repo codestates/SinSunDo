@@ -33,11 +33,13 @@ const LogInPage = ({ handleResponseSuccess }) => {
     if (!email || !password) {
       setMessage("이메일, 비밀번호 모두 다 입력해야합니다.");
     } else {
+      console.log("시작하자마자 요청을 한다.")
       axios
         .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`, userinfo, {
           withCredentials: true,
         })
         .then((res) => {
+          handleResponseSuccess(res.data.data.accessToken.split(" ")[1])
           setEmail("");
           setPassword("");
           handleResponseSuccess(res.data.data.accessToken.split(" ")[1]);

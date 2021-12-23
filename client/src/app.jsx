@@ -43,10 +43,12 @@ function App() {
         withCredentials: true,
       })
       .then((res) => {
+        if(res) {
         // console.log(res.data.data.userInfo)
         setUserinfo(res.data.data.userInfo);
         setNickname(res.data.data.userInfo.nickname);
         setIsLogin(true);
+        }
       })
       .catch((err) => {
         setIsLogin(false);
@@ -61,10 +63,9 @@ function App() {
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
       .then((res) => {
-        setUserinfo(null);
-        setIsLogin(false);
-        // history.push('/');
-      });
+          setUserinfo(null);
+          setIsLogin(false);
+      })
   };
 
   useEffect(() => {
