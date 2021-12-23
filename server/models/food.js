@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     storage: DataTypes.STRING,
     food_name: DataTypes.STRING,
     food_expiration: DataTypes.DATE,
-    day_ago: DataTypes.DATE
+    day_ago: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'food',

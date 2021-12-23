@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import style from './myPageCorrection.module.css'
 import axios from 'axios';
 
+require("dotenv").config();
+
 const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     const [email, setEmail] = useState("");
     const [nickname, setNickname] = useState("");
@@ -18,7 +20,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     //토큰 확인 후 정보 가져오기
     const userInfoHandler = async () => {
         await axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/users/mypageinfo`, {
+            .patch(`${process.env.REACT_APP_SERVER_URL}/users/mypage`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                     "Content-Type": "application/json"
@@ -42,9 +44,9 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
                     userInfo,
                     { withCredentials: true })
                 .then((res) => {
-                    if (res.message === "이미 존재하는 닉네임입니다.") {
+                    if (res.message === "중복된 닉네임입니다.") {
                         alert("중복된 닉네임이 있습니다.");
-                    } else if (res.message === "회원정보가 수정되었습니다") {
+                    } else if (res.message === "회원정보가 수정되었습니다.") {
                         alert("회원정보가 수정되었습니다");
                         axios
                             .patch(`${process.env.REACT_APP_SERVER_URL}/users/update`,
