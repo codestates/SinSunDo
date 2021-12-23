@@ -21,6 +21,8 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
       food_quantity: "",
     },
   ]);
+
+  const [productListUp, setProductListUp] = useState(product);
   // console.log("accessToken", accessToken);
   // get 요청으로 상품 list 가져오기
   const productList = () => {
@@ -33,41 +35,72 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
         withCredentials: true,
       })
       .then((data) => {
-        console.log("data", data.data.data.foodInfo);
-        // setProduct({
-        //   id: data.data.data.foodInfo.id,
-        //   storage: data.data.data.foodInfo.storage,
-        //   category_name: data.data.data.foodInfo.category_name,
-        //   day_ago: data.data.data.foodInfo.day_ago,
-        //   food_expiration: data.data.data.foodInfo.food_expiration,
-        //   food_name: data.data.data.foodInfo.food_name,
-        //   food_quantity: data.data.data.foodInfo.food_quantity
-        // });
+        const foodInfo = data.data.data.foodInfo;
+        // console.log("data", data.data.data.foodInfo);
+        // console.log("data", data.data.data);
+        // console.log("foodInfo", foodInfo[foodInfo.length - 1]);
+        const lastFoodInfo = foodInfo[foodInfo.length - 1];
+        console.log("lastFoodInfo", lastFoodInfo.id);
+        setProduct(foodInfo);
       });
   };
+
+  // id: lastFoodInfo.id,
+  // storage: lastFoodInfo.storage,
+  // category_name: lastFoodInfo.category_name,
+  // day_ago: lastFoodInfo.day_ago,
+  // food_expiration: lastFoodInfo.food_expiration,
+  // food_name: lastFoodInfo.food_name,
+  // food_quantity: lastFoodInfo.food_quantity,
 
   // get 요청 자동으로 가져 오기
   useEffect(() => {
     productList();
-  }, []);
+  }, [productOnOff]);
 
-  // console.log("product", product);
+  // useEffect(() => {
+  //   productList();
+  //   console.log("상태값이 업데이트될 때 실행됨");
+  //   console.log(product);
+  //   return () => {
+  //     console.log("상태가 업데이트 되기 전 / 언마운트 되기 전 실행됨");
+  //     console.log(product);
+  //   };
+  // }, []);
 
-  const refrigerate = product.filter((item) => item.storage === "냉장실");
-  const freeze = product.filter((item) => item.storage === "냉동실");
-  const roomTemperature = product.filter((item) => item.storage === "실온");
+  console.log("product", product);
+
+  const refrigerate = product.filter((item) => item.storage === "refrigerate");
+  console.log("refrigerate", refrigerate);
+  const freeze = product.filter((item) => item.storage === "freeze");
+  const roomTemperature = product.filter(
+    (item) => item.storage === "roomTemperature"
+  );
+
+  const refrigerateDanger = refrigerate.filter((el) => el.day_ago <= 5);
+  const freezeDanger = freeze.filter((el) => el.day_ago <= 5);
+  const roomTemperatureDanger = roomTemperature.filter((el) => el.day_ago <= 5);
 
   const handleDelete = (id) => {
+    console.log(id);
     const filter = product.filter((el) => el.id !== id);
-    setProduct(filter);
+
     //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
-    axios.delete(`${process.env.REACT_APP_SERVER_URL}/product/Delete`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      data: { filter },
-      withCredentials: true,
-    });
+    axios
+      .delete(`${process.env.REACT_APP_SERVER_URL}/product/delete`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        data: { id },
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log("res", res);
+        if (res.status === 201) {
+          setProduct(filter);
+        }
+      })
+      .catch((err) => {});
   };
 
   const handleAdd = () => {
@@ -82,6 +115,8 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
           productOnOff={productOnOff}
           setProductOnOff={setProductOnOff}
           accessToken={accessToken}
+          product={product}
+          setProduct={setProduct}
         />
       ) : null}
 
@@ -101,13 +136,15 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
             </span>
             <span className={style.danger}>
               위험
-              <span className={style.danger_num}>3</span>
+              <span className={style.danger_num}>
+                {refrigerateDanger.length}
+              </span>
             </span>
           </div>
 
           {refrigerate.length !== 0 ? (
             product
-              .filter((item) => item.storage === "냉장실")
+              .filter((item) => item.storage === "refrigerate")
               .map((el) => (
                 <Product product={el} key={el.id} handleDelete={handleDelete} />
               ))
@@ -127,13 +164,13 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
             </span>
             <span className={style.danger}>
               위험
-              <span className={style.danger_num}>3</span>
+              <span className={style.danger_num}>{freezeDanger.length}</span>
             </span>
           </div>
           {/* 삼항연산자필요 */}
           {freeze.length !== 0 ? (
             product
-              .filter((item) => item.storage === "냉동실")
+              .filter((item) => item.storage === "freeze")
               .map((el) => (
                 <Product product={el} key={el.id} handleDelete={handleDelete} />
               ))
@@ -155,13 +192,15 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
             </span>
             <span className={style.danger}>
               위험
-              <span className={style.danger_num}>3</span>
+              <span className={style.danger_num}>
+                {roomTemperatureDanger.length}
+              </span>
             </span>
           </div>
           {/* 삼항연산자필요 */}
           {roomTemperature.length !== 0 ? (
             product
-              .filter((item) => item.storage === "실온")
+              .filter((item) => item.storage === "roomTemperature")
               .map((el) => <Product product={el} key={el.id} />)
           ) : (
             <div className={style.empty}>

@@ -8,6 +8,8 @@ const ProductUpload = ({
   productOnOff,
   setProductOnOff,
   accessToken,
+  product,
+  setProduct,
 }) => {
   const [storage, setStorage] = useState("");
   const [category_name, setCategory_name] = useState("");
@@ -83,11 +85,13 @@ const ProductUpload = ({
       .then((data) => {
         // console.log("data", data);
         if (data.status === 201) {
+          // setProduct([...product, { productData }]);
           setStorage("");
           setCategory_name("");
           setFood_name("");
           setFood_quantity("");
           setFood_expiration("");
+          handleAdd();
         }
         // console.log(data);
         // ToDo 등록 완료 메세지
@@ -169,11 +173,7 @@ const ProductUpload = ({
             onChange={handleExpirationDate}
           />
         </span>
-        <button
-          className={style.registration}
-          onClick={handleProductData}
-          // onClick={handleAdd}
-        >
+        <button className={style.registration} onClick={handleProductData}>
           등록
         </button>
         <button className={style.close} onClick={handleAdd}>
