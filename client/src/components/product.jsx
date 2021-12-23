@@ -6,7 +6,7 @@ const Product = ({ product, handleDelete }) => {
     <div className={style.container}>
       <span className={style.category}>{product.category_name}</span>
       <span className={style.Product_name}>{product.food_name}</span>
-      <span className={style.quantity}>{product.food_quantity}</span>
+      <span className={style.quantity}>수량: {product.food_quantity}</span>
       <span className={style.expiration_date}>
         {product.food_expiration.slice(0, 10)}
       </span>

@@ -102,6 +102,7 @@ function App() {
           <Route path="/MyPage">
             <MyPage
               isLogin={isLogin}
+              setIsLogin={setIsLogin}
               userInfo={userinfo}
               accessToken={accessToken}
               handleLogout={handleLogout}

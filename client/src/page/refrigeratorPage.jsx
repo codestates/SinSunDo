@@ -5,19 +5,19 @@ import ProductUpload from "./productUpload";
 import axios from "axios";
 require("dotenv").config();
 
-const RefrigeratorPage = ({ isLogin, accessToken }) => {
+const RefrigeratorPage = ({ isLogin, accessToken, product, setProduct }) => {
   const [productOnOff, setProductOnOff] = useState(false);
-  const [product, setProduct] = useState([
-    {
-      id: "",
-      storage: "",
-      category_name: "",
-      day_ago: "",
-      food_expiration: "",
-      food_name: "",
-      food_quantity: "",
-    },
-  ]);
+  // const [product, setProduct] = useState([
+  //   {
+  //     id: "",
+  //     storage: "",
+  //     category_name: "",
+  //     day_ago: "",
+  //     food_expiration: "",
+  //     food_name: "",
+  //     food_quantity: "",
+  //   },
+  // ]);
 
   const productList = () => {
     axios
