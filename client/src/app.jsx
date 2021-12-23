@@ -10,11 +10,14 @@ import { useState, useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { dummy } from "./dummy/dummy";
 import axios from "axios";
+require('dotenv').config();
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
-  const [accessToken, setAccessToken] = useState('')
+
+  const [accessToken, setAccessToken] = useState(null)
+  // const history = useHistory();
 
   const isAuthenticated = (accessToken) => {
     // console.log(token)
@@ -46,6 +49,7 @@ function App() {
       .then((res) => {
         setUserinfo(null);
         setIsLogin(false);
+        // history.push('/');
       });
   };
 
@@ -70,7 +74,7 @@ function App() {
               // product={product}
               // setProduct={setProduct}
               isLogin={isLogin}
-            // accessToken={accessToken}
+              accessToken={accessToken}
             />
           </Route>
           <Route path="/AlarmPage">
