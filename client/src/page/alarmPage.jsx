@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./alarmPage.module.css";
 import AlramList from "../components/alramList";
+import BeforeLogin from "../components/beforeLogin";
 import axios from "axios";
 require("dotenv").config();
 
@@ -86,6 +87,7 @@ const AlarmPage = ({
   // console.log(renderAlram);
   return (
     <div>
+      {/* {isLogin ? */}
       <div className={style.container}>
         {renderAlrams.map((el) => (
           <div className={style.box}>
@@ -103,6 +105,9 @@ const AlarmPage = ({
           </div>
         ))}
       </div>
+      {/* :
+        <BeforeLogin />
+      } */}
     </div>
   );
 };

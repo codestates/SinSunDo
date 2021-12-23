@@ -3,6 +3,7 @@ import style from './myPage.module.css';
 import Toggle from '../components/toggle';
 import WithdrawModal from '../components/withdrawModal';
 import MyPageCorrection from './myPageCorrection';
+import BeforeLogin from '../components/beforeLogin';
 
 const MyPage = ({ isLogin, userInfo, accessToken, handleLogout }) => {
     // const { nickname, user_picture } = userInfo;
@@ -53,13 +54,7 @@ const MyPage = ({ isLogin, userInfo, accessToken, handleLogout }) => {
                             handleLogout={handleLogout}
                         /> : null}
                 </div > :
-                <div className={style.beforeContainer}>
-                    <div className={style.beforeBox}>
-                        <p className={style.beforeText}>
-                            로그인 후 사용 가능한 페이지입니다 :D
-                        </p>
-                    </div>
-                </div>
+                <BeforeLogin />
             }
         </>
     );
