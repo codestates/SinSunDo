@@ -30,10 +30,6 @@ module.exports = (req, res) => {
         const btMs = endDate2.getTime() - stDate.getTime();
         const btdat = btMs / (1000*60*60*24);
 
-        // console.log(endDate2, stDate);
-        // console.log(endDate2.getTime(), stDate.getTime());
-        // console.log(btdat)
-
         food.create({ 
             food_name : req.body.food_name, // 음식이름
             user_id : accessTokenData.id, // 유저 고유번호
