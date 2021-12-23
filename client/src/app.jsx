@@ -109,12 +109,16 @@ function App() {
             />
           </Route>
           <Route path="/LogInPage">
-            <LogInPage
-              handleResponseSuccess={handleResponseSuccess}
-              // loginHandler={loginHandler}
-              setAccessToken={setAccessToken}
-              isLogin={isLogin}
-            />
+            {isLogin ? (
+              <MainPage />
+            ) : (
+              <LogInPage
+                handleResponseSuccess={handleResponseSuccess}
+                // loginHandler={loginHandler}
+                setAccessToken={setAccessToken}
+                isLogin={isLogin}
+              />
+            )}
           </Route>
         </Switch>
       </BrowserRouter>

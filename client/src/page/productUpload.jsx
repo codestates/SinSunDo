@@ -117,6 +117,8 @@ const ProductUpload = ({
           <option value="음료">음료</option>
           <option value="인스턴스">인스턴스</option>
           <option value="채소">채소</option>
+          <option value="육류">육류</option>
+          <option value="견과류">견과류</option>
         </select>
 
         <input
