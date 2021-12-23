@@ -40,7 +40,7 @@ const LogInPage = ({ handleResponseSuccess }) => {
         .then((res) => {
           setEmail("");
           setPassword("");
-          handleResponseSuccess(res.data.data.accessToken);
+          handleResponseSuccess(res.data.data.accessToken.split(" ")[1]);
         })
         .catch((err) => {
           if (
@@ -99,7 +99,7 @@ const LogInPage = ({ handleResponseSuccess }) => {
           <button className={style.kakao}>카카오톡 로그인</button>
           <button
             className={style.google}
-          // onClick={googleAccessToken}
+            // onClick={googleAccessToken}
           >
             구글 로그인
           </button>

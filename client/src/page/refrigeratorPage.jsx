@@ -167,7 +167,9 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
           {roomTemperature.length !== 0 ? (
             product
               .filter((item) => item.storage === "roomTemperature")
-              .map((el) => <Product product={el} key={el.id} />)
+              .map((el) => (
+                <Product product={el} key={el.id} handleDelete={handleDelete} />
+              ))
           ) : (
             <div className={style.empty}>
               <div className={style.empty_sentence}>
