@@ -69,7 +69,6 @@ const ProductUpload = ({
         withCredentials: true,
       })
       .then((data) => {
-        // console.log("data", data);
         if (data.status === 201) {
           setStorage("");
           setCategory_name("");
@@ -78,8 +77,6 @@ const ProductUpload = ({
           setFood_expiration("");
           handleAdd();
         }
-        // console.log(data);
-        // ToDo 등록 완료 메세지
       })
       .catch((err) => {
         if (err.response.status === 401) {
