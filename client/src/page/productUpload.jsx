@@ -1,103 +1,68 @@
 import React, { useState } from "react";
 import style from "./productUpload.module.css";
 import axios from "axios";
-require("dotenv").config();
 
-const ProductUpload = ({
-  handleAdd,
-  productOnOff,
-  setProductOnOff,
-  accessToken,
-}) => {
+const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
   const [storage, setStorage] = useState("");
-  const [category_name, setCategory_name] = useState("");
-  const [food_name, setFood_name] = useState("");
-  const [food_quantity, setFood_quantity] = useState(1);
-  const [food_expiration, setFood_expiration] = useState("");
-  const [message, setMessage] = useState("");
-
-  // food_name : req.body.food_name, // 음식이름
-  // food_quantity : req.body.food_quantity, // 음식 수량
-  // category_name_id : req.body.category_name_id, // 카테고리
-  // storage : req.body.storage, // 냉동,냉장,실온
-  // food_expiration : req.body.food_expiration, // 유통기한
-  // day_ago : null
+  const [category, setCategory] = useState("");
+  const [foodName, setFoodName] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [expirationDate, setExpirationDate] = useState("");
 
   const handleChangeStorage = (storage) => {
     setStorage(storage.target.value);
   };
 
   const handleChangeCategory = (category) => {
-    setCategory_name(category.target.value);
+    setCategory(category.target.value);
   };
 
   const handleChangeFoodName = (foodName) => {
-    setFood_name(foodName.target.value);
+    setFoodName(foodName.target.value);
   };
 
   const handlePlus = () => {
-    handleChangeQuantity(Number(food_quantity) + 1);
+    handleChangeQuantity(Number(quantity) + 1);
     // setQuantity(Number(quantity) + 1);
   };
 
   const handleMinus = () => {
     // quantity < 0 ? 0 : setQuantity(quantity - 1);
-    if (food_quantity < 1) {
+    if (quantity < 1) {
       console.log("0보다 작다");
-      setFood_quantity(Number(0));
+      setQuantity(Number(0));
       return;
     }
-    handleChangeQuantity(Number(food_quantity) - 1);
+    handleChangeQuantity(Number(quantity) - 1);
   };
 
   const handleChangeQuantity = (quantity) => {
     // console.log(auantity.target.value);
-    // console.log("auantity", quantity);
-    setFood_quantity(quantity);
+    console.log("auantity", quantity);
+    setQuantity(quantity);
   };
 
   const handleExpirationDate = (expirationDate) => {
-    // console.log("유통기한", expirationDate.target.value);
-    setFood_expiration(expirationDate.target.value);
+    console.log("유통기한", expirationDate.target.value);
+    setExpirationDate(expirationDate.target.value);
   };
 
   const handleProductData = () => {
-    // console.log("클릭");
     const productData = {
       storage,
-      category_name,
-      food_name,
-      food_quantity,
-      food_expiration,
+      category,
+      foodName,
+      quantity,
+      expirationDate,
     };
-    // console.log(productData);
-    // console.log(process.env.REACT_APP_SERVER_URL);
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/product`, productData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
+      .post(`${process.env.REACT_APP_SERVER_URL}/product/add`, productData, {
         withCredentials: true,
       })
       .then((data) => {
-        // console.log("data", data);
-        if (data.status === 201) {
-          setStorage("");
-          setCategory_name("");
-          setFood_name("");
-          setFood_quantity("");
-          setFood_expiration("");
-        }
-        // console.log(data);
         // ToDo 등록 완료 메세지
       })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          console.log(err);
-          setMessage("요청이 잘못되었습니다.");
-        }
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleModal = () => {
@@ -152,7 +117,7 @@ const ProductUpload = ({
             className={style.quatity}
             type="number"
             // placeholder="수량"
-            value={food_quantity}
+            value={quantity}
             onChange={(e) => handleChangeQuantity(e.target.value)}
           />
           {/* <div className={style.quatity}>1</div> */}
@@ -172,14 +137,13 @@ const ProductUpload = ({
         <button
           className={style.registration}
           onClick={handleProductData}
-          // onClick={handleAdd}
+          onClick={handleAdd}
         >
           등록
         </button>
         <button className={style.close} onClick={handleAdd}>
           취소
         </button>
-        <div>{message}</div>
       </div>
     </div>
   );

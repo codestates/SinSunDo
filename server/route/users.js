@@ -2,8 +2,8 @@ const router = require('express').Router()
 const controllers = require('../controllers')
 
 //user router
-router.get('/mypage/mypageInfo', controllers.mypageInfo); // 유저정보 조회
-router.patch('/mypage/mypageTogle', controllers.mypageTogle); // 알람설정 변경
+router.get('/mypage', controllers.mypageInfo); // 유저정보 조회
+router.patch('/mypage', controllers.mypageTogle); // 알람설정 변경
 
 router.post('/signup', controllers.signup); // 회원가입
 router.post('/signin', controllers.signin); // 로그인

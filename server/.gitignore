@@ -11,6 +11,5 @@
 
 # misc
 .env
-.env.origin
 
 package-lock.json
