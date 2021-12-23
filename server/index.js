@@ -14,7 +14,7 @@ const app = express();
 // const controllers = require("./controllers");
 const usersRoute = require('./route/users');
 const productRoute = require('./route/product');
-const tokenDataRoute = require('./route/tokenData');
+
 
 app.use(express.json()); //front에서 json 형식의 데이터를 보냈을 때 데이터 req.body에 넣어준다
 app.use(express.urlencoded({ extended: false })); // form submit 했을 때 데이터를 req.body에 넣어준다
@@ -33,7 +33,6 @@ app.get("/", (req, res) => {
 
 app.use('/users', usersRoute);
 app.use('/product', productRoute);
-app.use('/tokenData', tokenDataRoute);
 
 // 매 0시 5분 0초에 업데이트를 진행
 const update_dayAgo = schedule.scheduleJob(

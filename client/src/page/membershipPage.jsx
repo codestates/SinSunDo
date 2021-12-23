@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-// import { useHistory } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import style from "./membershipPage.module.css";
 import axios from "axios";
 require("dotenv").config();
@@ -12,7 +12,6 @@ const MembershipPage = ({ handlemembership }) => {
     repassword: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
-  // const history = useHistory();
   const handleInputValue = (key) => (e) => {
     setSignUpInfo({ ...signupInfo, [key]: e.target.value });
   };
@@ -35,7 +34,6 @@ const MembershipPage = ({ handlemembership }) => {
         )
         .then((res) => {
           if (res.status === 201) {
-            // history.push("/LogInPage");
             // console.log(res.data)
             // setTimeout(() => navigate('/'), 3000);
           }

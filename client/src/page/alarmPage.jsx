@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import style from "./alarmPage.module.css";
 import AlramList from "../components/alramList";
 import axios from "axios";
-require('dotenv').config();
 
 const AlarmPage = ({ alram, setAlram, product, setProduct, isLogin, accessToken }) => {
   const renderAlram = product.filter(
