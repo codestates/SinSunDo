@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 1.5em auto;
+  padding-top: 0.5em;
+  border: 0.1em solid black;
+  width: 97%;
+  height: 4em;
+  border-radius: 0.6em;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.category {
+  margin-top: 0.3em;
+  width: 5em;
+  height: 1em;
+  margin-left: 3em;
+  font-size: 1.5em;
+}
+
+.Product_name {
+  margin-top: 0.3em;
+  width: 15em;
+  height: 1em;
+  font-size: 1.5em;
+}
+
+.quantity {
+  margin-top: 0.3em;
+  width: 3em;
+  height: 1em;
+  font-size: 1.5em;
+}
+
+.expiration_date {
+  margin-top: 0.3em;
+  font-size: 1.5em;
+}
+
+.delete {
+  margin: 0 2.7em 1em 0;
+  border: none;
+  background-color: white;
+}
