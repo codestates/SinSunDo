@@ -28,6 +28,8 @@ const LogInPage = ({ handleResponseSuccess }) => {
     return false;
   };
 
+  // 태식님 코드인데 app.js에서 loginHandler로 구현하기 때문에
+  // 없어도 될 것 같아서 주석처리합니다! 확인 부탁 드려요~
   const handleLogin = () => {
     const userinfo = { email, password };
     if (!email || !password) {

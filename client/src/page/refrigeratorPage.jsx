@@ -4,7 +4,6 @@ import Product from "../components/product";
 import ProductUpload from "./productUpload";
 import BeforeLogin from "../components/beforeLogin";
 import axios from "axios";
-require("dotenv").config();
 
 const RefrigeratorPage = ({ isLogin, accessToken, product, setProduct }) => {
   const [productOnOff, setProductOnOff] = useState(false);

@@ -16,7 +16,6 @@ const MyPage = ({
   // const { nickname } = userInfo;
   const [isWithdrawModal, setIsWithdrawModal] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
-
   const withModalHandler = () => {
     setIsWithdrawModal(!isWithdrawModal);
   };

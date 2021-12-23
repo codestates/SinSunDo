@@ -23,11 +23,11 @@ const ProductUpload = ({
   };
 
   const handleChangeCategory = (category) => {
-    setCategory_name(category.target.value);
+    setCategory(category.target.value);
   };
 
   const handleChangeFoodName = (foodName) => {
-    setFood_name(foodName.target.value);
+    setFoodName(foodName.target.value);
   };
 
   const handlePlus = () => {
@@ -37,10 +37,10 @@ const ProductUpload = ({
   const handleMinus = () => {
     if (food_quantity < 1) {
       console.log("0보다 작다");
-      setFood_quantity(Number(0));
+      setQuantity(Number(0));
       return;
     }
-    handleChangeQuantity(Number(food_quantity) - 1);
+    handleChangeQuantity(Number(quantity) - 1);
   };
 
   const handleChangeQuantity = (quantity) => {
@@ -54,18 +54,14 @@ const ProductUpload = ({
   const handleProductData = () => {
     const productData = {
       storage,
-      category_name,
-      food_name,
-      food_quantity,
-      food_expiration,
+      category,
+      foodName,
+      quantity,
+      expirationDate,
     };
 
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/product`, productData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
+      .post(`${process.env.REACT_APP_SERVER_URL}/product/add`, productData, {
         withCredentials: true,
       })
       .then((data) => {
@@ -78,12 +74,7 @@ const ProductUpload = ({
           handleAdd();
         }
       })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          console.log(err);
-          setMessage("요청이 잘못되었습니다.");
-        }
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleModal = () => {
@@ -140,7 +131,7 @@ const ProductUpload = ({
             className={style.quatity}
             type="number"
             // placeholder="수량"
-            value={food_quantity}
+            value={quantity}
             onChange={(e) => handleChangeQuantity(e.target.value)}
           />
 
@@ -163,7 +154,6 @@ const ProductUpload = ({
         <button className={style.close} onClick={handleAdd}>
           취소
         </button>
-        <div>{message}</div>
       </div>
     </div>
   );

@@ -12,7 +12,8 @@ import { dummy } from "./dummy/dummy";
 import axios from "axios";
 require("dotenv").config();
 
-function App() {
+
+function App({ history }) {
   const [isLogin, setIsLogin] = useState(false);
   const [nickname, setNickname] = useState("");
   const [userinfo, setUserinfo] = useState(null);
@@ -68,10 +69,43 @@ function App() {
       })
   };
 
+  //새로고침해도 로그인 유지--------------------
   useEffect(() => {
-    isAuthenticated();
-  }, []);
+    accessTokenRequest();
+  }, [])
 
+  //구글 로그인 코드---------------------------
+  //서버의 /callback 엔드포인트로 authorization code를 보내주고
+  //access token을 받아옵니다.
+  const googleAccessToken = async (authorizationCode) => {
+    let resp = await axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/callback/google`,
+        { authorizationCode },
+        { withCredentials: true }
+      )
+    issueAccessToken(resp.data.accessToken);
+    setIsLogin(true);
+  };
+
+  //카카오 로그인 코드---------------------------------- 구글 로그인 확인 후 진행
+  // const getAccessToken = async (authorizationCode) => {
+  //   let resp = await axios
+  //     .post(`${process.env.REACT_APP_SERVER_URL}/callback/kakao`,
+  //       { authorizationCode },
+  //       { withCredentials: true }
+  //     );
+  //   issueAccessToken(resp.data.accessToken);
+  //   setIsLogin(true);
+  // };
+
+  //소셜 로그인 코드 받기--------------------------------
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get('code');
+    if (authorizationCode) {
+      googleAccessToken(authorizationCode);
+    }
+  });
   return (
     <>
       <BrowserRouter>

@@ -1,3 +1,4 @@
+// 로그인
 const bcrypt = require('bcrypt'); // 비밀번호 암호화
 const { users } = require('../../models');
 const { generateAccessToken, sendAccessToken } = require('../tokenData/accessToken');
