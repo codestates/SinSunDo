@@ -1,8 +1,4 @@
 import React, { useCallback, useState } from "react";
-<<<<<<< HEAD
-import { useHistory } from 'react-router-dom';
-=======
->>>>>>> 9bc69263db00c2249e4352445bf368fb7c02aac1
 import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
@@ -45,11 +41,7 @@ const LogInPage = ({ handleResponseSuccess }) => {
         .then((res) => {
           setEmail("");
           setPassword("");
-<<<<<<< HEAD
-          // history.push("/");
-=======
           handleResponseSuccess(res.data.data.accessToken);
->>>>>>> 9bc69263db00c2249e4352445bf368fb7c02aac1
         })
         .catch((err) => {
           if (

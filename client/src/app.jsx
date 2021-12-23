@@ -27,12 +27,8 @@ function App() {
     },
   ]);
 
-<<<<<<< HEAD
-  const [accessToken, setAccessToken] = useState(null)
-=======
   const [accessToken, setAccessToken] = useState(null);
   // const history = useHistory();
->>>>>>> 9bc69263db00c2249e4352445bf368fb7c02aac1
 
   const isAuthenticated = (accessToken) => {
     // console.log(token)
@@ -61,18 +57,12 @@ function App() {
     isAuthenticated(data);
   };
 
-<<<<<<< HEAD
-  const handleLogout = ({ history }) => {
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
-=======
   const handleLogout = () => {
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
->>>>>>> 9bc69263db00c2249e4352445bf368fb7c02aac1
       .then((res) => {
         setUserinfo(null);
         setIsLogin(false);
-        history.push('/');
       });
   };
 

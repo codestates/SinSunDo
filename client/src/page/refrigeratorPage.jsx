@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import style from "./refrigeratorPage.module.css";
 import Product from "../components/product";
-import { dummy } from "../dummy/dummy";
 import ProductUpload from "./productUpload";
 import axios from "axios";
 require("dotenv").config();
 
 const RefrigeratorPage = ({ isLogin, accessToken }) => {
   const [productOnOff, setProductOnOff] = useState(false);
-  // const [product, setProduct] = useState(dummy.product);
-  // console.log(dummy.product);
   const [product, setProduct] = useState([
     {
       id: "",
@@ -22,11 +19,7 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
     },
   ]);
 
-  const [productListUp, setProductListUp] = useState(product);
-  // console.log("accessToken", accessToken);
-  // get 요청으로 상품 list 가져오기
   const productList = () => {
-    // console.log("accessToken", accessToken);
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/product`, {
         headers: {
@@ -36,42 +29,16 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
       })
       .then((data) => {
         const foodInfo = data.data.data.foodInfo;
-        // console.log("data", data.data.data.foodInfo);
-        // console.log("data", data.data.data);
-        // console.log("foodInfo", foodInfo[foodInfo.length - 1]);
-        // const lastFoodInfo = foodInfo[foodInfo.length - 1];
-        // console.log("lastFoodInfo", lastFoodInfo.id);
         setProduct(foodInfo);
       });
   };
-
-  // id: lastFoodInfo.id,
-  // storage: lastFoodInfo.storage,
-  // category_name: lastFoodInfo.category_name,
-  // day_ago: lastFoodInfo.day_ago,
-  // food_expiration: lastFoodInfo.food_expiration,
-  // food_name: lastFoodInfo.food_name,
-  // food_quantity: lastFoodInfo.food_quantity,
 
   // get 요청 자동으로 가져 오기
   useEffect(() => {
     productList();
   }, [productOnOff]);
 
-  // useEffect(() => {
-  //   productList();
-  //   console.log("상태값이 업데이트될 때 실행됨");
-  //   console.log(product);
-  //   return () => {
-  //     console.log("상태가 업데이트 되기 전 / 언마운트 되기 전 실행됨");
-  //     console.log(product);
-  //   };
-  // }, []);
-
-  console.log("product", product);
-
   const refrigerate = product.filter((item) => item.storage === "refrigerate");
-  console.log("refrigerate", refrigerate);
   const freeze = product.filter((item) => item.storage === "freeze");
   const roomTemperature = product.filter(
     (item) => item.storage === "roomTemperature"
@@ -85,7 +52,6 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
     console.log(id);
     const filter = product.filter((el) => el.id !== id);
 
-    //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
     axios
       .delete(`${process.env.REACT_APP_SERVER_URL}/product/delete`, {
         headers: {
@@ -100,7 +66,7 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
           setProduct(filter);
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const handleAdd = () => {
@@ -167,7 +133,7 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
               <span className={style.danger_num}>{freezeDanger.length}</span>
             </span>
           </div>
-          {/* 삼항연산자필요 */}
+
           {freeze.length !== 0 ? (
             product
               .filter((item) => item.storage === "freeze")
@@ -197,7 +163,7 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
               </span>
             </span>
           </div>
-          {/* 삼항연산자필요 */}
+
           {roomTemperature.length !== 0 ? (
             product
               .filter((item) => item.storage === "roomTemperature")
