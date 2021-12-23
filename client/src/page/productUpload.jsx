@@ -8,11 +8,8 @@ const ProductUpload = ({
   productOnOff,
   setProductOnOff,
   accessToken,
-<<<<<<< HEAD
-=======
   product,
   setProduct,
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
 }) => {
   const [storage, setStorage] = useState("");
   const [category_name, setCategory_name] = useState("");
@@ -57,29 +54,17 @@ const ProductUpload = ({
 
   const handleChangeQuantity = (quantity) => {
     // console.log(auantity.target.value);
-<<<<<<< HEAD
-    console.log("auantity", quantity);
-=======
     // console.log("auantity", quantity);
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
     setFood_quantity(quantity);
   };
 
   const handleExpirationDate = (expirationDate) => {
-<<<<<<< HEAD
-    console.log("유통기한", expirationDate.target.value);
-=======
     // console.log("유통기한", expirationDate.target.value);
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
     setFood_expiration(expirationDate.target.value);
   };
 
   const handleProductData = () => {
-<<<<<<< HEAD
-    console.log("클릭");
-=======
     // console.log("클릭");
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
     const productData = {
       storage,
       category_name,
@@ -87,17 +72,10 @@ const ProductUpload = ({
       food_quantity,
       food_expiration,
     };
-<<<<<<< HEAD
-    console.log(productData);
-    console.log(process.env.REACT_APP_SERVER_URL);
-    axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/product/add`, productData, {
-=======
     // console.log(productData);
     // console.log(process.env.REACT_APP_SERVER_URL);
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/product`, productData, {
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
@@ -105,27 +83,17 @@ const ProductUpload = ({
         withCredentials: true,
       })
       .then((data) => {
-<<<<<<< HEAD
-        console.log("data", data);
-        if (data.status === 201) {
-=======
         // console.log("data", data);
         if (data.status === 201) {
           // setProduct([...product, { productData }]);
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
           setStorage("");
           setCategory_name("");
           setFood_name("");
           setFood_quantity("");
           setFood_expiration("");
-<<<<<<< HEAD
-        }
-        console.log(data);
-=======
           handleAdd();
         }
         // console.log(data);
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
         // ToDo 등록 완료 메세지
       })
       .catch((err) => {
@@ -205,15 +173,7 @@ const ProductUpload = ({
             onChange={handleExpirationDate}
           />
         </span>
-<<<<<<< HEAD
-        <button
-          className={style.registration}
-          onClick={handleProductData}
-          // onClick={handleAdd}
-        >
-=======
         <button className={style.registration} onClick={handleProductData}>
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
           등록
         </button>
         <button className={style.close} onClick={handleAdd}>

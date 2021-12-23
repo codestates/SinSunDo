@@ -12,11 +12,7 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
   // console.log(dummy.product);
   const [product, setProduct] = useState([
     {
-<<<<<<< HEAD
-      // id: "",
-=======
       id: "",
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
       storage: "",
       category_name: "",
       day_ago: "",
@@ -25,19 +21,12 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
       food_quantity: "",
     },
   ]);
-<<<<<<< HEAD
-  console.log("accessToken", accessToken);
-  // get 요청으로 상품 list 가져오기
-  const productList = (accessToken) => {
-    console.log("accessToken", accessToken);
-=======
 
   const [productListUp, setProductListUp] = useState(product);
   // console.log("accessToken", accessToken);
   // get 요청으로 상품 list 가져오기
   const productList = () => {
     // console.log("accessToken", accessToken);
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/product`, {
         headers: {
@@ -46,26 +35,12 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
         withCredentials: true,
       })
       .then((data) => {
-<<<<<<< HEAD
-        console.log("data", data.data);
-        setProduct({
-          // id: data.data.foodInfo.id,
-          storage: data.data.foodInfo.storage,
-          category_name: data.data.foodInfo.category_name,
-          day_ago: data.data.foodInfo.day_ago,
-          food_expiration: data.data.foodInfo.food_expiration,
-          food_name: data.data.foodInfo.food_name,
-          food_quantity: data.data.foodInfo.food_quantity,
-        });
-      });
-  };
-=======
         const foodInfo = data.data.data.foodInfo;
         // console.log("data", data.data.data.foodInfo);
         // console.log("data", data.data.data);
         // console.log("foodInfo", foodInfo[foodInfo.length - 1]);
-        const lastFoodInfo = foodInfo[foodInfo.length - 1];
-        console.log("lastFoodInfo", lastFoodInfo.id);
+        // const lastFoodInfo = foodInfo[foodInfo.length - 1];
+        // console.log("lastFoodInfo", lastFoodInfo.id);
         setProduct(foodInfo);
       });
   };
@@ -77,16 +52,10 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
   // food_expiration: lastFoodInfo.food_expiration,
   // food_name: lastFoodInfo.food_name,
   // food_quantity: lastFoodInfo.food_quantity,
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
 
   // get 요청 자동으로 가져 오기
   useEffect(() => {
     productList();
-<<<<<<< HEAD
-  }, []);
-
-  console.log("product", product);
-=======
   }, [productOnOff]);
 
   // useEffect(() => {
@@ -98,7 +67,6 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
   //     console.log(product);
   //   };
   // }, []);
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
 
   console.log("product", product);
 
@@ -116,17 +84,6 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
   const handleDelete = (id) => {
     console.log(id);
     const filter = product.filter((el) => el.id !== id);
-<<<<<<< HEAD
-    setProduct(filter);
-    //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
-    axios.delete(`${process.env.REACT_APP_SERVER_URL}/product/Delete`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      data: { filter },
-      withCredentials: true,
-    });
-=======
 
     //ToDo axios 와 엔드포인트 product/delete를 사용하여 삭제를 구현 해야하나 .. ?
     axios
@@ -144,7 +101,6 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
         }
       })
       .catch((err) => {});
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
   };
 
   const handleAdd = () => {
@@ -159,11 +115,8 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
           productOnOff={productOnOff}
           setProductOnOff={setProductOnOff}
           accessToken={accessToken}
-<<<<<<< HEAD
-=======
           product={product}
           setProduct={setProduct}
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
         />
       ) : null}
 

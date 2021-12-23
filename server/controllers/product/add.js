@@ -17,10 +17,6 @@ module.exports = (req, res) => {
         res.status(401).send({ data: null, message: '유효하지 않은 토큰입니다.' });
     }
     else {
-<<<<<<< HEAD
-        food.create({ 
-            food_name : req.body.food_name, // 음식이름
-=======
         // D-Day 날짜 지정
         const now = new Date();
         const year = now.getFullYear();
@@ -41,17 +37,11 @@ module.exports = (req, res) => {
         food.create({ 
             food_name : req.body.food_name, // 음식이름
             user_id : accessTokenData.id, // 유저 고유번호
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
             food_quantity : req.body.food_quantity, // 음식 수량
             category_name : req.body.category_name, // 카테고리
             storage : req.body.storage, // 냉동,냉장,실온
             food_expiration : req.body.food_expiration, // 유통기한
-<<<<<<< HEAD
-            day_ago : day, //남은 일자
-            user_id : accessTokenData.id
-=======
             day_ago : btdat
->>>>>>> 4142434bd577e19b717f33f9c5019387da6017a9
         })
         .then((data) => {
             if(data) {

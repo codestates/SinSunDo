@@ -14,7 +14,7 @@ module.exports = (req, res) => {
             const { nickname, password } = req.body;
             users.findOne({ where: { nickname: nickname}})
             .then((data) => {
-                if(data) {
+                if(data) {ƒ
                     return res.status(409).send({message:'중복된 닉네임입니다.'})
                 }
                 else {
