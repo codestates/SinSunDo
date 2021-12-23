@@ -100,7 +100,7 @@ const RefrigeratorPage = ({ isLogin, accessToken }) => {
           setProduct(filter);
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const handleAdd = () => {

@@ -3,9 +3,10 @@ import style from './myPage.module.css';
 import Toggle from '../components/toggle';
 import WithdrawModal from '../components/withdrawModal';
 import MyPageCorrection from './myPageCorrection';
+import BeforeLogin from '../components/beforeLogin';
 
 const MyPage = ({ isLogin, userInfo, accessToken, handleLogout }) => {
-    const { nickname, user_picture } = userInfo;
+    // const { nickname, user_picture } = userInfo;
     const [isWithdrawModal, setIsWithdrawModal] = useState(false);
     const [isEditModal, setIsEditModal] = useState(false);
 
@@ -17,10 +18,6 @@ const MyPage = ({ isLogin, userInfo, accessToken, handleLogout }) => {
         setIsEditModal(!isEditModal);
     }
 
-    const beforeLogin = () => {
-        alert('로그인을 해주세요')
-    }
-
     return (
         <>
             {isLogin ?
@@ -28,10 +25,10 @@ const MyPage = ({ isLogin, userInfo, accessToken, handleLogout }) => {
                     <div className={style.box}>
                         <img
                             className={style.img}
-                            src={user_picture}
+                            // src={user_picture} 
                             alt="Profile_Pic"
                         />
-                        <p className={style.nickname}>{nickname}</p>
+                        <p className={style.nickname}>nickname</p>
                         <button
                             className={style.settingBtn}
                             onClick={userinfoEditHandler}
@@ -57,7 +54,7 @@ const MyPage = ({ isLogin, userInfo, accessToken, handleLogout }) => {
                             handleLogout={handleLogout}
                         /> : null}
                 </div > :
-                <div>{beforeLogin}</div>
+                <BeforeLogin />
             }
         </>
     );

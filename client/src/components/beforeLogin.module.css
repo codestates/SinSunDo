@@ -1,0 +1,23 @@
+.beforeContainer{
+  border-radius: 15px;
+  height: 45em;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 16em;
+  box-sizing: border-box;
+}
+.beforeBox{
+  border: 0.4em solid rgb(245, 197, 14);;
+  width: 23em;
+  height: 9em;
+  margin: 0 auto;
+  padding: 0.8em;
+  padding-left: 4.5em;
+  padding-right: 4.5em;
+  box-sizing: border-box;
+  border-radius: 1em;
+}
+.beforeText{
+  font-size: 1.5em;
+  font-weight: bold;
+}
