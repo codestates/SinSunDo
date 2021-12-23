@@ -26,7 +26,7 @@ module.exports = (req, res) => {
                                 users.findOne({ where: { email: accessTokenData.email }})
                                 .then((data) => {
                                     delete data.dataValues.password; 
-                                    delete data.dataValues.togle;
+                                    // delete data.dataValues.togle;
                                     res.status(201).send({message: "회원정보가 수정되었습니다."})
                                 })
                             })

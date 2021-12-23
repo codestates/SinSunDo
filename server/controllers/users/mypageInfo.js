@@ -5,7 +5,6 @@ const { isAuthorized } = require('../tokenData/accessToken');
 
 module.exports = (req, res) => {
     // 마이페이지 정보 불러오기
-    console.log(req);
     const accessTokenData = isAuthorized(req);
     // console.log(accessTokenData);
     if(!accessTokenData) {
@@ -17,8 +16,8 @@ module.exports = (req, res) => {
             // const RefreshToken = generateRefreshToken(data.dataValues);
             // sendRefreshToken(res, `jwt ${RefreshToken}`);
             delete data.dataValues.password;
-            delete data.dataValues.togle;
-            res.status(201).json({ data : { userInfo : data.dataValues }, message: '회원정보 조회에 성공했습니다'})
+            // delete data.dataValues.togle;
+            res.status(200).json({ data : { userInfo : data.dataValues }, message: '회원정보 조회에 성공했습니다'})
         }).catch((err) => {
             console.log(err);
             res.status(500).send({ message: 'Server Error' });

@@ -12,6 +12,7 @@ module.exports = (req, res) => {
             where: {email: accessTokenData.email},
         })
         .then((foodData) => {
+            console.log(foodData)
             res.status(201).json({ data : { foodInfo : foodData }, message: '음식 조회에 성공했습니다'})
         })
     }

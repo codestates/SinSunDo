@@ -16,7 +16,6 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null)
-  // const history = useHistory();
 
   const isAuthenticated = (accessToken) => {
     // console.log(token)
@@ -30,9 +29,11 @@ function App() {
         withCredentials: true,
       })
       .then((res) => {
+        if(res) {
         // console.log(res.data.data.userInfo)
-        setUserinfo(res.data.data.userInfo);
-        setIsLogin(true);
+          setUserinfo(res.data.data.userInfo);
+          setIsLogin(true);
+        }
       })
       .catch((err) => {
         setIsLogin(false);
@@ -42,12 +43,12 @@ function App() {
     isAuthenticated(data.data.data.accessToken.split(" ")[1]);
   };
 
-  const handleLogout = () => {
+  const handleLogout = ({ history }) => {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
       .then((res) => {
         setUserinfo(null);
         setIsLogin(false);
-        // history.push('/');
+        history.push('/');
       });
   };
 
@@ -72,7 +73,7 @@ function App() {
               // product={product}
               // setProduct={setProduct}
               isLogin={isLogin}
-            // accessToken={accessToken}
+              accessToken={accessToken}
             />
           </Route>
           <Route path="/AlarmPage">

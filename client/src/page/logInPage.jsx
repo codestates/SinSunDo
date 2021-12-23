@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
@@ -10,7 +10,6 @@ const LogInPage = ({ loginHandler, googleAccessToken, handleResponseSuccess }) =
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
   const [membershipOnOff, setMembershipOnOff] = useState(false);
-  // const history = useHistory();
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -38,6 +37,7 @@ const LogInPage = ({ loginHandler, googleAccessToken, handleResponseSuccess }) =
     if (!email || !password) {
       setMessage('이메일, 비밀번호 모두 다 입력해야합니다.');
     } else {
+      console.log("시작하자마자 요청을 한다.")
       axios
         .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`,
           userinfo, {
@@ -49,7 +49,7 @@ const LogInPage = ({ loginHandler, googleAccessToken, handleResponseSuccess }) =
           handleResponseSuccess(res);
           setEmail("");
           setPassword("");
-          // history.push("/MyPage");
+          // history.push("/");
         })
         .catch((err) => {
           if (err.response.data.message === '로그인 정보가 일치하지 않습니다.') {
