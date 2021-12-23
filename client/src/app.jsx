@@ -10,23 +10,34 @@ import { useState, useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { dummy } from "./dummy/dummy";
 import axios from "axios";
-require('dotenv').config();
+require("dotenv").config();
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
+  const [product, setProduct] = useState([
+    {
+      id: "",
+      storage: "",
+      category_name: "",
+      day_ago: "",
+      food_expiration: "",
+      food_name: "",
+      food_quantity: "",
+    },
+  ]);
 
-  const [accessToken, setAccessToken] = useState(null)
+  const [accessToken, setAccessToken] = useState(null);
   // const history = useHistory();
 
   const isAuthenticated = (accessToken) => {
     // console.log(token)
-    setAccessToken(accessToken)
+    setAccessToken(accessToken);
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage/mypageInfo`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         withCredentials: true,
       })
@@ -37,7 +48,7 @@ function App() {
       })
       .catch((err) => {
         setIsLogin(false);
-    });
+      });
   };
 
   const handleResponseSuccess = (data) => {
@@ -45,7 +56,8 @@ function App() {
   };
 
   const handleLogout = () => {
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
+    axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
       .then((res) => {
         setUserinfo(null);
         setIsLogin(false);
@@ -71,8 +83,8 @@ function App() {
           </Route>
           <Route path="/RefrigeratorPage">
             <RefrigeratorPage
-              // product={product}
-              // setProduct={setProduct}
+              product={product}
+              setProduct={setProduct}
               isLogin={isLogin}
               accessToken={accessToken}
             />
@@ -81,10 +93,10 @@ function App() {
             <AlarmPage
               // alram={alram}
               // setAlram={setAlram}
-              // product={product}
-              // setProduct={setProduct}
+              product={product}
+              setProduct={setProduct}
               isLogin={isLogin}
-            // accessToken={accessToken}
+              // accessToken={accessToken}
             />
           </Route>
           <Route path="/MyPage">

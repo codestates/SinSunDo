@@ -2,14 +2,22 @@ import React, { useEffect, useState } from "react";
 import style from "./alarmPage.module.css";
 import AlramList from "../components/alramList";
 import axios from "axios";
-require('dotenv').config();
+require("dotenv").config();
 
-const AlarmPage = ({ alram, setAlram, product, setProduct, isLogin, accessToken }) => {
-  const renderAlram = product.filter(
-    (el) => alram.map((alram) => alram.food_id).indexOf(el.id) > -1
-  );
-  console.log("renderAlram", renderAlram);
-  const [renderAlrams, setRenderAlrams] = useState(renderAlram);
+const AlarmPage = ({
+  alram,
+  setAlram,
+  product,
+  setProduct,
+  isLogin,
+  accessToken,
+}) => {
+  console.log(product);
+  // const renderAlram = product.filter(
+  //   (el) => alram.map((alram) => alram.food_id).indexOf(el.id) > -1
+  // );
+  // console.log("renderAlram", renderAlram);
+  const [renderAlrams, setRenderAlrams] = useState([]);
   // const [renderAlrams, setRenderAlrams] = useState({
   //   id,
   //   storage,
@@ -65,17 +73,17 @@ const AlarmPage = ({ alram, setAlram, product, setProduct, isLogin, accessToken 
   //   setRenderAlrams()
   // }, [])
 
-  const handleDelete = (id) => {
-    console.log(id);
-    const filter = renderAlrams.filter((el) => el.id !== id);
-    setRenderAlrams(filter);
-    //ToDo axios 와 엔드포인트 renerAlram/delete를 사용하여 삭제를 구현
-    // axios.delete(`${process.env.REACT_APP_SERVER_URL}/alram/delete`,{ headers: {
-    //         Authorization: `Bearer ${accessToken}`,
-    //       }, data: {filter}, withCredentials: true })
-  };
+  // const handleDelete = (id) => {
+  //   console.log(id);
+  //   const filter = renderAlrams.filter((el) => el.id !== id);
+  //   setRenderAlrams(filter);
+  //   //ToDo axios 와 엔드포인트 renerAlram/delete를 사용하여 삭제를 구현
+  //   // axios.delete(`${process.env.REACT_APP_SERVER_URL}/alram/delete`,{ headers: {
+  //   //         Authorization: `Bearer ${accessToken}`,
+  //   //       }, data: {filter}, withCredentials: true })
+  // };
 
-  console.log(renderAlram);
+  // console.log(renderAlram);
   return (
     <div>
       <div className={style.container}>
@@ -84,7 +92,7 @@ const AlarmPage = ({ alram, setAlram, product, setProduct, isLogin, accessToken 
             <div className={style.innerBox}>
               <AlramList
                 key={el.id}
-                handleDelete={handleDelete}
+                // handleDelete={handleDelete}
                 id={el.id}
                 category={el.category_name}
                 name={el.food_name}

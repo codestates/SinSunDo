@@ -18,13 +18,6 @@ const ProductUpload = ({
   const [food_expiration, setFood_expiration] = useState("");
   const [message, setMessage] = useState("");
 
-  // food_name : req.body.food_name, // 음식이름
-  // food_quantity : req.body.food_quantity, // 음식 수량
-  // category_name_id : req.body.category_name_id, // 카테고리
-  // storage : req.body.storage, // 냉동,냉장,실온
-  // food_expiration : req.body.food_expiration, // 유통기한
-  // day_ago : null
-
   const handleChangeStorage = (storage) => {
     setStorage(storage.target.value);
   };
@@ -39,11 +32,9 @@ const ProductUpload = ({
 
   const handlePlus = () => {
     handleChangeQuantity(Number(food_quantity) + 1);
-    // setQuantity(Number(quantity) + 1);
   };
 
   const handleMinus = () => {
-    // quantity < 0 ? 0 : setQuantity(quantity - 1);
     if (food_quantity < 1) {
       console.log("0보다 작다");
       setFood_quantity(Number(0));
@@ -53,18 +44,14 @@ const ProductUpload = ({
   };
 
   const handleChangeQuantity = (quantity) => {
-    // console.log(auantity.target.value);
-    // console.log("auantity", quantity);
     setFood_quantity(quantity);
   };
 
   const handleExpirationDate = (expirationDate) => {
-    // console.log("유통기한", expirationDate.target.value);
     setFood_expiration(expirationDate.target.value);
   };
 
   const handleProductData = () => {
-    // console.log("클릭");
     const productData = {
       storage,
       category_name,
@@ -72,8 +59,7 @@ const ProductUpload = ({
       food_quantity,
       food_expiration,
     };
-    // console.log(productData);
-    // console.log(process.env.REACT_APP_SERVER_URL);
+
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/product`, productData, {
         headers: {
@@ -85,7 +71,6 @@ const ProductUpload = ({
       .then((data) => {
         // console.log("data", data);
         if (data.status === 201) {
-          // setProduct([...product, { productData }]);
           setStorage("");
           setCategory_name("");
           setFood_name("");
@@ -159,7 +144,7 @@ const ProductUpload = ({
             value={food_quantity}
             onChange={(e) => handleChangeQuantity(e.target.value)}
           />
-          {/* <div className={style.quatity}>1</div> */}
+
           <button className={style.quatity_minus_btn} onClick={handleMinus}>
             <i className="quatity_minus fas fa-minus-square"></i>
           </button>

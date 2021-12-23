@@ -2,13 +2,10 @@ import React, { useCallback, useState } from "react";
 import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
-// import { useHistory } from 'react-router-dom';
-import { useLocation, useHistory } from 'react-router-dom'
 
 const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
-  const history = useHistory();
   // let location = useLocation();
-  console.log(history)
+  // console.log(history);
   // console.log(location)
 
   const [email, setEmail] = useState("");
@@ -38,11 +35,10 @@ const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
   const handleLogin = () => {
     const userinfo = { email, password };
     if (!email || !password) {
-      setMessage('이메일, 비밀번호 모두 다 입력해야합니다.');
+      setMessage("이메일, 비밀번호 모두 다 입력해야합니다.");
     } else {
       axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`,
-          userinfo, {
+        .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`, userinfo, {
           withCredentials: true,
         })
         .then((res) => {
@@ -52,12 +48,14 @@ const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
           // history.push("/");
         })
         .catch((err) => {
-          if (err.response.data.message === '로그인 정보가 일치하지 않습니다.') {
+          if (
+            err.response.data.message === "로그인 정보가 일치하지 않습니다."
+          ) {
             setMessage("로그인 정보가 일치하지 않습니다");
           }
-        })
+        });
     }
-  }
+  };
 
   const handleClick = useCallback(() => {
     if (email === "") {
@@ -79,9 +77,9 @@ const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
       ? setMembershipOnOff(true)
       : setMembershipOnOff(false);
   };
-  const hanleHistory = () => {
-    history.push("/")
-  }
+  // const hanleHistory = () => {
+  //   history.push("/");
+  // };
 
   return (
     <>
@@ -102,29 +100,22 @@ const LogInPage = ({ issueTokens, handleResponseSuccess }) => {
             placeholder="   비밀번호"
             onChange={onChangePassword}
           />
-          <button
-            className={style.login}
-            onClick={() => handleClick()}
-          >
+          <button className={style.login} onClick={() => handleClick()}>
             로그인
           </button>
           <span className={style.message}>{message}</span>
-          <button className={style.kakao}
-            // onClick={(() => { routerStore.history.push("/") })}
-            // onClick={(() => { history.push("/") })}
-            onClick={hanleHistory}
-          >카카오톡 로그인</button>
+          <button className={style.kakao}>카카오톡 로그인</button>
           <button
             className={style.google}
-          // onClick={googleAccessToken}
-          >구글 로그인</button>
+            // onClick={googleAccessToken}
+          >
+            구글 로그인
+          </button>
           <div className={style.membership}>
             아직 sinsundo의 회원이 아니신가요 ?
           </div>
 
-          <button
-            className={style.membership_btn}
-            onClick={handlemembership}>
+          <button className={style.membership_btn} onClick={handlemembership}>
             회원가입
           </button>
         </div>
