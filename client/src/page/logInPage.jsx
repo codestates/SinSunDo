@@ -3,7 +3,7 @@ import style from "./logInPage.module.css";
 import axios from "axios";
 import MembershipPage from "./membershipPage";
 
-const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
+const LogInPage = ({ handleResponseSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(false);
@@ -32,22 +32,28 @@ const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
   // 없어도 될 것 같아서 주석처리합니다! 확인 부탁 드려요~
   const handleLogin = () => {
     const userinfo = { email, password };
-
-    axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`,
-        userinfo, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.message !== "ok") {
-          setMessage("고객님의 정보가 일치하지 않습니다");
-        } else {
-          loginHandler();
+    if (!email || !password) {
+      setMessage("이메일, 비밀번호 모두 다 입력해야합니다.");
+    } else {
+      console.log("시작하자마자 요청을 한다.")
+      axios
+        .post(`${process.env.REACT_APP_SERVER_URL}/users/signin`, userinfo, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          handleResponseSuccess(res.data.data.accessToken.split(" ")[1])
           setEmail("");
           setPassword("");
-          history.push('/')
-        }
-      });
+          handleResponseSuccess(res.data.data.accessToken.split(" ")[1]);
+        })
+        .catch((err) => {
+          if (
+            err.response.data.message === "로그인 정보가 일치하지 않습니다."
+          ) {
+            setMessage("로그인 정보가 일치하지 않습니다");
+          }
+        });
+    }
   };
 
   const handleClick = useCallback(() => {
@@ -90,25 +96,22 @@ const LogInPage = ({ loginHandler, googleAccessToken, history }) => {
             placeholder="   비밀번호"
             onChange={onChangePassword}
           />
-          <button
-            className={style.login}
-            onClick={() => handleClick()}
-          >
+          <button className={style.login} onClick={() => handleClick()}>
             로그인
           </button>
           <span className={style.message}>{message}</span>
           <button className={style.kakao}>카카오톡 로그인</button>
           <button
             className={style.google}
-            onClick={googleAccessToken}
-          >구글 로그인</button>
+            // onClick={googleAccessToken}
+          >
+            구글 로그인
+          </button>
           <div className={style.membership}>
             아직 sinsundo의 회원이 아니신가요 ?
           </div>
 
-          <button
-            className={style.membership_btn}
-            onClick={handlemembership}>
+          <button className={style.membership_btn} onClick={handlemembership}>
             회원가입
           </button>
         </div>

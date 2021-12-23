@@ -10,72 +10,64 @@ import { useState, useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { dummy } from "./dummy/dummy";
 import axios from "axios";
+require("dotenv").config();
+
 
 function App({ history }) {
   const [isLogin, setIsLogin] = useState(false);
-  const [accessToken, setAccessToken] = useState({ accessToken: null })
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    nickname: '',
-    img: ''
-  });
-  const [product, setProduct] = useState(dummy.product);
-  const [alram, setAlram] = useState(dummy.alram);
+  const [nickname, setNickname] = useState("");
+  const [userinfo, setUserinfo] = useState(null);
+  const [product, setProduct] = useState([
+    {
+      id: "",
+      storage: "",
+      category_name: "",
+      day_ago: "",
+      food_expiration: "",
+      food_name: "",
+      food_quantity: "",
+    },
+  ]);
 
-  //로그인 관리----------------------------------------
-  const loginHandler = (data) => {
-    setIsLogin(true);
-    issueAccessToken(data.data.accessToken);
-  }
+  const [accessToken, setAccessToken] = useState(null);
+  // const history = useHistory();
 
-  // useEffect(() => {
-  //   if (accessToken.accessToken === null) {
-  //     logoutHadler();
-  //   }
-  // }, [])
-
-  //로그아웃 관리-------------------------------------------------------
-  const logoutHadler = () => {
+  const isAuthenticated = (accessToken) => {
+    // console.log(token)
+    setAccessToken(accessToken);
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/users/signout`,
-        { withCredentials: true })
+      .get(`${process.env.REACT_APP_SERVER_URL}/users/mypage/mypageInfo`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
       .then((res) => {
+        if(res) {
+        // console.log(res.data.data.userInfo)
+        setUserinfo(res.data.data.userInfo);
+        setNickname(res.data.data.userInfo.nickname);
+        setIsLogin(true);
+        }
+      })
+      .catch((err) => {
         setIsLogin(false);
-        setAccessToken({ accessToken: null });
-        setUserInfo({
-          email: '',
-          nickname: '',
-          user_picture: ''
-        })
-        history.push('/');
       });
   };
 
-  //토큰 요청--------------------------------------------------------------
-  const accessTokenRequest = (accessToken) => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/tokenData/accessToken`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        })
-      .then((res) => {
-        const { email, nickname, user_picture } = res.data.userInfo
-        setUserInfo({ email, nickname, user_picture })
-      })
-      .catch((err) =>
-        console.log(err)
-      );
-  }
+  const handleResponseSuccess = (data) => {
+    isAuthenticated(data);
+  };
 
-  //토큰 최신화------------------------------------
-  const issueAccessToken = (token) => {
-    setAccessToken({ accessToken: token });
-    accessTokenRequest(token);
-  }
+  const handleLogout = () => {
+    axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/users/signout`)
+      .then((res) => {
+          setUserinfo(null);
+          setIsLogin(false);
+      })
+  };
 
   //새로고침해도 로그인 유지--------------------
   useEffect(() => {
@@ -117,10 +109,7 @@ function App({ history }) {
   return (
     <>
       <BrowserRouter>
-        <Nav
-          isLogin={isLogin}
-          logoutHadler={logoutHadler}
-        />
+        <Nav isLogin={isLogin} handleLogout={handleLogout} />
         <Switch>
           <Route exact path="/">
             <MainPage />
@@ -135,27 +124,37 @@ function App({ history }) {
           </Route>
           <Route path="/AlarmPage">
             <AlarmPage
-              alram={alram}
-              setAlram={setAlram}
+              // alram={alram}
+              // setAlram={setAlram}
               product={product}
               setProduct={setProduct}
               isLogin={isLogin}
-              accessToken={accessToken}
+              // accessToken={accessToken}
             />
           </Route>
           <Route path="/MyPage">
             <MyPage
               isLogin={isLogin}
-              userInfo={userInfo}
+              setIsLogin={setIsLogin}
+              userInfo={userinfo}
               accessToken={accessToken}
-              logoutHadler={logoutHadler}
+              handleLogout={handleLogout}
+              userinfo={userinfo}
+              nickname={nickname}
+              setNickname={setNickname}
             />
           </Route>
           <Route path="/LogInPage">
-            <LogInPage
-              loginHandler={loginHandler}
-              googleAccessToken={googleAccessToken}
-            />
+            {isLogin ? (
+              <MainPage />
+            ) : (
+              <LogInPage
+                handleResponseSuccess={handleResponseSuccess}
+                // loginHandler={loginHandler}
+                setAccessToken={setAccessToken}
+                isLogin={isLogin}
+              />
+            )}
           </Route>
         </Switch>
       </BrowserRouter>

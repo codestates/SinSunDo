@@ -1,4 +1,5 @@
 // 계정정보 수정
+// 계정정보 수정
 const bcrypt = require('bcrypt'); // 비밀번호 암호화
 const { users } = require('../../models');
 const { isAuthorized } = require('../tokenData/accessToken');

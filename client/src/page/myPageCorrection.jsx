@@ -18,7 +18,7 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     //토큰 확인 후 정보 가져오기
     const userInfoHandler = async () => {
         await axios
-            .get(`${process.env.REACT_APP_SERVER_URL}/users/mypageinfo`, {
+            .get(`${process.env.REACT_APP_SERVER_URL}/users/mypageInfo`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                     "Content-Type": "application/json"
@@ -37,25 +37,27 @@ const MyPageCorrection = ({ accessToken, userinfoEditHandler, history }) => {
     const handleEdit = () => {
         if (password === passwordcheck) {
             const userInfo = { nickname, password };
+            console.log(userInfo)
             axios
-                .post(`${process.env.REACT_APP_SERVER_URL}/users/mypageinfo`,
-                    userInfo,
-                    { withCredentials: true })
-                .then((res) => {
-                    if (res.message === "이미 존재하는 닉네임입니다.") {
+                .patch(`${process.env.REACT_APP_SERVER_URL}/users/update`, userInfo, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    "Content-Type": "application/json"
+                }, withCredentials: true })
+            .then((res) => {
+                if(!res) {
+                    alert("유효하지 않은 토큰입니다.");
+                } else {
+                    if(res.message === "중복된 닉네임입니다.") {
                         alert("중복된 닉네임이 있습니다.");
-                    } else if (res.message === "회원정보가 수정되었습니다") {
+                        userinfoEditHandler();
+                    } else {
+                        handleClick();
                         alert("회원정보가 수정되었습니다");
-                        axios
-                            .patch(`${process.env.REACT_APP_SERVER_URL}/users/update`,
-                                { nickname: nickname.value, password: password.value },
-                                { withCredentials: true })
-                            .then((res) => {
-                                history.push("/MyPage");
-                            })
-                            .catch((err) => { console.log(err) })
+                        userinfoEditHandler();
                     }
-                })
+                }
+            }).catch((err) => { console.log(err) })
         }
     }
 

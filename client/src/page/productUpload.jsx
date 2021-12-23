@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import style from "./productUpload.module.css";
 import axios from "axios";
+require("dotenv").config();
 
-const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
+const ProductUpload = ({
+  handleAdd,
+  productOnOff,
+  setProductOnOff,
+  accessToken,
+  product,
+  setProduct,
+}) => {
   const [storage, setStorage] = useState("");
-  const [category, setCategory] = useState("");
-  const [foodName, setFoodName] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  const [expirationDate, setExpirationDate] = useState("");
+  const [category_name, setCategory_name] = useState("");
+  const [food_name, setFood_name] = useState("");
+  const [food_quantity, setFood_quantity] = useState(1);
+  const [food_expiration, setFood_expiration] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleChangeStorage = (storage) => {
     setStorage(storage.target.value);
@@ -22,13 +31,11 @@ const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
   };
 
   const handlePlus = () => {
-    handleChangeQuantity(Number(quantity) + 1);
-    // setQuantity(Number(quantity) + 1);
+    handleChangeQuantity(Number(food_quantity) + 1);
   };
 
   const handleMinus = () => {
-    // quantity < 0 ? 0 : setQuantity(quantity - 1);
-    if (quantity < 1) {
+    if (food_quantity < 1) {
       console.log("0보다 작다");
       setQuantity(Number(0));
       return;
@@ -37,14 +44,11 @@ const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
   };
 
   const handleChangeQuantity = (quantity) => {
-    // console.log(auantity.target.value);
-    console.log("auantity", quantity);
-    setQuantity(quantity);
+    setFood_quantity(quantity);
   };
 
   const handleExpirationDate = (expirationDate) => {
-    console.log("유통기한", expirationDate.target.value);
-    setExpirationDate(expirationDate.target.value);
+    setFood_expiration(expirationDate.target.value);
   };
 
   const handleProductData = () => {
@@ -55,12 +59,20 @@ const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
       quantity,
       expirationDate,
     };
+
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/product/add`, productData, {
         withCredentials: true,
       })
       .then((data) => {
-        // ToDo 등록 완료 메세지
+        if (data.status === 201) {
+          setStorage("");
+          setCategory_name("");
+          setFood_name("");
+          setFood_quantity("");
+          setFood_expiration("");
+          handleAdd();
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -96,6 +108,8 @@ const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
           <option value="음료">음료</option>
           <option value="인스턴스">인스턴스</option>
           <option value="채소">채소</option>
+          <option value="육류">육류</option>
+          <option value="견과류">견과류</option>
         </select>
 
         <input
@@ -120,7 +134,7 @@ const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
             value={quantity}
             onChange={(e) => handleChangeQuantity(e.target.value)}
           />
-          {/* <div className={style.quatity}>1</div> */}
+
           <button className={style.quatity_minus_btn} onClick={handleMinus}>
             <i className="quatity_minus fas fa-minus-square"></i>
           </button>
@@ -134,11 +148,7 @@ const ProductUpload = ({ handleAdd, productOnOff, setProductOnOff }) => {
             onChange={handleExpirationDate}
           />
         </span>
-        <button
-          className={style.registration}
-          onClick={handleProductData}
-          onClick={handleAdd}
-        >
+        <button className={style.registration} onClick={handleProductData}>
           등록
         </button>
         <button className={style.close} onClick={handleAdd}>

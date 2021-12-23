@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import style from "./toggle.module.css";
 
-export const Toggle = () => {
-  const [isOn, setisOn] = useState(false);
+export const Toggle = ( { accessToken, userInfo } ) => {
+  const [isOn, setisOn] = useState(true);
+  const [message, setMessage] = useState(false);
+  const [accessTokenData, setAccessTokenData] = useState(null)
 
   const toggleHandler = () => {
     setisOn(!isOn);
