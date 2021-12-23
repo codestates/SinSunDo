@@ -13,11 +13,18 @@ const AlarmPage = ({
   isLogin,
   accessToken,
 }) => {
-  console.log(product);
   // const renderAlram = product.filter(
   //   (el) => alram.map((alram) => alram.food_id).indexOf(el.id) > -1
   // );
   // console.log("renderAlram", renderAlram);
+
+  const seven_day_ago = product.filter((el) => el.day_ago === 7);
+  console.log("seven_day_ago", seven_day_ago);
+  const five_day_ago = product.filter((el) => el.day_ago === 5);
+  console.log("five_day_ago", five_day_ago);
+  const one_day_ago = product.filter((el) => el.day_ago === 1);
+  console.log("one_day_ago", one_day_ago);
+
   const [renderAlrams, setRenderAlrams] = useState([]);
   // const [renderAlrams, setRenderAlrams] = useState({
   //   id,
@@ -26,7 +33,7 @@ const AlarmPage = ({
   //   food_name,
   //   food_quantity,
   //   food_expiration,
-  //   day_ago
+  //   day_ago,
   // });
 
   //알람 추가----------------(사름)
@@ -43,36 +50,38 @@ const AlarmPage = ({
   //         food_name: data.data.foodalram.food_name,
   //         food_quantity: data.data.foodalram.food_quantity,
   //         food_expiration: data.data.foodalram.food_expiration,
-  //         day_ago: data.data.foodalram.day_ago
-  //       });
-  //     })
-  // }
-
-  //별도 서버 지우기 요청 없이 클라에서만 지우는 것으로 진행....?
-  // ToDo get 요청으로 alram list 가져오기
-  // const alramList = () => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_SERVER_URL}/alram/delete`, {
-  //       headers: { Authorization: `Bearer ${accessToken}` },
-  //       withCredentials: true,
-  //     })
-  //     .then((data) => {
-  //       setRenderAlrams({
-  //         id: data.data.foodalram.id,
-  //         storage: data.data.foodalram.storage,
-  //         category_name: data.data.foodalram.category_name,
-  //         food_name: data.data.foodalram.food_name,
-  //         food_quantity: data.data.foodalram.food_quantity,
-  //         food_expiration: data.data.foodalram.food_expiration,
   //         day_ago: data.data.foodalram.day_ago,
   //       });
   //     });
   // };
 
+  //별도 서버 지우기 요청 없이 클라에서만 지우는 것으로 진행....?
+  // ToDo get 요청으로 alram list 가져오기
+  // const alramList = () => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_SERVER_URL}/product/alram/`, {
+  //       headers: { Authorization: `Bearer ${accessToken}` },
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       console.log("data", data);
+  //       // setRenderAlrams({
+  //       //   id: data.data.foodalram.id,
+  //       //   storage: data.data.foodalram.storage,
+  //       //   category_name: data.data.foodalram.category_name,
+  //       //   food_name: data.data.foodalram.food_name,
+  //       //   food_quantity: data.data.foodalram.food_quantity,
+  //       //   food_expiration: data.data.foodalram.food_expiration,
+  //       //   day_ago: data.data.foodalram.day_ago,
+  //       // });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
   // ToDo alram list rendering
   // useEffect(() => {
-  //   setRenderAlrams()
-  // }, [])
+  //   alramList();
+  // }, []);
 
   // const handleDelete = (id) => {
   //   console.log(id);
@@ -87,27 +96,58 @@ const AlarmPage = ({
   // console.log(renderAlram);
   return (
     <div>
-      {isLogin ?
-      <div className={style.container}>
-        {renderAlrams.map((el) => (
-          <div className={style.box}>
-            <div className={style.innerBox}>
-              <AlramList
-                key={el.id}
-                // handleDelete={handleDelete}
-                id={el.id}
-                category={el.category_name}
-                name={el.food_name}
-                quantity={el.food_quantity}
-                dayAgo={el.day_ago}
-              />
+      {isLogin ? (
+        <div className={style.container}>
+          {seven_day_ago.map((el) => (
+            <div className={style.box}>
+              <div className={style.innerBox}>
+                <AlramList
+                  key={el.id}
+                  // handleDelete={handleDelete}
+                  id={el.id}
+                  category={el.category_name}
+                  name={el.food_name}
+                  quantity={el.food_quantity}
+                  dayAgo={el.day_ago}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      :
+          ))}
+          {five_day_ago.map((el) => (
+            <div className={style.box}>
+              <div className={style.innerBox}>
+                <AlramList
+                  key={el.id}
+                  // handleDelete={handleDelete}
+                  id={el.id}
+                  category={el.category_name}
+                  name={el.food_name}
+                  quantity={el.food_quantity}
+                  dayAgo={el.day_ago}
+                />
+              </div>
+            </div>
+          ))}
+
+          {one_day_ago.map((el) => (
+            <div className={style.box}>
+              <div className={style.innerBox}>
+                <AlramList
+                  key={el.id}
+                  // handleDelete={handleDelete}
+                  id={el.id}
+                  category={el.category_name}
+                  name={el.food_name}
+                  quantity={el.food_quantity}
+                  dayAgo={el.day_ago}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
         <BeforeLogin />
-      }
+      )}
     </div>
   );
 };

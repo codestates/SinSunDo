@@ -30,12 +30,9 @@ const Nav = ({ isLogin, handleLogout }) => {
               <button className={style.button}>로그인</button>
             </Link>
           ) : (
-            <Link to="/mainPage">
-              <button
-                className={style.button}
-                onClick={handleLogout}
-              >로그아웃</button>
-            </Link>
+            <button className={style.button} onClick={handleLogout}>
+              로그아웃
+            </button>
           )}
         </li>
       </ul>

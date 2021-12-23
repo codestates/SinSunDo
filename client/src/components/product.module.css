@@ -15,26 +15,30 @@
 }
 
 .category {
+  margin-top: 0.3em;
   width: 5em;
   height: 1em;
   margin-left: 3em;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .Product_name {
+  margin-top: 0.3em;
   width: 15em;
   height: 1em;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .quantity {
+  margin-top: 0.3em;
   width: 3em;
   height: 1em;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .expiration_date {
-  font-size: 2em;
+  margin-top: 0.3em;
+  font-size: 1.5em;
 }
 
 .delete {
